@@ -2,15 +2,21 @@ package com.smartWorkers.gestionBudgets.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.smartWorkers.gestionBudgets.dao.TransactionsRepository;
 import com.smartWorkers.gestionBudgets.entities.Transactions;
 
+@Service
 public class TransactionsImplementations implements TransactionsService{
 	
-	TransactionsRepository transactionRepository;
+	private TransactionsRepository transactionRepository;
+	
+	public TransactionsImplementations(TransactionsRepository transactionRepository) {
+		this.transactionRepository = transactionRepository;
+	}
 	
 	public List<Transactions> getTransactions() {
-
 		 return transactionRepository.findAll();
-		 }
+	}
 }
