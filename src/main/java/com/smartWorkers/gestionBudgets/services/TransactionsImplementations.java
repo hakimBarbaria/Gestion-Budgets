@@ -2,6 +2,8 @@ package com.smartWorkers.gestionBudgets.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.smartWorkers.gestionBudgets.dao.TransactionsRepository;
@@ -18,5 +20,9 @@ public class TransactionsImplementations implements TransactionsService{
 	
 	public List<Transactions> getTransactions() {
 		 return transactionRepository.findAll();
+	}
+	
+	public Page<Transactions> getTransactionsInPages(int page, int size) {
+		return transactionRepository.findAll(PageRequest.of(page, size));
 	}
 }
