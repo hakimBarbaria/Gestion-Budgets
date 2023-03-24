@@ -18,22 +18,21 @@ public class Transactions {
 	private String type;
 	private Date created_at;
 	private Date updated_at;
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
     private Users user;
 	@ManyToOne
 	@JoinColumn(name = "categorie_id", nullable = false)
-    private Categories categorie;
+    private Categories categorie;*/
 	public Transactions() {
 	}
-	public Transactions(Double amount, String type, Date created_at, Date updated_at, Users user,
-			Categories categorie) {
+	public Transactions(Double amount, String type, Date created_at, Date updated_at) {
 		this.amount = amount;
 		this.type = type;
 		this.created_at = created_at;
 		this.updated_at = updated_at;
-		this.user = user;
-		this.categorie = categorie;
+	/*	this.user = user;
+		this.categorie = categorie;*/
 	}
 	public Long getTransaction_id() {
 		return transaction_id;
@@ -65,7 +64,7 @@ public class Transactions {
 	public void setUpdated_at(Date updated_at) {
 		this.updated_at = updated_at;
 	}
-	public Users getUser() {
+	/*public Users getUser() {
 		return user;
 	}
 	public void setUser(Users user) {
@@ -76,7 +75,7 @@ public class Transactions {
 	}
 	public void setCategorie(Categories categorie) {
 		this.categorie = categorie;
-	}
+	}*/
 	
 	
 	

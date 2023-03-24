@@ -8,16 +8,36 @@
 		<version>2.7.9</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.smartWorkers</groupId>
-	<artifactId>gestionBudgets</artifactId>
+	<groupId>com.iset</groupId>
+	<artifactId>Produits</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>gestionBudgets</name>
+	<name>Produits</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
-	<dependencies>
 	
+	<dependencies>
+
+	<dependency>
+ <groupId>nz.net.ultraq.thymeleaf</groupId>
+ <artifactId>thymeleaf-layout-dialect</artifactId>
+</dependency>
+	<dependency>
+ <groupId>org.webjars</groupId>
+ <artifactId>jquery</artifactId>
+ <version>3.5.1</version>
+</dependency>
+	
+	<dependency>
+<groupId>org.springframework.boot</groupId>
+ <artifactId>spring-boot-starter-thymeleaf</artifactId>
+</dependency>
+	<dependency>
+ <groupId>org.webjars</groupId>
+ <artifactId>bootstrap</artifactId>
+ <version>4.3.1</version>
+</dependency>
 	<dependency>
 <groupId>org.apache.tomcat.embed</groupId>
 <artifactId>tomcat-embed-jasper</artifactId>
@@ -27,11 +47,6 @@
 <groupId>javax.servlet</groupId>
 <artifactId>jstl</artifactId>
 </dependency>
-	<dependency>
-<groupId>org.springframework.boot</groupId>
- <artifactId>spring-boot-starter-thymeleaf</artifactId>
-</dependency>
-	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
