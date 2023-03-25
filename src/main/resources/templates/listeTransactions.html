@@ -110,7 +110,7 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.c
 <br>
 <nav aria-label="Page navigation example">
   <ul class="inline-flex -space-x-px">
-    <li th:each="page,status:${pages}"> 
+    <li th:each="page,status:${pages}">
    		<a th:class="${status.index==currentPage?'px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white':'button'}"
 		th:href="@{ Transactions(page=${status.index}, size=${size} ) }" th:text="${status.index }"></a>
     </li>
