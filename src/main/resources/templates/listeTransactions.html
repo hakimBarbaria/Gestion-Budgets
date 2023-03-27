@@ -17,8 +17,7 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.c
 <button type="button" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"><i class="bi bi-plus-lg"></i> Add Transaction</button>
 <br><br>
 
-<div class="inline-flex rounded-md shadow-sm">
-<form action="filteringWithDate" method="post">
+<form action="filteringWithDate" method="post" class="inline-flex rounded-md shadow-sm">
   <select id="countries" name="month" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
   <option selected>Filtering with date</option>
   <option value="01">January</option>
@@ -40,6 +39,7 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.c
 </button>
 </form>
 
+<div class="inline-flex rounded-md shadow-sm">
   <select id="countries" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
   <option selected>Filtering with categorie</option>
   <option value="US">pas encore programmée</option>>
@@ -49,6 +49,7 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.c
  <span class="sr-only">Search</span>
 </button>
 </div>
+
 <br><br>
 	<h1 class="text-5xl font-extrabold dark:text-white text-center mb-1 text-base font-medium text-blue-700 dark:text-blue-200">Transactions List</h1>
 <br>
@@ -106,7 +107,7 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.c
     </table>
 </div>
 <br>
-<p th:text="${message}" class="text-red-700 text-4xl text-gray-900 dark:text-white text-center mb-4 text-lg font-normal text-gray-500 dark:text-gray-400 font-bold"></p>
+<p th:text="${message}" class="text-red-600 text-2xl text-gray-900 dark:text-white text-center mb-4 text-lg font-normal text-gray-500 dark:text-gray-400 font-bold"></p>
 <br>
 <nav aria-label="Page navigation example">
   <ul class="inline-flex -space-x-px">

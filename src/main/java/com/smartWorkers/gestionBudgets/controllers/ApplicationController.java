@@ -39,7 +39,7 @@ public class ApplicationController {
 	}
 	
 	@PostMapping("/filteringWithDate")
-	public String filterTransactionsByMonth(@RequestParam("month") int month, Model model) {
+	public String filterTransactionsByMonth(@RequestParam("month") int month, ModelMap modelMap) {
 	    // Get the transactions from your service layer
 		List<Transactions> transactions = transactionsService.getTransactions();
 
@@ -56,9 +56,9 @@ public class ApplicationController {
 	        .collect(Collectors.toList());
 
 	    // Add the filtered transactions to the model
-	    model.addAttribute("transactions", filteredTransactions);
+	    modelMap.addAttribute("transactions", filteredTransactions);
 	    if (filteredTransactions.isEmpty()) {
-	    	model.addAttribute("message","You don't have any transactions this mounth !");
+	    	modelMap.addAttribute("message","You don't have any transactions this mounth !");
 	
 	    }
 	    return "listeTransactions"; // Return the name of the view to render the filtered transaction
