@@ -11,4 +11,5 @@ public interface TransactionsService {
 	
 	List<Transactions> getTransactions();
 	Page<Transactions> getTransactionsInPages(int page, int size);
+	List<Transactions> findByCategorie(String categorie);
 }

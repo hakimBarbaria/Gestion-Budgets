@@ -27,4 +27,8 @@ public class TransactionsImplementations implements TransactionsService{
 		return transactionRepository.findAll(PageRequest.of(page, size));
 	}
 	
+	public List<Transactions> findByCategorie(String categorie) {
+	    return transactionRepository.findByCategorie(categorie);
+	}
+	
 }

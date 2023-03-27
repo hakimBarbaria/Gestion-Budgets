@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +26,7 @@ public class ApplicationController {
 	 TransactionsService transactionsService;
 	
 	
+	
 	@RequestMapping("/Transactions")
 	public String Transitions(
 	ModelMap modelMap,
@@ -32,9 +34,11 @@ public class ApplicationController {
 	@RequestParam(name = "size", defaultValue = "1") int size)
 	{
 	 Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
+	 List<Transactions> ALLtransactions = transactionsService.getTransactions();
 	modelMap.addAttribute("transactions", transactions);
 	modelMap.addAttribute("pages", new int[transactions.getTotalPages()]);
 	modelMap.addAttribute("currentPage", page);
+	modelMap.addAttribute("ALLtransactions", ALLtransactions);
 	return "listeTransactions";
 	}
 	
@@ -42,7 +46,7 @@ public class ApplicationController {
 	public String filterTransactionsByMonth(@RequestParam("month") int month, ModelMap modelMap) {
 	    // Get the transactions from your service layer
 		List<Transactions> transactions = transactionsService.getTransactions();
-
+		 List<Transactions> ALLtransactions = transactionsService.getTransactions();
 	    // Filter the transactions based on the selected month
 	    List<Transactions> filteredTransactions = transactions.stream()
 	        .filter(transaction -> {
@@ -57,6 +61,7 @@ public class ApplicationController {
 
 	    // Add the filtered transactions to the model
 	    modelMap.addAttribute("transactions", filteredTransactions);
+	    modelMap.addAttribute("ALLtransactions", ALLtransactions);
 	    if (filteredTransactions.isEmpty()) {
 	    	modelMap.addAttribute("message","You don't have any transactions this mounth !");
 	
@@ -64,4 +69,15 @@ public class ApplicationController {
 	    return "listeTransactions"; // Return the name of the view to render the filtered transaction
 
 }
+	
+	@PostMapping("/filterWithCategorie")
+	public String filterWithCategory(@RequestParam("categorie") String categorie, ModelMap modelMap) {
+	    
+	    List<Transactions> filteredTransactions = transactionsService.findByCategorie(categorie);
+	    List<Transactions> ALLtransactions = transactionsService.getTransactions();
+	    modelMap.addAttribute("transactions", filteredTransactions);
+	    modelMap.addAttribute("ALLtransactions", ALLtransactions);
+	    return "listeTransactions";
+	}
+
 }
