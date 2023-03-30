@@ -15,4 +15,6 @@ public interface TransactionsService {
   List<Transactions> findByCategorie(String categorie);
 
   void deleteTransaction(Long id);
+
+  public Transactions getTransactionById(Long transaction_id);
 }

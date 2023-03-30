@@ -80,4 +80,11 @@ public class ApplicationController {
     transactionsService.deleteTransaction(id);
     return "redirect:/Transactions";
   }
+
+  @RequestMapping(path = "/modifier_transaction")
+  public String modifierTransaction(@RequestParam("id") Long produit_id, ModelMap modelMap) {
+    Transactions transaction = transactionsService.getTransactionById(produit_id);
+    modelMap.addAttribute("transaction", transaction);
+    return "editTransaction";
+  }
 }
