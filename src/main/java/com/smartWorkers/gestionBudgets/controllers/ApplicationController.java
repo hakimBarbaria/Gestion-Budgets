@@ -26,14 +26,14 @@ public class ApplicationController {
   public String Transitions(
       ModelMap modelMap,
       @RequestParam(name = "page", defaultValue = "0") int page,
-      @RequestParam(name = "size", defaultValue = "5") int size) {
+      @RequestParam(name = "size", defaultValue = "3") int size) {
     Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
     List<Transactions> ALLtransactions = transactionsService.getTransactions();
     modelMap.addAttribute("transactions", transactions);
     modelMap.addAttribute("pages", new int[transactions.getTotalPages()]);
     modelMap.addAttribute("currentPage", page);
     modelMap.addAttribute("ALLtransactions", ALLtransactions);
-    return "listeTransactions";
+    return "listeTransactionsUsingCards";
   }
 
   @PostMapping("/filteringWithDate")
@@ -61,7 +61,7 @@ public class ApplicationController {
       modelMap.addAttribute("message", "You don't have any transactions this mounth !");
 
     }
-    return "listeTransactions"; // Return the name of the view to render the filtered transaction
+    return "listeTransactionsUsingCards"; // Return the name of the view to render the filtered transaction
 
   }
 
@@ -72,7 +72,7 @@ public class ApplicationController {
     List<Transactions> ALLtransactions = transactionsService.getTransactions();
     modelMap.addAttribute("transactions", filteredTransactions);
     modelMap.addAttribute("ALLtransactions", ALLtransactions);
-    return "listeTransactions";
+    return "listeTransactionsUsingCards";
   }
 
   @RequestMapping(path = "/delete/{id}")
