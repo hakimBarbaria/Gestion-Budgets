@@ -39,3 +39,6 @@ tmp/
 *.bak
 *.swp
 *~.nib
+
+### Application.properties ###
+src/main/resources/application.properties
