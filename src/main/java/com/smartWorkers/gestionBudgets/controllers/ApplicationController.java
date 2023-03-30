@@ -26,7 +26,7 @@ public class ApplicationController {
   public String Transitions(
       ModelMap modelMap,
       @RequestParam(name = "page", defaultValue = "0") int page,
-      @RequestParam(name = "size", defaultValue = "1") int size) {
+      @RequestParam(name = "size", defaultValue = "5") int size) {
     Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
     List<Transactions> ALLtransactions = transactionsService.getTransactions();
     modelMap.addAttribute("transactions", transactions);
