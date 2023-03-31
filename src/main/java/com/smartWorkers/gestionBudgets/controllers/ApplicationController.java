@@ -21,7 +21,20 @@ import com.smartWorkers.gestionBudgets.services.TransactionsService;
 public class ApplicationController {
   @Autowired
   TransactionsService transactionsService;
-
+  boolean ChangingTypeOfPresentation = false;
+  
+  @RequestMapping("/ChangingType")
+  public String changingType() {
+	  if (this.ChangingTypeOfPresentation == false) {
+		  this.ChangingTypeOfPresentation= true;
+		  return "redirect:/Transactions";
+	  }else {
+		  this.ChangingTypeOfPresentation = false;
+		  return "redirect:/Transactions";
+	  }
+	  
+  }
+  
   @RequestMapping("/Transactions")
   public String Transitions(
       ModelMap modelMap,
@@ -33,7 +46,11 @@ public class ApplicationController {
     modelMap.addAttribute("pages", new int[transactions.getTotalPages()]);
     modelMap.addAttribute("currentPage", page);
     modelMap.addAttribute("ALLtransactions", ALLtransactions);
-    return "listeTransactionsUsingCards";
+    if (this.ChangingTypeOfPresentation == false) {
+    	return "listeTransactionsUsingCards";
+    }else {
+    	return "listeTransactions";
+    }
   }
 
   @PostMapping("/filteringWithDate")
@@ -61,7 +78,11 @@ public class ApplicationController {
       modelMap.addAttribute("message", "You don't have any transactions this mounth !");
 
     }
-    return "listeTransactionsUsingCards"; // Return the name of the view to render the filtered transaction
+    if (this.ChangingTypeOfPresentation == false) {
+    	return "listeTransactionsUsingCards";
+    }else {
+    	return "listeTransactions";
+    }
 
   }
 
@@ -72,7 +93,11 @@ public class ApplicationController {
     List<Transactions> ALLtransactions = transactionsService.getTransactions();
     modelMap.addAttribute("transactions", filteredTransactions);
     modelMap.addAttribute("ALLtransactions", ALLtransactions);
-    return "listeTransactionsUsingCards";
+    if (this.ChangingTypeOfPresentation == false) {
+    	return "listeTransactionsUsingCards";
+    }else {
+    	return "listeTransactions";
+    }
   }
 
   @RequestMapping(path = "/delete/{id}")
