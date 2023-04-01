@@ -110,11 +110,11 @@
         
         <div class="inline-flex">
 			<p class="font-semibold tracking-tight text-gray-900 dark:text-white">Created At :
-         <span th:text="${transaction.created_at}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span></p>
+         <span th:text="${#dates.format(transaction.created_at, 'dd-MM-yyyy')}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span></p>
         </div>
          <div class="inline-flex">
 			<p class="font-semibold tracking-tight text-gray-900 dark:text-white">Last Update :
-         <span th:text="${transaction.updated_at}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span></p>
+         <span th:text="${#dates.format(transaction.updated_at, 'dd-MM-yyyy')}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span></p>
         </div>
          <div class="inline-flex">
 			<p class="font-semibold tracking-tight text-gray-900 dark:text-white">Type :

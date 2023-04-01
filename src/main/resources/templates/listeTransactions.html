@@ -143,10 +143,10 @@
             </td>
             <td class="px-6 py-4" th:text="${transaction.type}">
             </td>
-            <td class="px-6 py-4" th:text="${transaction.created_at}">
-            </td>
-            <td class="px-6 py-4" th:text="${transaction.updated_at}">
-            </td>
+           <td class="px-6 py-4" th:text="${#dates.format(transaction.created_at, 'dd-MM-yyyy')}">
+			</td>
+			<td class="px-6 py-4" th:text="${#dates.format(transaction.updated_at, 'dd-MM-yyyy')}">
+			</td>
             <td class="px-6 py-4" th:text="${transaction.categorie}">
             </td>
             <td class="px-6 py-4 text-right inline-flex">
@@ -170,7 +170,6 @@
     <p th:text="${message}"
       class="text-red-600 text-2xl text-gray-900 dark:text-white text-center mb-4 text-lg font-normal text-gray-500 dark:text-gray-400 font-bold">
     </p>
-    <br>
     <nav aria-label="Page navigation example">
       <ul class="inline-flex -space-x-px">
         <li th:each="page,status:${pages}">
