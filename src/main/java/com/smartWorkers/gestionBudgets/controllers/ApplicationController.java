@@ -26,19 +26,19 @@ public class ApplicationController {
   @Autowired
   TransactionsService transactionsService;
   boolean ChangingTypeOfPresentation = false;
-  
+
   @RequestMapping("/ChangingType")
   public String changingType() {
-	  if (this.ChangingTypeOfPresentation == false) {
-		  this.ChangingTypeOfPresentation= true;
-		  return "redirect:/Transactions";
-	  }else {
-		  this.ChangingTypeOfPresentation = false;
-		  return "redirect:/Transactions";
-	  }
-	  
+    if (this.ChangingTypeOfPresentation == false) {
+      this.ChangingTypeOfPresentation = true;
+      return "redirect:/Transactions";
+    } else {
+      this.ChangingTypeOfPresentation = false;
+      return "redirect:/Transactions";
+    }
+
   }
-  
+
   @RequestMapping("/Transactions")
   public String Transitions(
       ModelMap modelMap,
@@ -51,9 +51,9 @@ public class ApplicationController {
     modelMap.addAttribute("currentPage", page);
     modelMap.addAttribute("ALLtransactions", ALLtransactions);
     if (this.ChangingTypeOfPresentation == false) {
-    	return "listeTransactionsUsingCards";
-    }else {
-    	return "listeTransactions";
+      return "listeTransactionsUsingCards";
+    } else {
+      return "listeTransactions";
     }
   }
 
@@ -82,9 +82,9 @@ public class ApplicationController {
       modelMap.addAttribute("message", "You don't have any transactions this mounth !");
     }
     if (this.ChangingTypeOfPresentation == false) {
-    	return "listeTransactionsUsingCards";
-    }else {
-    	return "listeTransactions";
+      return "listeTransactionsUsingCards";
+    } else {
+      return "listeTransactions";
     }
 
   }
@@ -97,9 +97,9 @@ public class ApplicationController {
     modelMap.addAttribute("transactions", filteredTransactions);
     modelMap.addAttribute("ALLtransactions", ALLtransactions);
     if (this.ChangingTypeOfPresentation == false) {
-    	return "listeTransactionsUsingCards";
-    }else {
-    	return "listeTransactions";
+      return "listeTransactionsUsingCards";
+    } else {
+      return "listeTransactions";
     }
   }
 
