@@ -2,15 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorate="template">
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.css" rel="stylesheet" />
-
 <head>
   <meta charset="utf-8">
   <title>Transactions</title>
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-	<link rel="stylesheet" href="https://cdn.tailwindcss.com" />
-	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -78,85 +72,102 @@
     </div>
 
     <br><br>
-   <h1
+    <h1
       class="mb-4 text-4xl font-extrabold text-center leading-none tracking-tight md:text-5xl lg:text-6xl text-blue-600 dark:text-blue-200">
       Transactions List</h1>
     <br>
     <div class="grid grid-cols-7 md:grid-cols-7 gap-12">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div>
-    <form action="/ChangingType">
-<button type="submit" class="text-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"><i class="bi bi-justify"></i></button>
-    </form>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div>
+        <form action="/ChangingType">
+          <button type="submit"
+            class="text-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"><i
+              class="bi bi-justify"></i></button>
+        </form>
+      </div>
     </div>
-    </div>
-    
-<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-    <div th:each="transaction : ${transactions}">
-  <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-   <i class="text-center bi bi-currency-exchange self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white w-10 h-10 mb-2 text-gray-500 dark:text-gray-400"></i>
-		<div class="inline-flex">
-			<p> #</p>
-          <p th:text="${transaction.transaction_id}"></p>
-        </div>
-        
-        <p class="text-right font-semibold tracking-tight text-gray-900 dark:text-white">Category :
-         <span th:text="${transaction.categorie}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span></p>
-        
-        <div class="inline-flex">
-			<p class="font-semibold tracking-tight text-gray-900 dark:text-white">Created At :
-         <span th:text="${#dates.format(transaction.created_at, 'dd-MM-yyyy')}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span></p>
-        </div>
-         <div class="inline-flex">
-			<p class="font-semibold tracking-tight text-gray-900 dark:text-white">Last Update :
-         <span th:text="${#dates.format(transaction.updated_at, 'dd-MM-yyyy')}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span></p>
-        </div>
-         <div class="inline-flex">
-			<p class="font-semibold tracking-tight text-gray-900 dark:text-white">Type :
-         <span th:text="${transaction.type}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span></p>
-        </div>
-        <br>
-    	<div class="inline-flex text-right">
-			<p class="font-semibold tracking-tight text-gray-900 dark:text-white">Amount :
-         	<span th:text="${transaction.amount}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span>
-         	<span class="mb-3 font-normal text-gray-500 dark:text-gray-400">DT</span></p>
-        </div>
-    <div class="px-6 py-4 inline-flex">
-              <button type="button"
-                class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"><i
-                  class="bi bi-pencil"></i></button>
-              <form action="#" th:action="@{'/delete/{id}'(id=${transaction.getTransaction_id()})}" th:method="delete">
-                <button type="submit"
-                  class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                  th:data-confirm-delete="|Are you sure you want to delete this expense ${transaction.getType()}?|"
-                  onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
-                  <i class="bi bi-trash"></i>
-                </button>
-              </form>
-            </div>
-            
-		</div>
-  </div>
 
-</div>
-    
-    
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div th:each="transaction : ${transactions}">
+        <div
+          class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+          <i
+            class="text-center bi bi-currency-exchange self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white w-10 h-10 mb-2 text-gray-500 dark:text-gray-400"></i>
+          <div class="inline-flex">
+            <p> #</p>
+            <p th:text="${transaction.transaction_id}"></p>
+          </div>
+
+          <p class="text-right font-semibold tracking-tight text-gray-900 dark:text-white">Category :
+            <span th:text="${transaction.categorie}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span>
+          </p>
+
+          <div class="inline-flex">
+            <p class="font-semibold tracking-tight text-gray-900 dark:text-white">Created At :
+              <span th:text="${#dates.format(transaction.created_at, 'dd-MM-yyyy')}"
+                class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span>
+            </p>
+          </div>
+          <div class="inline-flex">
+            <p class="font-semibold tracking-tight text-gray-900 dark:text-white">Last Update :
+              <span th:text="${#dates.format(transaction.updated_at, 'dd-MM-yyyy')}"
+                class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span>
+            </p>
+          </div>
+          <div class="inline-flex">
+            <p class="font-semibold tracking-tight text-gray-900 dark:text-white">Type :
+              <span th:text="${transaction.type}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span>
+            </p>
+          </div>
+          <br>
+          <div class="inline-flex text-right">
+            <p class="font-semibold tracking-tight text-gray-900 dark:text-white">Amount :
+              <span th:text="${transaction.amount}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span>
+              <span class="mb-3 font-normal text-gray-500 dark:text-gray-400">DT</span>
+            </p>
+          </div>
+          <div class="px-6 py-4 inline-flex">
+            <a th:href="@{modifier_transaction(id=${transaction.getTransaction_id()})}"
+              class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+              <i class="bi bi-pencil"></i>
+            </a>
+            <form action="#" th:action="@{'/delete/{id}'(id=${transaction.getTransaction_id()})}" th:method="delete">
+              <button type="submit"
+                class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                th:data-confirm-delete="|Are you sure you want to delete this expense ${transaction.getType()}?|"
+                onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
+                <i class="bi bi-trash"></i>
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+
     <br>
     <p th:text="${message}"
       class="text-red-600 text-2xl text-gray-900 dark:text-white text-center mb-4 text-lg font-normal text-gray-500 dark:text-gray-400 font-bold">
     </p>
-    
-    <!-- <a href="#" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-    	Show More
-    	<svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-	</a> -->
-	
-	<nav aria-label="Page navigation example">
+
+    <!-- <a href="#"
+      class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+      Show More
+      <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+          clip-rule="evenodd"></path>
+      </svg>
+    </a> -->
+
+    <nav aria-label="Page navigation example">
       <ul class="inline-flex -space-x-px">
         <li th:each="page,status:${pages}">
           <a th:class="${status.index==currentPage?'px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white':'button'}"
@@ -164,7 +175,7 @@
         </li>
       </ul>
     </nav>
-    
+
   </div>
 </body>
 
