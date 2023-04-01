@@ -115,12 +115,11 @@
 			<p class="font-semibold tracking-tight text-gray-900 dark:text-white">Last Update :
          <span th:text="${transaction.updated_at}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span></p>
         </div>
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
          <div class="inline-flex">
 			<p class="font-semibold tracking-tight text-gray-900 dark:text-white">Type :
          <span th:text="${transaction.type}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span></p>
         </div>
-      </div>
+        <br>
     	<div class="inline-flex text-right">
 			<p class="font-semibold tracking-tight text-gray-900 dark:text-white">Amount :
          	<span th:text="${transaction.amount}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span>
