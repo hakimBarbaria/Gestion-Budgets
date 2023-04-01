@@ -152,6 +152,6 @@ public class ApplicationController {
     Transactions updated_Transaction = transactionsService.getTransactionById(transaction_id);
     modelMap.addAttribute("message", "Transaction mise à jour avec succès");
     modelMap.addAttribute("transaction", updated_Transaction);
-    return "editTransaction";
+    return "redirect:/Transactions";
   }
 }
