@@ -19,11 +19,6 @@ public class TransactionsImplementations implements TransactionsService {
   }
 
   @Override
-  public void deleteTransaction(Long id) {
-    transactionRepository.deleteById(id);
-  }
-
-  @Override
   public List<Transactions> getTransactions() {
     return transactionRepository.findAll();
   }
@@ -41,5 +36,15 @@ public class TransactionsImplementations implements TransactionsService {
   @Override
   public Transactions getTransactionById(Long transaction_id) {
     return transactionRepository.findById(transaction_id).get();
+  }
+
+  @Override
+  public void deleteTransaction(Long id) {
+    transactionRepository.deleteById(id);
+  }
+
+  @Override
+  public void udpateTransaction(Transactions transaction) {
+    transactionRepository.save(transaction);
   }
 }
