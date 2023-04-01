@@ -1,7 +1,10 @@
 package com.smartWorkers.gestionBudgets.controllers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -76,7 +80,6 @@ public class ApplicationController {
     modelMap.addAttribute("ALLtransactions", ALLtransactions);
     if (filteredTransactions.isEmpty()) {
       modelMap.addAttribute("message", "You don't have any transactions this mounth !");
-
     }
     if (this.ChangingTypeOfPresentation == false) {
     	return "listeTransactionsUsingCards";
@@ -104,5 +107,51 @@ public class ApplicationController {
   public String deleteTransaction(@PathVariable Long id) {
     transactionsService.deleteTransaction(id);
     return "redirect:/Transactions";
+  }
+
+  @RequestMapping("/modifier_transaction")
+  public String modifierTransaction(@RequestParam("id") Long transaction_id, ModelMap modelMap) {
+    Transactions transaction = transactionsService.getTransactionById(transaction_id);
+    modelMap.addAttribute("transaction", transaction);
+    return "editTransaction";
+  }
+
+  @RequestMapping("/update_transaction")
+  public String updateTransaction(@ModelAttribute("transaction") Transactions new_transaction,
+      @RequestParam("date") String date, ModelMap modelMap) throws ParseException {
+    Long transaction_id = new_transaction.getTransaction_id();
+    Transactions old_transaction = transactionsService.getTransactionById(transaction_id);
+    System.out.println("this is what you looking for : " + transaction_id);
+    if (date != "" && old_transaction.getCreated_at() != new_transaction.getCreated_at()) {
+      // conversion de la date
+      SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+      Date dateCreation = dateformat.parse(String.valueOf(date));
+      old_transaction.setCreated_at(dateCreation);
+
+      Date currentDate = new Date();
+      SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+      old_transaction.setUpdated_at(dateFormat.parse(dateFormat.format(currentDate)));
+    }
+    if (old_transaction.getAmount() != new_transaction.getAmount() && new_transaction.getAmount() > 0) {
+      old_transaction.setAmount(new_transaction.getAmount());
+    }
+    if (old_transaction.getType() != new_transaction.getType() && new_transaction.getType().length() > 0) {
+      old_transaction.setType(new_transaction.getType());
+    }
+    if (old_transaction.getCategorie() != new_transaction.getCategorie()
+        && new_transaction.getCategorie().length() > 0D) {
+      old_transaction.setCategorie(new_transaction.getCategorie());
+    }
+
+    // if (old_transaction.getDescription() != new_transaction.getDescription() &&
+    // new_transaction.getDescription().length() > 0D) {
+    // old_transaction.setDescription(new_transaction.getDescription());
+    // }
+    transactionsService.udpateTransaction(old_transaction);
+
+    Transactions updated_Transaction = transactionsService.getTransactionById(transaction_id);
+    modelMap.addAttribute("message", "Transaction mise à jour avec succès");
+    modelMap.addAttribute("transaction", updated_Transaction);
+    return "editTransaction";
   }
 }

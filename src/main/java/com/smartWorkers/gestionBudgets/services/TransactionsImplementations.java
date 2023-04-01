@@ -19,20 +19,32 @@ public class TransactionsImplementations implements TransactionsService {
   }
 
   @Override
-  public void deleteTransaction(Long id) {
-    transactionRepository.deleteById(id);
-  }
-
   public List<Transactions> getTransactions() {
     return transactionRepository.findAll();
   }
 
+  @Override
   public Page<Transactions> getTransactionsInPages(int page, int size) {
     return transactionRepository.findAll(PageRequest.of(page, size));
   }
 
+  @Override
   public List<Transactions> findByCategorie(String categorie) {
     return transactionRepository.findByCategorie(categorie);
   }
 
+  @Override
+  public Transactions getTransactionById(Long transaction_id) {
+    return transactionRepository.findById(transaction_id).get();
+  }
+
+  @Override
+  public void deleteTransaction(Long id) {
+    transactionRepository.deleteById(id);
+  }
+
+  @Override
+  public void udpateTransaction(Transactions transaction) {
+    transactionRepository.save(transaction);
+  }
 }
