@@ -9,7 +9,8 @@
 
 <body>
   <div layout:fragment="Mycontent">
-    <div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-12">
+     <div>
       <form action="filteringWithDate" method="post" class="inline-flex rounded-md shadow-sm">
         <select id="countries" name="month"
           class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
@@ -37,15 +38,17 @@
           <span class="sr-only">Search</span>
         </button>
       </form>
-
+	</div>
+	<div>
       <form action="filterWithCategorie" method="post" class="inline-flex rounded-md shadow-sm">
         <select id="categories" name="categorie"
           class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
           <option selected disabled>Filtering with category</option>
-
-          <th:block th:each="transaction : ${ALLtransactions}">
-            <option th:text="${transaction.categorie}"></option>
-          </th:block>
+			<option>Electronics</option>
+             <option value="TV">TV/Monitors</option>
+             <option value="PC">PC</option>
+             <option value="GA">Gaming/Console</option>
+             <option value="PH">Phones</option>
         </select>
         <button type="submit"
           class="p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -57,7 +60,8 @@
           <span class="sr-only">Search</span>
         </button>
       </form>
-
+	</div>
+	</div>
       <p class=" text-right text-gray-500 dark:text-gray-400"><a href="/Transactions"
           class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
           Back To Original List
@@ -69,7 +73,6 @@
           </svg>
         </a></p>
 
-    </div>
 
     <br><br>
     <h1

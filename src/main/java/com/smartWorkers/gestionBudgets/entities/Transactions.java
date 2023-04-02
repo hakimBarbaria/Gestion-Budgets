@@ -17,7 +17,7 @@ public class Transactions {
   private Date created_at;
   private Date updated_at;
   private String categorie;
-
+  private String description;
   /*
    * @ManyToOne
    * 
@@ -32,8 +32,9 @@ public class Transactions {
   public Transactions() {
   }
 
-  public Transactions(Double amount, String type, Date created_at, Date updated_at, String categorie) {
-    this.categorie = categorie;
+  public Transactions(String description,Double amount, String type, Date created_at, Date updated_at, String categorie) {
+    this.description=description;
+	this.categorie = categorie;
     this.amount = amount;
     this.type = type;
     this.created_at = created_at;
@@ -44,7 +45,15 @@ public class Transactions {
      */
   }
 
-  public String getCategorie() {
+  public String getDescription() {
+	return description;
+}
+
+public void setDescription(String description) {
+	this.description = description;
+}
+
+public String getCategorie() {
     return categorie;
   }
 

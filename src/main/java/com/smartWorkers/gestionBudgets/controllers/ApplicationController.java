@@ -95,6 +95,9 @@ public class ApplicationController {
     List<Transactions> filteredTransactions = transactionsService.findByCategorie(categorie);
     List<Transactions> ALLtransactions = transactionsService.getTransactions();
     modelMap.addAttribute("transactions", filteredTransactions);
+    if (filteredTransactions.isEmpty()) {
+        modelMap.addAttribute("message", "You don't have any transactions in this category !");
+      }
     modelMap.addAttribute("ALLtransactions", ALLtransactions);
     if (this.ChangingTypeOfPresentation == false) {
       return "listeTransactionsUsingCards";
