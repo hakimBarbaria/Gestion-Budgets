@@ -96,8 +96,8 @@ public class ApplicationController {
     List<Transactions> ALLtransactions = transactionsService.getTransactions();
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
-        modelMap.addAttribute("message", "You don't have any transactions in this category !");
-      }
+      modelMap.addAttribute("message", "You don't have any transactions in this category !");
+    }
     modelMap.addAttribute("ALLtransactions", ALLtransactions);
     if (this.ChangingTypeOfPresentation == false) {
       return "listeTransactionsUsingCards";
@@ -155,6 +155,6 @@ public class ApplicationController {
     Transactions updated_Transaction = transactionsService.getTransactionById(transaction_id);
     modelMap.addAttribute("message", "Transaction mise à jour avec succès");
     modelMap.addAttribute("transaction", updated_Transaction);
-    return "redirect:/Transactions";
+    return "editTransaction";
   }
 }
