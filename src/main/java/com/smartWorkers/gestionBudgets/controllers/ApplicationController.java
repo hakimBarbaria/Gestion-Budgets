@@ -31,12 +31,11 @@ public class ApplicationController {
   public String changingType() {
     if (this.ChangingTypeOfPresentation == false) {
       this.ChangingTypeOfPresentation = true;
-      return "redirect:/Transactions";
+      
     } else {
       this.ChangingTypeOfPresentation = false;
-      return "redirect:/Transactions";
     }
-
+    return "redirect:/Transactions";
   }
 
   @RequestMapping("/Transactions")
