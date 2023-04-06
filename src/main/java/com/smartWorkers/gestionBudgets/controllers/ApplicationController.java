@@ -157,7 +157,7 @@ public class ApplicationController {
     transactionsService.udpateTransaction(old_transaction);
 
     Transactions updated_Transaction = transactionsService.getTransactionById(transaction_id);
-    modelMap.addAttribute("message", "Transaction mise à jour avec succès");
+    modelMap.addAttribute("message", "Transaction updated successfully !");
     modelMap.addAttribute("transaction", updated_Transaction);
     return "editTransaction";
   }
