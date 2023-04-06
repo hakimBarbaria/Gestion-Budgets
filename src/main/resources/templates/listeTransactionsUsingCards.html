@@ -196,8 +196,8 @@
 
     <nav aria-label="Page navigation example">
       <ul class="inline-flex -space-x-px">
-        <li th:each="page,status:${pages}">
-          <a th:class="${status.index==currentPage?'px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white':'button'}"
+        <li th:each="page,status:${pages}" class="px-3 py-2">
+          <a th:class="${status.index==currentPage?'text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium text-sm px-4 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700':'button'}"
             th:href="@{ Transactions(page=${status.index}, size=${size} ) }" th:text="${status.index }"></a>
         </li>
       </ul>

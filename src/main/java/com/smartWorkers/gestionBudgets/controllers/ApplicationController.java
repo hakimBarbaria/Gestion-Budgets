@@ -26,7 +26,7 @@ public class ApplicationController {
   @Autowired
   TransactionsService transactionsService;
   boolean ChangingTypeOfPresentation = false;
-
+  
   @RequestMapping("/redirectionToOriginalList")
   public String redirectionToOriginalList() {
 	  return "redirect:/Transactions";
