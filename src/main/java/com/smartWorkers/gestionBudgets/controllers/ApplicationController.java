@@ -52,6 +52,11 @@ public class ApplicationController {
 	  return "AddCategories";
   }
   
+  @RequestMapping("/editCategory")
+  public String editCategory () {
+	  return "editCategory";
+  }
+  
   @RequestMapping("/AddBudget")
   public String RedirectToAddBudget () {
 	  return "AddBudgets";
