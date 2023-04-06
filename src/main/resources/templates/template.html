@@ -28,8 +28,8 @@
               </path>
             </svg>
           </button>
-          <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white"><i
-              class="bi bi-wallet2"></i> Osrof cha3lik</span>
+          <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+          <a href="/Dashboard"><i class="bi bi-wallet2"></i> Osrof cha3lik</span></a>
 
         </div>
         <div class="flex items-center">
@@ -56,7 +56,7 @@
               </div>
               <ul class="py-1" role="none">
                 <li>
-                  <a href="#"
+                  <a href="/Dashboard"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                     role="menuitem">Dashboard</a>
                 </li>
@@ -95,7 +95,7 @@
     <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
       <ul class="space-y-2">
         <li>
-          <a href="#"
+          <a href="/Dashboard"
             class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
             <svg aria-hidden="true"
               class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -124,7 +124,7 @@
           <ul id="dropdown-example" class="hidden py-2 space-y-2">
             <li>
               <!-- Lien Pour l'ajout des Transactions -->
-              <a href="#"
+              <a href="/AddTransactions"
                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add
                 Transaction</a>
             </li>
@@ -135,6 +135,67 @@
             </li>
           </ul>
         </li>
+        
+        <li>
+          <button type="button"
+            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+            aria-controls="dropdown-ForCategory" data-collapse-toggle="dropdown-ForCategory">
+            <i
+              class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white bi bi-basket-fill"></i>
+            <span class="ml-3"></span>
+            <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Categories</span>
+            <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </button>
+          <ul id="dropdown-ForCategory" class="hidden py-2 space-y-2">
+            <li>
+              <!-- Lien Pour l'ajout des Transactions -->
+              <a href="/AddCategory"
+                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add
+                Category</a>
+            </li>
+            <li>
+              <a href="/Categories"
+                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">List
+                Categories</a>
+            </li>
+          </ul>
+        </li>
+        
+                <li>
+          <button type="button"
+            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+            aria-controls="dropdown-ForBudgets" data-collapse-toggle="dropdown-ForBudgets">
+            <i
+              class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white bi bi-bank2"></i>
+            <span class="ml-3"></span>
+            <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>budgets</span>
+            <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </button>
+          <ul id="dropdown-ForBudgets" class="hidden py-2 space-y-2">
+            <li>
+              <!-- Lien Pour l'ajout des Transactions -->
+              <a href="/AddBudget"
+                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add
+                Budget</a>
+            </li>
+            <li>
+              <a href="/Budgets"
+                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">List
+                Budgets</a>
+            </li>
+          </ul>
+        </li>
+         
         <li>
 
           <div id="toast-default"

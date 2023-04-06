@@ -32,6 +32,36 @@ public class ApplicationController {
 	  return "redirect:/Transactions";
   }
   
+  @RequestMapping("/Dashboard")
+  public String RedirectToDashboard () {
+	  return "dashboard";
+  }
+  
+  @RequestMapping("/Categories")
+  public String RedirectToCategories () {
+	  return "categories";
+  }
+  
+  @RequestMapping("/AddTransactions")
+  public String RedirectToAddTransaction () {
+	  return "AddTransactions";
+  }
+  
+  @RequestMapping("/AddCategory")
+  public String RedirectToAddCategory () {
+	  return "AddCategories";
+  }
+  
+  @RequestMapping("/AddBudget")
+  public String RedirectToAddBudget () {
+	  return "AddBudgets";
+  }
+  
+  @RequestMapping("/Budgets")
+  public String RedirectToBudgets () {
+	  return "Budgets";
+  }
+  
   @RequestMapping("/ChangingType")
   public String changingType() {
     if (this.ChangingTypeOfPresentation == false) {
