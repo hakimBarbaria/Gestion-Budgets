@@ -222,4 +222,10 @@ public class ApplicationController {
     modelMap.addAttribute("transaction", updated_Transaction);
     return "editTransaction";
   }
+  
+  
+  @RequestMapping("/")
+  public String RedirectToLandingPage() {
+	  return "landingPage";
+  }
 }
