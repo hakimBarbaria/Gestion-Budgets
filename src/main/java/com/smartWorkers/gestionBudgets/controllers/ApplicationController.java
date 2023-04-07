@@ -3,9 +3,12 @@ package com.smartWorkers.gestionBudgets.controllers;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -190,5 +193,22 @@ public class ApplicationController {
     modelMap.addAttribute("message", "Transaction updated successfully !");
     modelMap.addAttribute("transaction", updated_Transaction);
     return "editTransaction";
+  }
+  @RequestMapping("/saveTransaction")
+  public String saveTransaction(ModelMap modelMap,
+                                @ModelAttribute("transaction") Transactions new_transaction,
+                                @RequestParam("date") String date,
+                                @RequestParam("description") String description
+  ) throws ParseException {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Date dateCreation = dateFormat.parse(date);
+    new_transaction.setCreated_at(dateCreation);
+    LocalDateTime ldt = LocalDateTime.now();
+    String today = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(ldt);
+    Date tadayForReal = dateFormat.parse(today);
+    new_transaction.setUpdated_at(tadayForReal);
+    new_transaction.setDescription(description);
+    transactionsService.addTransaction(new_transaction);
+    return "redirect:/Transactions";
   }
 }

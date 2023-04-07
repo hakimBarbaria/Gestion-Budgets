@@ -19,4 +19,5 @@ public interface TransactionsService {
   public Transactions getTransactionById(Long transaction_id);
 
   public void udpateTransaction(Transactions transaction);
+  public void addTransaction(Transactions transaction);
 }

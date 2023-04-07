@@ -47,4 +47,9 @@ public class TransactionsImplementations implements TransactionsService {
   public void udpateTransaction(Transactions transaction) {
     transactionRepository.save(transaction);
   }
+
+  @Override
+  public void addTransaction(Transactions transaction) {
+    transactionRepository.save(transaction);
+  }
 }
