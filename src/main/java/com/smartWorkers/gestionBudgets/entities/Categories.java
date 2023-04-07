@@ -15,21 +15,20 @@ public class Categories {
 	private String name;
 	//Importer l'url du l'icon
 	private String icon;
+	/*
 	@ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private Users user;
 	@ManyToOne
     @JoinColumn(name = "budget_id", nullable = false)
     private Budgets budget;
-	
+	*/
 	public Categories() {
 	}
 
-	public Categories(String name, String icon, Users user, Budgets budget) {
+	public Categories(String name, String icon) {
 		this.name = name;
 		this.icon = icon;
-		this.user = user;
-		this.budget = budget;
 	}
 
 	public Long getCategorie_id() {
@@ -52,7 +51,7 @@ public class Categories {
 		this.icon = icon;
 	}
 
-	public Users getUser() {
+	/*public Users getUser() {
 		return user;
 	}
 
@@ -66,7 +65,7 @@ public class Categories {
 
 	public void setBudget(Budgets budget) {
 		this.budget = budget;
-	}
+	}*/
 	
 	
 	

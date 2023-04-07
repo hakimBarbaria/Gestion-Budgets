@@ -18,13 +18,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.smartWorkers.gestionBudgets.entities.Categories;
 import com.smartWorkers.gestionBudgets.entities.Transactions;
+import com.smartWorkers.gestionBudgets.services.CategoryService;
 import com.smartWorkers.gestionBudgets.services.TransactionsService;
 
 @Controller
 public class ApplicationController {
   @Autowired
   TransactionsService transactionsService;
+  
+  @Autowired
+  CategoryService categoryService;
   boolean ChangingTypeOfPresentation = false;
   
   @RequestMapping("/redirectionToOriginalList")
@@ -53,7 +58,28 @@ public class ApplicationController {
   }
   
   @RequestMapping("/editCategory")
-  public String editCategory () {
+  public String editCategory (ModelMap modelMap) {        /** , @RequestParam("idCategory") Long Category_id ***/
+	  Categories category = categoryService.getCategorieById(1L);
+	  modelMap.addAttribute("category", category);
+	  return "editCategory";
+  }
+  
+  @RequestMapping("/updateCategory")
+  public String updateCategory(ModelMap modelMap,@ModelAttribute("category") Categories newCategory) {
+	    
+	  Long category_id = newCategory.getCategorie_id();
+	    Categories old_category = categoryService.getCategorieById(1L);
+	    
+	    if (newCategory.getName() != null && !old_category.getName().equals(newCategory.getName())) {
+	    	  old_category.setName(newCategory.getName());
+	    	}
+
+	  
+	  
+	  
+	    categoryService.saveCategory(old_category);
+	    modelMap.addAttribute("message", "Category updated successfully !");
+	   // modelMap.addAttribute("categ", newCategory);
 	  return "editCategory";
   }
   

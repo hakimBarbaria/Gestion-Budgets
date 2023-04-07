@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
+import com.smartWorkers.gestionBudgets.entities.Categories;
 import com.smartWorkers.gestionBudgets.entities.Transactions;
 
 public interface TransactionsService {
@@ -19,4 +20,5 @@ public interface TransactionsService {
   public Transactions getTransactionById(Long transaction_id);
 
   public void udpateTransaction(Transactions transaction);
+  
 }
