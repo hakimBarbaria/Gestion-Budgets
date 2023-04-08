@@ -73,10 +73,7 @@ public class ApplicationController {
 	    if (newCategory.getName() != null && !old_category.getName().equals(newCategory.getName())) {
 	    	  old_category.setName(newCategory.getName());
 	    	}
-
-	  
-	  
-	  
+	    
 	    categoryService.saveCategory(old_category);
 	    modelMap.addAttribute("message", "Category updated successfully !");
 	   // modelMap.addAttribute("categ", newCategory);
@@ -223,9 +220,4 @@ public class ApplicationController {
     return "editTransaction";
   }
   
-  
-  @RequestMapping("/")
-  public String RedirectToLandingPage() {
-	  return "landingPage";
-  }
 }
