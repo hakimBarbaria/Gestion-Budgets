@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.smartWorkers.gestionBudgets.entities.Categories;
 import com.smartWorkers.gestionBudgets.entities.Transactions;
 import com.smartWorkers.gestionBudgets.services.TransactionsService;
 
@@ -30,8 +31,10 @@ import com.smartWorkers.gestionBudgets.services.TransactionsService;
 public class ApplicationController {
   @Autowired
   TransactionsService transactionsService;
+
   @Autowired
   CategoriesService categoriesService;
+  
   boolean ChangingTypeOfPresentation = false;
   
   @RequestMapping("/redirectionToOriginalList")
@@ -57,6 +60,33 @@ public class ApplicationController {
   @RequestMapping("/AddCategory")
   public String RedirectToAddCategory () {
 	  return "AddCategories";
+  }
+  
+  @RequestMapping("/editCategory")
+  public String editCategory (ModelMap modelMap) {        /** , @RequestParam("idCategory") Long Category_id ***/
+	  Categories category = categoriesService.getCategoryById(1L);
+	  modelMap.addAttribute("category", category);
+	  return "editCategory";
+  }
+  
+  @RequestMapping("/updateCategory")
+  public String updateCategory(ModelMap modelMap,@ModelAttribute("category") Categories newCategory) {
+	    
+	  Long category_id = newCategory.getCategorie_id();
+	    Categories old_category = categoriesService.getCategoryById(1L);
+	    
+	    if (newCategory.getName() != null && !old_category.getName().equals(newCategory.getName())) {
+	    	  old_category.setName(newCategory.getName());
+	    	}
+	    
+	    if (newCategory.getIcon() != null && !old_category.getIcon().equals(newCategory.getIcon())) {
+	    	  old_category.setIcon(newCategory.getIcon());
+	    	}
+	    
+	    categoriesService.updateCategory(old_category);
+	    modelMap.addAttribute("message", "Category updated successfully !");
+	   // modelMap.addAttribute("categ", newCategory);
+	  return "editCategory";
   }
   
   @RequestMapping("/AddBudget")
