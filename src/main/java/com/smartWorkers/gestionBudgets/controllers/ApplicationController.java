@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+import com.smartWorkers.gestionBudgets.entities.Categories;
+import com.smartWorkers.gestionBudgets.services.CategoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,8 @@ import com.smartWorkers.gestionBudgets.services.TransactionsService;
 public class ApplicationController {
   @Autowired
   TransactionsService transactionsService;
+  @Autowired
+  CategoriesService categoriesService;
   boolean ChangingTypeOfPresentation = false;
   
   @RequestMapping("/redirectionToOriginalList")
@@ -210,5 +214,16 @@ public class ApplicationController {
     new_transaction.setDescription(description);
     transactionsService.addTransaction(new_transaction);
     return "redirect:/Transactions";
+  }
+  @RequestMapping("/saveCategory")
+  public String saveCategory(ModelMap modelMap
+                             ,@RequestParam("name") String name,
+                             @RequestParam("icon") String icon
+  ){
+    Categories new_category = new Categories();
+    new_category.setName(name);
+    new_category.setIcon(icon);
+    categoriesService.addCategory(new_category);
+    return "redirect:/Dashboard";
   }
 }
