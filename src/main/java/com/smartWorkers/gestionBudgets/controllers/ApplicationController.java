@@ -216,8 +216,8 @@ public class ApplicationController {
     return "redirect:/Transactions";
   }
   @RequestMapping("/saveCategory")
-  public String saveCategory(ModelMap modelMap
-                             ,@RequestParam("name") String name,
+  public String saveCategory(ModelMap modelMap,
+                             @RequestParam("name") String name,
                              @RequestParam("icon") String icon
   ){
     Categories new_category = new Categories();
