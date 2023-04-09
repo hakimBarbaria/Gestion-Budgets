@@ -22,5 +22,7 @@ public interface TransactionsService {
   public void udpateTransaction(Transactions transaction);
 
   public void addTransaction(Transactions transaction);
+  
+  public Page<Transactions> filterByType(String Type, int page, int size);
 
 }

@@ -19,5 +19,4 @@ public interface CategoriesService {
 
     public void updateCategory(Categories category);
     public void addCategory(Categories category);
-    
 }

@@ -256,4 +256,45 @@ public class ApplicationController {
     categoriesService.addCategory(new_category);
     return "redirect:/Dashboard";
   }
+  
+  
+  @PostMapping("/showOUT")
+  public String filterWithType(ModelMap modelMap,@RequestParam("OUT") String OUT,
+		  @RequestParam(name = "page", defaultValue = "0") int page,
+	      @RequestParam(name = "size", defaultValue = "3") int size) {
+
+    Page<Transactions> filteredTransactions = transactionsService.filterByType(OUT,page, size);
+    Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
+    modelMap.addAttribute("transactions", filteredTransactions);
+    if (filteredTransactions.isEmpty()) {
+      modelMap.addAttribute("message", "You don't add any Out Transactions yet !");
+    }
+    modelMap.addAttribute("pages", new int[transactions.getTotalPages()]);
+    modelMap.addAttribute("currentPage", page);
+    if (this.ChangingTypeOfPresentation == false) {
+      return "listeTransactionsUsingCards";
+    } else {
+      return "listeTransactions";
+    }
+  }
+
+  @PostMapping("/showIN")
+  public String filterWithTypeIN(ModelMap modelMap,@RequestParam("IN") String IN,
+		  @RequestParam(name = "page", defaultValue = "0") int page,
+	      @RequestParam(name = "size", defaultValue = "3") int size) {
+
+    Page<Transactions> filteredTransactions = transactionsService.filterByType(IN,page, size);
+    Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
+    modelMap.addAttribute("transactions", filteredTransactions);
+    if (filteredTransactions.isEmpty()) {
+      modelMap.addAttribute("message", "You don't add any Income Transactions yet !");
+    }
+    modelMap.addAttribute("pages", new int[transactions.getTotalPages()]);
+    modelMap.addAttribute("currentPage", page);
+    if (this.ChangingTypeOfPresentation == false) {
+      return "listeTransactionsUsingCards";
+    } else {
+      return "listeTransactions";
+    }
+  }
 }

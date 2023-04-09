@@ -83,7 +83,23 @@
         </form>
       </div>
     </div>
-
+    <!-- Breadcrumb -->
+<nav class="flex justify-between" aria-label="Breadcrumb">
+  <ol class="inline-flex items-center mb-3 sm:mb-0">
+    <li>
+      <form action="showOUT" method="post" class="flex items-center">
+        <button id="dropdownProject" name="OUT" value="OUT" class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300 inline-flex items-center px-3 py-2 text-sm font-normal text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-white dark:focus:ring-gray-700"><i class="bi bi-cash-coin"> OUT</i></button> 
+      </form>
+    </li>
+    <span class="mx-2 text-gray-400">/</span>
+    <li aria-current="page">
+      <form action="showIN" method="post" class="flex items-center">
+        <button id="dropdownDatabase" name="IN" value="IN" class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300 inline-flex items-center px-3 py-2 text-sm font-normal text-center text-gray-600 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-300 dark:focus:ring-gray-700"><i class="bi bi-coin"> INCOME</i></button>
+      </form>
+    </li>
+  </ol>
+</nav>
+<br>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
       <div th:each="transaction : ${transactions}">
         <div
@@ -123,6 +139,12 @@
               <span class="mb-3 font-normal text-gray-500 dark:text-gray-400">DT</span>
             </p>
           </div>
+          <div class="text-left">
+            <p class="font-semibold tracking-tight text-gray-900 dark:text-white">Dscription :<br>
+              <span th:text="${transaction.description}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span>
+            </p>
+          </div>
+          
           <div class="px-6 py-4 inline-flex">
             <a th:href="@{modifier_transaction(id=${transaction.getTransaction_id()})}"
               class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
