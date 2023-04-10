@@ -12,7 +12,7 @@
     <section class="bg-white dark:bg-gray-900">
       <p class=" text-left text-gray-500 dark:text-gray-400"><a href="/Transactions"
           class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
-          <i class="bi bi-arrow-left-circle mr-3"></i> 
+          <i class="bi bi-arrow-left-circle mr-3"></i>
           Transactions
         </a>
       </p>
@@ -52,9 +52,9 @@
             <input type="text" name="transaction_id" th:value="${transaction.getTransaction_id()}" hidden>
             <div class="w-full">
               <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
-              <input type="number" name="amount" id="amount"
+              <input type="number" name="amount" id="amount" min="0" step="any"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                th:value="${transaction.amount}" placeholder="$299">
+                th:value="${transaction.amount}">
             </div>
             <div class="w-full">
               <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
@@ -67,7 +67,7 @@
               <select id="type" name="type"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                 <option th:text="${transaction.type}" selected></option>
-                <option>IN</option>
+                <option>Out</option>
               </select>
             </div>
             <div>
@@ -75,7 +75,9 @@
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">category</label>
               <select id="categorie" name="categorie"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                <option selected="">Electronics</option>
+                <option th:text="${transaction.categorie}" selected></option>
+
+                <option value="EL">Electronics</option>
                 <option value="TV">TV/Monitors</option>
                 <option value="PC">PC</option>
                 <option value="GA">Gaming/Console</option>
@@ -84,11 +86,11 @@
             </div>
           </div>
           <div class="sm:col-span-2 mb-4">
-            <label for="description" name="description"
+            <label for="description"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-            <textarea id="description" rows="5"
+            <textarea id="description" rows="5" name="description"
               class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              placeholder="Write a product description here...">Standard glass.</textarea>
+              th:text="${transaction.description}" placeholder="Write a product description here..."></textarea>
           </div>
           <div class="flex items-center space-x-4">
             <button type="submit" th:href="@{update_transaction(id=${transaction.getTransaction_id()})}"
@@ -96,8 +98,8 @@
               Update Transaction
             </button>
             <button type="button" id="readProductButton" data-modal-toggle="deleteModal"
-             class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-	         Delete
+              class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+              Delete
             </button>
           </div>
         </form>
