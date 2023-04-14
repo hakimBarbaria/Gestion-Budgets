@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
-import com.smartWorkers.gestionBudgets.entities.Categories;
-import com.smartWorkers.gestionBudgets.services.CategoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -28,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smartWorkers.gestionBudgets.entities.Categories;
 import com.smartWorkers.gestionBudgets.entities.Transactions;
+import com.smartWorkers.gestionBudgets.services.CategoriesService;
 import com.smartWorkers.gestionBudgets.services.TransactionsService;
 
 @Controller
@@ -37,35 +36,35 @@ public class ApplicationController {
 
   @Autowired
   CategoriesService categoriesService;
-  
+
   boolean ChangingTypeOfPresentation = false;
   boolean showListIcons = true;
-  
+ 
   @RequestMapping("/redirectionToOriginalList")
   public String redirectionToOriginalList() {
-	  return "redirect:/Transactions";
+    return "redirect:/Transactions";
   }
-  
- /* @RequestMapping("/Dashboard")
-  public String RedirectToDashboard () {
-	  return "dashboard";
-  }*/
-  
+
+
+  @RequestMapping("/Dashboard")
+  public String RedirectToDashboard() {
+    return "dashboard";
+  }
   @RequestMapping("/Categories")
-  public String RedirectToCategories () {
-	  return "categories";
+  public String RedirectToCategories() {
+    return "categories";
   }
-  
+
   @RequestMapping("/AddTransactions")
-  public String RedirectToAddTransaction () {
-	  return "AddTransactions";
+  public String RedirectToAddTransaction() {
+    return "AddTransactions";
   }
-  
+
   @RequestMapping("/AddCategory")
-  public String RedirectToAddCategory () {
-	  return "AddCategories";
+  public String RedirectToAddCategory() {
+    return "AddCategories";
   }
-  
+
   @RequestMapping("/editCategory")
   public String editCategory (ModelMap modelMap) {        /** , @RequestParam("idCategory") Long Category_id ***/
 	  Categories category = categoriesService.getCategoryById(1L);
@@ -87,42 +86,41 @@ public class ApplicationController {
 	  this.showListIcons = false;
 	  return "redirect:/editCategory";
   }
-  
   @RequestMapping("/updateCategory")
-  public String updateCategory(ModelMap modelMap,@ModelAttribute("category") Categories newCategory) {
-	    
-	  Long category_id = newCategory.getCategorie_id();
-	    Categories old_category = categoriesService.getCategoryById(1L);
-	    
-	    if (newCategory.getName() != null && !old_category.getName().equals(newCategory.getName())) {
-	    	  old_category.setName(newCategory.getName());
-	    	}
-	    
-	    if (newCategory.getIcon() != null && !old_category.getIcon().equals(newCategory.getIcon())) {
-	    	  old_category.setIcon(newCategory.getIcon());
-	    	}
-	    
-	    categoriesService.updateCategory(old_category);
-	    modelMap.addAttribute("message", "Category updated successfully !");
-	   // modelMap.addAttribute("categ", newCategory);
-	  return "editCategory";
+  public String updateCategory(ModelMap modelMap, @ModelAttribute("category") Categories newCategory) {
+
+    Long category_id = newCategory.getCategorie_id();
+    Categories old_category = categoriesService.getCategoryById(1L);
+
+    if (newCategory.getName() != null && !old_category.getName().equals(newCategory.getName())) {
+      old_category.setName(newCategory.getName());
+    }
+
+    if (newCategory.getIcon() != null && !old_category.getIcon().equals(newCategory.getIcon())) {
+      old_category.setIcon(newCategory.getIcon());
+    }
+
+    categoriesService.updateCategory(old_category);
+    modelMap.addAttribute("message", "Category updated successfully !");
+    // modelMap.addAttribute("categ", newCategory);
+    return "editCategory";
   }
-  
+
   @RequestMapping("/AddBudget")
-  public String RedirectToAddBudget () {
-	  return "AddBudgets";
+  public String RedirectToAddBudget() {
+    return "AddBudgets";
   }
-  
+
   @RequestMapping("/Budgets")
-  public String RedirectToBudgets () {
-	  return "Budgets";
+  public String RedirectToBudgets() {
+    return "Budgets";
   }
-  
+
   @RequestMapping("/ChangingType")
   public String changingType() {
     if (this.ChangingTypeOfPresentation == false) {
       this.ChangingTypeOfPresentation = true;
-      
+
     } else {
       this.ChangingTypeOfPresentation = false;
     }
@@ -232,8 +230,12 @@ public class ApplicationController {
       old_transaction.setType(new_transaction.getType());
     }
     if (old_transaction.getCategorie() != new_transaction.getCategorie()
-        && new_transaction.getCategorie().length() > 0D) {
+        && new_transaction.getCategorie().length() > 0) {
       old_transaction.setCategorie(new_transaction.getCategorie());
+    }
+    if (old_transaction.getDescription() != new_transaction.getDescription()
+        && new_transaction.getCategorie().length() > 0) {
+      old_transaction.setDescription(new_transaction.getDescription());
     }
 
     // if (old_transaction.getDescription() != new_transaction.getDescription() &&
@@ -247,12 +249,12 @@ public class ApplicationController {
     modelMap.addAttribute("transaction", updated_Transaction);
     return "editTransaction";
   }
+
   @RequestMapping("/saveTransaction")
   public String saveTransaction(ModelMap modelMap,
-                                @ModelAttribute("transaction") Transactions new_transaction,
-                                @RequestParam("date") String date,
-                                @RequestParam("description") String description
-  ) throws ParseException {
+      @ModelAttribute("transaction") Transactions new_transaction,
+      @RequestParam("date") String date,
+      @RequestParam("description") String description) throws ParseException {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     Date dateCreation = dateFormat.parse(date);
     new_transaction.setCreated_at(dateCreation);
@@ -264,25 +266,24 @@ public class ApplicationController {
     transactionsService.addTransaction(new_transaction);
     return "redirect:/Transactions";
   }
+
   @RequestMapping("/saveCategory")
   public String saveCategory(ModelMap modelMap,
-                             @RequestParam("name") String name,
-                             @RequestParam("icon") String icon
-  ){
+      @RequestParam("name") String name,
+      @RequestParam("icon") String icon) {
     Categories new_category = new Categories();
     new_category.setName(name);
     new_category.setIcon(icon);
     categoriesService.addCategory(new_category);
     return "redirect:/Dashboard";
   }
-  
-  
-  @PostMapping("/showOUT")
-  public String filterWithType(ModelMap modelMap,@RequestParam("OUT") String OUT,
-		  @RequestParam(name = "page", defaultValue = "0") int page,
-	      @RequestParam(name = "size", defaultValue = "3") int size) {
 
-    Page<Transactions> filteredTransactions = transactionsService.filterByType(OUT,page, size);
+  @PostMapping("/showOUT")
+  public String filterWithType(ModelMap modelMap, @RequestParam("OUT") String OUT,
+      @RequestParam(name = "page", defaultValue = "0") int page,
+      @RequestParam(name = "size", defaultValue = "3") int size) {
+
+    Page<Transactions> filteredTransactions = transactionsService.filterByType(OUT, page, size);
     Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
@@ -298,11 +299,11 @@ public class ApplicationController {
   }
 
   @PostMapping("/showIN")
-  public String filterWithTypeIN(ModelMap modelMap,@RequestParam("IN") String IN,
-		  @RequestParam(name = "page", defaultValue = "0") int page,
-	      @RequestParam(name = "size", defaultValue = "3") int size) {
+  public String filterWithTypeIN(ModelMap modelMap, @RequestParam("IN") String IN,
+      @RequestParam(name = "page", defaultValue = "0") int page,
+      @RequestParam(name = "size", defaultValue = "3") int size) {
 
-    Page<Transactions> filteredTransactions = transactionsService.filterByType(IN,page, size);
+    Page<Transactions> filteredTransactions = transactionsService.filterByType(IN, page, size);
     Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
