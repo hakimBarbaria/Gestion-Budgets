@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
-import com.smartWorkers.gestionBudgets.entities.Categories;
 import com.smartWorkers.gestionBudgets.entities.Transactions;
 
 public interface TransactionsService {
@@ -22,7 +21,7 @@ public interface TransactionsService {
   public void udpateTransaction(Transactions transaction);
 
   public void addTransaction(Transactions transaction);
-  
+
   public Page<Transactions> filterByType(String Type, int page, int size);
 
 }

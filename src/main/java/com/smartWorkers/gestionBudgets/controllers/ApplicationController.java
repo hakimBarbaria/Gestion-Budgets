@@ -15,9 +15,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,17 +37,17 @@ public class ApplicationController {
 
   boolean ChangingTypeOfPresentation = false;
   boolean showListIcons = true;
- 
+
   @RequestMapping("/redirectionToOriginalList")
   public String redirectionToOriginalList() {
     return "redirect:/Transactions";
   }
 
-
   @RequestMapping("/Dashboard")
   public String RedirectToDashboard() {
     return "dashboard";
   }
+
   @RequestMapping("/Categories")
   public String RedirectToCategories() {
     return "categories";
@@ -66,30 +64,31 @@ public class ApplicationController {
   }
 
   @RequestMapping("/editCategory")
-  public String editCategory (ModelMap modelMap) {        /** , @RequestParam("idCategory") Long Category_id ***/
-	  Categories category = categoriesService.getCategoryById(1L);
-	  modelMap.addAttribute("category", category);
-	  modelMap.addAttribute("showIcons", this.showListIcons);
-	  if (this.showListIcons == false) {
-		  List<String> icons = Arrays.asList(
-		      "alarm", "archive", "arrow-down", "arrow-left", "arrow-right", "arrow-up", "at", "bag"
-		     
-		   );
-		  modelMap.addAttribute("icons", icons);
-		  this.showListIcons= true;
-	  }
-	  return "editCategory";
+  public String editCategory(ModelMap modelMap) { /** , @RequestParam("idCategory") Long Category_id ***/
+    Categories category = categoriesService.getCategoryById(1L);
+    modelMap.addAttribute("category", category);
+    modelMap.addAttribute("showIcons", this.showListIcons);
+    if (this.showListIcons == false) {
+      List<String> icons = Arrays.asList(
+          "alarm", "archive", "arrow-down", "arrow-left", "arrow-right", "arrow-up", "at", "bag"
+
+      );
+      modelMap.addAttribute("icons", icons);
+      this.showListIcons = true;
+    }
+    return "editCategory";
   }
-  
+
   @RequestMapping("ListIcons")
   public String ListIcons(ModelMap modelMap) {
-	  this.showListIcons = false;
-	  return "redirect:/editCategory";
+    this.showListIcons = false;
+    return "redirect:/editCategory";
   }
+
   @RequestMapping("/updateCategory")
   public String updateCategory(ModelMap modelMap, @ModelAttribute("category") Categories newCategory) {
 
-    Long category_id = newCategory.getCategorie_id();
+    // Long category_id = newCategory.getCategorie_id();
     Categories old_category = categoriesService.getCategoryById(1L);
 
     if (newCategory.getName() != null && !old_category.getName().equals(newCategory.getName())) {
