@@ -1,7 +1,18 @@
 package com.smartWorkers.gestionBudgets.controllers;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,21 +45,42 @@ public class categoryController {
   }
 
   @RequestMapping("/editCategory")
-  public String editCategory(ModelMap modelMap) { /** , @RequestParam("idCategory") Long Category_id ***/
+  public String editCategory(ModelMap modelMap) { /** , @RequestParam("idCategory") Long Category_id**/
     Categories category = categoriesService.getCategoryById(1L);
     modelMap.addAttribute("category", category);
     modelMap.addAttribute("showIcons", this.showListIcons);
     if (this.showListIcons == false) {
-      List<String> icons = Arrays.asList(
-          "alarm", "archive", "arrow-down", "arrow-left", "arrow-right", "arrow-up", "at", "bag"
-
-      );
+      List<String> icons = loadIconClasses();
       modelMap.addAttribute("icons", icons);
       this.showListIcons = true;
     }
     return "editCategory";
   }
+ 
+  private List<String> loadIconClasses() {
+	    List<String> iconClasses = new ArrayList<>();
+	    try {
+	        ResourceLoader resourceLoader = new DefaultResourceLoader();
+	        Resource resource = resourceLoader.getResource("classpath:META-INF/resources/webjars/bootstrap-icons/1.10.3/font/bootstrap-icons.css");
+	        BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream()));
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            if (line.startsWith(".bi-")) {
+	                String[] splitLine = line.split(":before");
+	                String iconClass = splitLine[0].replace(".", "").replace(":", "");
+	                iconClasses.add(iconClass);
+	            }
+	        }
+	        reader.close();
+	    } catch (IOException e) {
+	        // handle exception
+	    }
+	    return iconClasses;
+	}
 
+
+  
+  
   @RequestMapping("ListIcons")
   public String ListIcons(ModelMap modelMap) {
     this.showListIcons = false;
