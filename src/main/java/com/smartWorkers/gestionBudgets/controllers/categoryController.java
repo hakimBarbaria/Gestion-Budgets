@@ -15,16 +15,14 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smartWorkers.gestionBudgets.entities.Categories;
-import com.smartWorkers.gestionBudgets.entities.Transactions;
 import com.smartWorkers.gestionBudgets.services.CategoriesService;
 
 @Controller
@@ -42,6 +40,13 @@ public class categoryController {
   @RequestMapping("/AddCategory")
   public String RedirectToAddCategory() {
     return "AddCategories";
+  }
+
+  @RequestMapping(path = "/delete_category/{id}")
+  public String deleteCategory(ModelMap modelMap, @PathVariable Long category_id) {
+    categoriesService.deleteCategory(category_id);
+    modelMap.addAttribute("message", "Category deleted successfully !");
+    return "redirect:/categories";
   }
 
   @RequestMapping("/editCategory")
