@@ -9,125 +9,133 @@
 
 <body>
   <div layout:fragment="Mycontent">
-    	<section class="bg-white dark:bg-gray-900">
-    		 <p class=" text-left text-gray-500 dark:text-gray-400"><a href="/Categories"
-         		 class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
-          			<i class="bi bi-arrow-left-circle mr-3"></i> 
-          			Categories
-        		</a>
-      		</p>
-      		<div class="flex justify-end" th:if="${message}">
-	        <div id="toast-success"
-	          class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
-	          role="alert">
-	          <div
-	            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
-	            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-	              xmlns="http://www.w3.org/2000/svg">
-	              <path fill-rule="evenodd"
-	                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-	                clip-rule="evenodd"></path>
-	            </svg>
-	            <span class="sr-only">Check icon</span>
-	          </div>
-	          <div class="ml-3 text-sm font-normal" th:text="${message}"></div>
-	          <button type="button"
-	            class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
-	            data-dismiss-target="#toast-success" aria-label="Close">
-	            <span class="sr-only">Close</span>
-	            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-	              xmlns="http://www.w3.org/2000/svg">
-	              <path fill-rule="evenodd"
-	                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-	                clip-rule="evenodd"></path>
-	            </svg>
-	          </button>
-	        </div>
+    <section class="bg-white dark:bg-gray-900">
+      <p class=" text-left text-gray-500 dark:text-gray-400"><a href="/Categories"
+          class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
+          <i class="bi bi-arrow-left-circle mr-3"></i>
+          Categories
+        </a>
+      </p>
+      <div class="flex justify-end" th:if="${message}">
+        <div id="toast-success"
+          class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+          role="alert">
+          <div
+            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clip-rule="evenodd"></path>
+            </svg>
+            <span class="sr-only">Check icon</span>
           </div>
-          
-           <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
-        		<h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Update Category</h2>
-        		
-        		<form action="updateCategory" method="post">
-        		
+          <div class="ml-3 text-sm font-normal" th:text="${message}"></div>
+          <button type="button"
+            class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+            data-dismiss-target="#toast-success" aria-label="Close">
+            <span class="sr-only">Close</span>
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
+        <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Update Category</h2>
+
+        <form action="updateCategory" method="post">
+
           <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
             <input type="text" name="categorie_id" th:value="${category.categorie_id}" hidden>
             <div class="w-full">
-              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category Name</label>
+              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category
+                Name</label>
               <input type="text" name="name" id="categoryName" th:value="${category.name}"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                 placeholder="CategoryName">
+                placeholder="CategoryName">
             </div>
-             
+
             <div>
-                <label for="icon"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Icon</label>
-                 <p class=" text-left text-gray-500 dark:text-gray-400"><a href="/ListIcons"
-         		 class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
-          			Select one <i class="bi bi-arrow-bar-right"></i>
-        		</a>
-      		</p>
-                 </div>
-
-			<div th:if="${showIcons} == false">
-    
-<div>   
-    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-    <div class="relative">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-        </div>
-        <input type="search" id="icon-search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos...">
-    </div>
-</div>
-
-    <br>
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="icon-list">
-    <div th:each="icon : ${icons}">
-    	<div class="card text-center">
-    	  <input type="checkbox" th:id="${icon}" th:value="${icon}" class="hidden peer" name="icon">
-    	  <label th:for="${icon}" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">                           
-            <div class="block">
-                <i th:class="'bi-' + ${icon}"></i>
-                <br>
-                <span th:text="${icon}"></span>
+              <label for="icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Icon</label>
+              <p class=" text-left text-gray-500 dark:text-gray-400"><a href="/ListIcons"
+                  class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                  Select one <i class="bi bi-arrow-bar-right"></i>
+                </a>
+              </p>
             </div>
-        </label>
-         
-          <br>
-          
-        </div>
-    </div>
-    </div>
-    
 
-</div>
+            <div th:if="${showIcons} == false">
 
-<script>
-    $(document).ready(function() {
-        $("#icon-search").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $("#icon-list .card").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-    });
-</script>
-			</div>
-            <div class="grid grid-cols-2 md:grid-cols-2 gap-6">
-               <div>
-	            <button type="submit" 
-	              class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-	              edit Category
-	            </button>
-	            </div>
-	            <div>
-	            <button type="button" id="readProductButton" data-modal-toggle="deleteModal"
-	              class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-	              Delete
-	            </button>
-	            </div>
-	        </div>
+              <div>
+                <label for="default-search"
+                  class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none"
+                      stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                  </div>
+                  <input type="search" id="icon-search"
+                    class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Search Mockups, Logos...">
+                </div>
+              </div>
+
+              <br>
+              <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="icon-list">
+                <div th:each="icon : ${icons}">
+                  <div class="card text-center">
+                    <input type="checkbox" th:id="${icon}" th:value="${icon}" class="hidden peer" name="icon">
+                    <label th:for="${icon}"
+                      class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                      <div class="block">
+                        <i th:class="'bi-' + ${icon}"></i>
+                        <br>
+                        <span th:text="${icon}"></span>
+                      </div>
+                    </label>
+
+                    <br>
+
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+            <script>
+              $(document).ready(function () {
+                $("#icon-search").on("keyup", function () {
+                  var value = $(this).val().toLowerCase();
+                  $("#icon-list .card").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                  });
+                });
+              });
+            </script>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-2 gap-6">
+            <div>
+              <button type="submit"
+                class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                edit Category
+              </button>
+            </div>
+            <div>
+              <button type="button" id="readProductButton" data-modal-toggle="deleteModal"
+                class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                Delete
+              </button>
+            </div>
+          </div>
         </form>
       </div>
       <!-- Main modal -->
@@ -184,12 +192,7 @@
           </div>
         </div>
       </div>
-            
-          </div>
-       		 </form>
-          </div>
-          
-    	</section>
+    </section>
   </div>
 </body>
 
