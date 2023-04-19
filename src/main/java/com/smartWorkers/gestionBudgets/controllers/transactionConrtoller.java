@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.smartWorkers.gestionBudgets.entities.Categories;
 import com.smartWorkers.gestionBudgets.entities.Transactions;
+import com.smartWorkers.gestionBudgets.services.CategoriesService;
 import com.smartWorkers.gestionBudgets.services.TransactionsService;
 
 @Controller
@@ -30,15 +32,20 @@ public class transactionConrtoller {
 
   @Autowired
   TransactionsService transactionsService;
-
+  
+  @Autowired
+  CategoriesService categoriesService;
+  
   @RequestMapping("/redirectionToOriginalList")
   public String redirectionToOriginalList() {
     return "redirect:/Transactions";
   }
 
   @RequestMapping("/AddTransactions")
-  public String RedirectToAddTransaction() {
-    return "AddTransactions";
+  public String RedirectToAddTransaction(ModelMap modelMap) {
+	  List<Categories> categories = categoriesService.getCategories();
+	  modelMap.addAttribute("categories",categories);
+	  return "AddTransactions";
   }
 
   @RequestMapping("/ChangingType")
@@ -59,10 +66,12 @@ public class transactionConrtoller {
       @RequestParam(name = "size", defaultValue = "3") int size) {
     Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
     List<Transactions> ALLtransactions = transactionsService.getTransactions();
+    List<Categories> categories = categoriesService.getCategories();
     modelMap.addAttribute("transactions", transactions);
     modelMap.addAttribute("pages", new int[transactions.getTotalPages()]);
     modelMap.addAttribute("currentPage", page);
     modelMap.addAttribute("ALLtransactions", ALLtransactions);
+    modelMap.addAttribute("categories", categories);
     if (this.ChangingTypeOfPresentation == false) {
       return "listeTransactionsUsingCards";
     } else {
@@ -92,7 +101,8 @@ public class transactionConrtoller {
     modelMap.addAttribute("transactions", filteredTransactions);
     modelMap.addAttribute("ALLtransactions", ALLtransactions);
     if (filteredTransactions.isEmpty()) {
-      modelMap.addAttribute("message", "You don't have any transactions this mounth !");
+      modelMap.addAttribute("message", "If you see this message that's mean you don't creat any transaction in this date yet, try to creat one\r\n" + 
+      		"  	Click on \"add\" to add one or click \"Exist\" to go back to the original list");
     }
     if (this.ChangingTypeOfPresentation == false) {
       return "listeTransactionsUsingCards";
@@ -106,11 +116,14 @@ public class transactionConrtoller {
 
     List<Transactions> filteredTransactions = transactionsService.findByCategorie(categorie);
     List<Transactions> ALLtransactions = transactionsService.getTransactions();
+    List<Categories> categories = categoriesService.getCategories();
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
-      modelMap.addAttribute("message", "You don't have any transactions in this category !");
+      modelMap.addAttribute("message", "If you see this message that's mean you don't creat any transaction in this category yet, try to creat one\r\n" + 
+      		"  	Click on \"add\" to add one or click \"Exist\" to go back to the original list ");
     }
     modelMap.addAttribute("ALLtransactions", ALLtransactions);
+    modelMap.addAttribute("categories", categories);
     if (this.ChangingTypeOfPresentation == false) {
       return "listeTransactionsUsingCards";
     } else {
@@ -200,7 +213,8 @@ public class transactionConrtoller {
     Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
-      modelMap.addAttribute("message", "You don't add any Out Transactions yet !");
+      modelMap.addAttribute("message", "If you see this message that's mean you don't creat any Out transaction yet, try to creat one\r\n" + 
+      		"  	Click on \"add\" to add one or click \"Exist\" to go back to the original list");
     }
     modelMap.addAttribute("pages", new int[transactions.getTotalPages()]);
     modelMap.addAttribute("currentPage", page);
@@ -220,7 +234,8 @@ public class transactionConrtoller {
     Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
-      modelMap.addAttribute("message", "You don't add any Income Transactions yet !");
+      modelMap.addAttribute("message", "If you see this message that's mean you don't creat any Income transaction yet, try to creat one\r\n" + 
+        		"  	Click on \"add\" to add one or click \"Exist\" to go back to the original list");
     }
     modelMap.addAttribute("pages", new int[transactions.getTotalPages()]);
     modelMap.addAttribute("currentPage", page);
