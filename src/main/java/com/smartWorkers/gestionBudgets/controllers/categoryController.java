@@ -78,7 +78,7 @@ public class categoryController {
 	        }
 	        reader.close();
 	    } catch (IOException e) {
-	        // handle exception
+	        // exception handling 
 	    }
 	    return iconClasses;
 	}
