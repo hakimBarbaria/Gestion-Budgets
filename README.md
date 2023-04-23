@@ -1,3 +1,3 @@
-# GestionBudge
-This is an Application for a Budget Manager for students using spring boot framework, created by HakimBarbaria TrabelsiAhmed GhanmiRaed and RiabiHalim
-in "projet d'integration"
+# GestionBudget
+This is an Application for a Budget Manager for students using spring boot framework, created by "Hakim Barbaria" "Trabelsi Ahmed" "Ghanmi Raed" and "Riabi Halim"
+in "projet d'integration" for "2022-2023" iset Bizerte
