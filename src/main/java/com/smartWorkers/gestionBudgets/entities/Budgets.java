@@ -17,16 +17,23 @@ public class Budgets {
 	private Date created_at;
 	private Date updated_at;
 	/* Ajouter une clé étrangére "category_id" du la table categories */ 
-	@ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
-    private Categories categorie;
-	public Budgets() {
-	}
+	@ManyToOne 
+	private Categories categorie;
+	
 	public Budgets(Double budgetLimite, Date created_at, Date updated_at, Categories categorie) {
+		super();
 		this.budgetLimite = budgetLimite;
 		this.created_at = created_at;
 		this.updated_at = updated_at;
 		this.categorie = categorie;
+	}
+	public Categories getCategorie() {
+		return categorie;
+	}
+	public void setCategorie(Categories categorie) {
+		this.categorie = categorie;
+	}
+	public Budgets() {
 	}
 	public Long getBudget_id() {
 		return budget_id;
@@ -52,12 +59,7 @@ public class Budgets {
 	public void setUpdated_at(Date updated_at) {
 		this.updated_at = updated_at;
 	}
-	public Categories getCategorie() {
-		return categorie;
-	}
-	public void setCategorie(Categories categorie) {
-		this.categorie = categorie;
-	}
+	
 	
 	
 	
