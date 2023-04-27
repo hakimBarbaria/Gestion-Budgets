@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class budgetController {
   @RequestMapping("/AddBudget")
-  public String RedirectToAddBudget() {
+  public String RedirectToAddBudget() {  
     return "AddBudgets";
   }
 

@@ -1,9 +1,12 @@
 package com.smartWorkers.gestionBudgets.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Categories {
@@ -11,38 +14,39 @@ public class Categories {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long categorie_id;
   private String name;
-  // Importer l'url du l'icon
-  private String icon;
-  /*
-   * @ManyToOne
-   * =======
-   * /*
-   * 
-   * @ManyToOne
-   * 
-   * @JoinColumn(name = "user_id", nullable = false)
-   * private Users user;
-   * 
-   * @ManyToOne
-   * 
-   * @JoinColumn(name = "budget_id", nullable = false)
-   * <<<<<<< HEAD
-   * private Budgets budget;
-   */
-
+ 
+  private String description;
+  
+  @OneToMany(mappedBy = "categorie")
+  private List<Budgets> budgets;
+  
   public Categories() {
   }
 
-  public Categories(String name, String icon) {
-    this.name = name;
-    this.icon = icon;
-    /*
-     * this.user = user;
-     * this.budget = budget;
-     */
-  }
 
-  public Long getCategorie_id() {
+  public List<Budgets> getBudgets() {
+	return budgets;
+}
+
+
+public void setBudgets(List<Budgets> budgets) {
+	this.budgets = budgets;
+}
+
+
+public void setCategorie_id(Long categorie_id) {
+	this.categorie_id = categorie_id;
+}
+
+
+public Categories(String name, String description, List<Budgets> budgets) {
+	super();
+	this.name = name;
+	this.description = description;
+	this.budgets = budgets;
+}
+
+public Long getCategorie_id() {
     return categorie_id;
   }
 
@@ -54,13 +58,17 @@ public class Categories {
     this.name = name;
   }
 
-  public String getIcon() {
-    return icon;
-  }
 
-  public void setIcon(String icon) {
-    this.icon = icon;
-  }
+public String getDescription() {
+	return description;
+}
+
+
+public void setDescription(String description) {
+	this.description = description;
+}
+
+  
 
   /*
    * public Users getUser() {

@@ -53,36 +53,9 @@ public class categoryController {
   public String editCategory(ModelMap modelMap) { /** , @RequestParam("idCategory") Long Category_id**/
     Categories category = categoriesService.getCategoryById(1L);
     modelMap.addAttribute("category", category);
-    modelMap.addAttribute("showIcons", this.showListIcons);
-    if (this.showListIcons == false) {
-      List<String> icons = loadIconClasses();
-      modelMap.addAttribute("icons", icons);
-      this.showListIcons = true;
-    }
     return "editCategory";
   }
  
-  private List<String> loadIconClasses() {
-	    List<String> iconClasses = new ArrayList<>();
-	    try {
-	        ResourceLoader resourceLoader = new DefaultResourceLoader();
-	        Resource resource = resourceLoader.getResource("classpath:META-INF/resources/webjars/bootstrap-icons/1.10.3/font/bootstrap-icons.css");
-	        BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream()));
-	        String line;
-	        while ((line = reader.readLine()) != null) {
-	            if (line.startsWith(".bi-")) {
-	                String[] splitLine = line.split(":before");
-	                String iconClass = splitLine[0].replace(".", "").replace(":", "");
-	                iconClasses.add(iconClass);
-	            }
-	        }
-	        reader.close();
-	    } catch (IOException e) {
-	        // exception handling 
-	    }
-	    return iconClasses;
-	}
-
 
   
   
@@ -102,8 +75,8 @@ public class categoryController {
       old_category.setName(newCategory.getName());
     }
 
-    if (newCategory.getIcon() != null && !old_category.getIcon().equals(newCategory.getIcon())) {
-      old_category.setIcon(newCategory.getIcon());
+    if (newCategory.getDescription() != null && !old_category.getDescription().equals(newCategory.getDescription())) {
+      old_category.setDescription(newCategory.getDescription());
     }
 
     categoriesService.updateCategory(old_category);
@@ -115,10 +88,10 @@ public class categoryController {
   @RequestMapping("/saveCategory")
   public String saveCategory(ModelMap modelMap,
       @RequestParam("name") String name,
-      @RequestParam("icon") String icon) {
+      @RequestParam("description") String description) {
     Categories new_category = new Categories();
     new_category.setName(name);
-    new_category.setIcon(icon);
+    new_category.setDescription(description);
     categoriesService.addCategory(new_category);
     return "redirect:/Dashboard";
   }
