@@ -91,7 +91,6 @@ public class categoryController {
     this.showListIcons = false;
     return "redirect:/editCategory";
   }
-
   @RequestMapping("/updateCategory")
   public String updateCategory(ModelMap modelMap, @ModelAttribute("category") Categories newCategory) {
 
