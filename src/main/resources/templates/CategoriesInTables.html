@@ -25,35 +25,47 @@
             <form action="/changingTypeView">
                 <button type="submit"
                         class="text-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"><i
-                        class="bi bi-justify"></i></button>
+                        class="bi bi-grid-3x3-gap"></i></button>
             </form>
         </div>
     </div>
-    <br><br>
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-        <div th:each="category: ${categories}">
-            <div
-                    class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <i
-                        class="text-center bi bi-basket3 self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white w-10 h-10 mb-2 text-gray-500 dark:text-gray-400"></i>
-                <div class="inline-flex">
-                    <p> #</p>
-                    <p th:text="${category.categorie_id}"></p>
-                </div>
-<br>
-                <div class="inline-flex">
-                    <p class="font-semibold tracking-tight text-gray-900 dark:text-white">Name :
-                        <span th:text="${category.name}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span>
-                    </p>
-                </div>
-                <br>
-                <div class="text-left">
-                    <p class="font-semibold tracking-tight text-gray-900 dark:text-white">Description :<br>
-                        <span th:text="${category.description}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span>
-                    </p>
-                </div>
+<br><br>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    #
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    <div class="flex items-center">
+                        Name
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    <div class="flex items-center">
+                        Description
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    <div class="flex items-center">
+                        Actions
+                    </div>
+                </th>
 
-                <div class="px-6 py-4 inline-flex">
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" th:each="category: ${categories}">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    th:text="${category.categorie_id}">
+                </th>
+                <td class="px-6 py-4" th:text="${category.name}">
+                </td>
+                <td class="px-6 py-4" th:text="${category.description}">
+                </td>
+                <td class="px-6 py-4 text-right inline-flex">
                     <a th:href="@{editCategory(idCategory=${category.getCategorie_id()})}"
                        class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                         <i class="bi bi-pencil"></i>
@@ -83,14 +95,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-
-
-            </div>
-        </div>
-
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+
     <br>
     <nav aria-label="Page navigation example">
         <ul class="inline-flex -space-x-px">
