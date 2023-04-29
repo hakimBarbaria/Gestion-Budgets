@@ -1,19 +1,5 @@
 package com.smartWorkers.gestionBudgets.controllers;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -50,20 +36,18 @@ public class categoryController {
   }
 
   @RequestMapping("/editCategory")
-  public String editCategory(ModelMap modelMap) { /** , @RequestParam("idCategory") Long Category_id**/
+  public String editCategory(ModelMap modelMap) { /** , @RequestParam("idCategory") Long Category_id **/
     Categories category = categoriesService.getCategoryById(1L);
     modelMap.addAttribute("category", category);
     return "editCategory";
   }
- 
 
-  
-  
   @RequestMapping("ListIcons")
   public String ListIcons(ModelMap modelMap) {
     this.showListIcons = false;
     return "redirect:/editCategory";
   }
+
   @RequestMapping("/updateCategory")
   public String updateCategory(ModelMap modelMap, @ModelAttribute("category") Categories newCategory) {
 
