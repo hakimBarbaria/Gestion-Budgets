@@ -10,11 +10,13 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.smartWorkers.gestionBudgets.entities.Transactions;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,14 +29,35 @@ import com.smartWorkers.gestionBudgets.services.CategoriesService;
 
 @Controller
 public class categoryController {
-  boolean showListIcons = true;
+  boolean ChangeViewList = true;
 
   @Autowired
   CategoriesService categoriesService;
 
   @RequestMapping("/Categories")
-  public String RedirectToCategories() {
-    return "categories";
+  public String RedirectToCategories(ModelMap modelMap,
+                                     @RequestParam(name = "page", defaultValue = "0") int page,
+                                     @RequestParam(name = "size", defaultValue = "3") int size) {
+  /*declaration des page des categories*/
+    Page<Categories> categories = categoriesService.getCategoryInPages(page, size);
+    modelMap.addAttribute("categories", categories);
+    modelMap.addAttribute("pages", new int[categories.getTotalPages()]);
+    modelMap.addAttribute("currentPage", page);
+    if (this.ChangeViewList == false) {
+      return "categories";
+    } else {
+      return "CategoriesInTables";
+    }
+  }
+
+  @RequestMapping("changingTypeView")
+  public String changingTypeView(){
+    if (this.ChangeViewList == false){
+      this.ChangeViewList=true;
+    }else{
+      this.ChangeViewList = false;
+    }
+    return "redirect:/Categories";
   }
 
   @RequestMapping("/AddCategory")
@@ -50,8 +73,8 @@ public class categoryController {
   }
 
   @RequestMapping("/editCategory")
-  public String editCategory(ModelMap modelMap) { /** , @RequestParam("idCategory") Long Category_id**/
-    Categories category = categoriesService.getCategoryById(1L);
+  public String editCategory(ModelMap modelMap, @RequestParam("idCategory") Long Category_id) {
+    Categories category = categoriesService.getCategoryById(Category_id);
     modelMap.addAttribute("category", category);
     return "editCategory";
   }
@@ -61,14 +84,13 @@ public class categoryController {
   
   @RequestMapping("ListIcons")
   public String ListIcons(ModelMap modelMap) {
-    this.showListIcons = false;
     return "redirect:/editCategory";
   }
   @RequestMapping("/updateCategory")
   public String updateCategory(ModelMap modelMap, @ModelAttribute("category") Categories newCategory) {
 
-    // Long category_id = newCategory.getCategorie_id();
-    Categories old_category = categoriesService.getCategoryById(1L);
+     Long category_id = newCategory.getCategorie_id();
+    Categories old_category = categoriesService.getCategoryById(category_id);
 
     if (newCategory.getName() != null && !old_category.getName().equals(newCategory.getName())) {
       old_category.setName(newCategory.getName());
