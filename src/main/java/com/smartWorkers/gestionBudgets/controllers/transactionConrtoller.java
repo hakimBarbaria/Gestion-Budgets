@@ -32,10 +32,10 @@ public class transactionConrtoller {
 
   @Autowired
   TransactionsService transactionsService;
-  
+
   @Autowired
   CategoriesService categoriesService;
-  
+
   @RequestMapping("/redirectionToOriginalList")
   public String redirectionToOriginalList() {
     return "redirect:/Transactions";
@@ -43,9 +43,9 @@ public class transactionConrtoller {
 
   @RequestMapping("/AddTransactions")
   public String RedirectToAddTransaction(ModelMap modelMap) {
-	  List<Categories> categories = categoriesService.getCategories();
-	  modelMap.addAttribute("categories",categories);
-	  return "AddTransactions";
+    List<Categories> categories = categoriesService.getCategories();
+    modelMap.addAttribute("categories", categories);
+    return "AddTransactions";
   }
 
   @RequestMapping("/ChangingType")
@@ -101,8 +101,9 @@ public class transactionConrtoller {
     modelMap.addAttribute("transactions", filteredTransactions);
     modelMap.addAttribute("ALLtransactions", ALLtransactions);
     if (filteredTransactions.isEmpty()) {
-      modelMap.addAttribute("message", "If you see this message that's mean you don't creat any transaction in this date yet, try to creat one\r\n" + 
-      		"  	Click on \"add\" to add one or click \"Exist\" to go back to the original list");
+      modelMap.addAttribute("message",
+          "If you see this message that's mean you don't creat any transaction in this date yet, try to creat one\r\n" +
+              "  	Click on \"add\" to add one or click \"Exist\" to go back to the original list");
     }
     if (this.ChangingTypeOfPresentation == false) {
       return "listeTransactionsUsingCards";
@@ -119,8 +120,10 @@ public class transactionConrtoller {
     List<Categories> categories = categoriesService.getCategories();
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
-      modelMap.addAttribute("message", "If you see this message that's mean you don't creat any transaction in this category yet, try to creat one\r\n" + 
-      		"  	Click on \"add\" to add one or click \"Exist\" to go back to the original list ");
+      modelMap.addAttribute("message",
+          "If you see this message that's mean you don't creat any transaction in this category yet, try to creat one\r\n"
+              +
+              "  	Click on \"add\" to add one or click \"Exist\" to go back to the original list ");
     }
     modelMap.addAttribute("ALLtransactions", ALLtransactions);
     modelMap.addAttribute("categories", categories);
@@ -140,6 +143,8 @@ public class transactionConrtoller {
   @RequestMapping("/modifier_transaction")
   public String modifierTransaction(@RequestParam("id") Long transaction_id, ModelMap modelMap) {
     Transactions transaction = transactionsService.getTransactionById(transaction_id);
+    List<Categories> categories = categoriesService.getCategories();
+    modelMap.addAttribute("categories", categories);
     modelMap.addAttribute("transaction", transaction);
     return "editTransaction";
   }
@@ -149,7 +154,7 @@ public class transactionConrtoller {
       @RequestParam("date") String date, ModelMap modelMap) throws ParseException {
     Long transaction_id = new_transaction.getTransaction_id();
     Transactions old_transaction = transactionsService.getTransactionById(transaction_id);
-    System.out.println("this is what you looking for : " + transaction_id);
+    
     if (date != "" && old_transaction.getCreated_at() != new_transaction.getCreated_at()) {
       // conversion de la date
       SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
@@ -182,6 +187,9 @@ public class transactionConrtoller {
     transactionsService.udpateTransaction(old_transaction);
 
     Transactions updated_Transaction = transactionsService.getTransactionById(transaction_id);
+    List<Categories> categories = categoriesService.getCategories();
+    
+    modelMap.addAttribute("categories", categories);
     modelMap.addAttribute("message", "Transaction updated successfully !");
     modelMap.addAttribute("transaction", updated_Transaction);
     return "editTransaction";
@@ -213,8 +221,9 @@ public class transactionConrtoller {
     Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
-      modelMap.addAttribute("message", "If you see this message that's mean you don't creat any Out transaction yet, try to creat one\r\n" + 
-      		"  	Click on \"add\" to add one or click \"Exist\" to go back to the original list");
+      modelMap.addAttribute("message",
+          "If you see this message that's mean you don't creat any Out transaction yet, try to creat one\r\n" +
+              "  	Click on \"add\" to add one or click \"Exist\" to go back to the original list");
     }
     modelMap.addAttribute("pages", new int[transactions.getTotalPages()]);
     modelMap.addAttribute("currentPage", page);
@@ -234,8 +243,9 @@ public class transactionConrtoller {
     Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
-      modelMap.addAttribute("message", "If you see this message that's mean you don't creat any Income transaction yet, try to creat one\r\n" + 
-        		"  	Click on \"add\" to add one or click \"Exist\" to go back to the original list");
+      modelMap.addAttribute("message",
+          "If you see this message that's mean you don't creat any Income transaction yet, try to creat one\r\n" +
+              "  	Click on \"add\" to add one or click \"Exist\" to go back to the original list");
     }
     modelMap.addAttribute("pages", new int[transactions.getTotalPages()]);
     modelMap.addAttribute("currentPage", page);
