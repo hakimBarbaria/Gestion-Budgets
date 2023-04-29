@@ -2,10 +2,10 @@ package com.smartWorkers.gestionBudgets.entities;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Transactions {
@@ -18,42 +18,28 @@ public class Transactions {
   private Date updated_at;
   private String categorie;
   private String description;
-  /*
-   * @ManyToOne
-   * 
-   * @JoinColumn(name = "user_id", nullable = false)
-   * private Users user;
-   * 
-   * @ManyToOne
-   * 
-   * @JoinColumn(name = "categorie_id", nullable = false)
-   * private Categories categorie;
-   */
+
   public Transactions() {
   }
 
   public Transactions(String description,Double amount, String type, Date created_at, Date updated_at, String categorie) {
     this.description=description;
-	this.categorie = categorie;
+    this.categorie = categorie;
     this.amount = amount;
     this.type = type;
     this.created_at = created_at;
     this.updated_at = updated_at;
-    /*
-     * this.user = user;
-     * this.categorie = categorie;
-     */
   }
 
   public String getDescription() {
-	return description;
-}
+    return description;
+  }
 
-public void setDescription(String description) {
-	this.description = description;
-}
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-public String getCategorie() {
+  public String getCategorie() {
     return categorie;
   }
 
@@ -100,19 +86,4 @@ public String getCategorie() {
   public void setUpdated_at(Date updated_at) {
     this.updated_at = updated_at;
   }
-  /*
-   * public Users getUser() {
-   * return user;
-   * }
-   * public void setUser(Users user) {
-   * this.user = user;
-   * }
-   * public Categories getCategorie() {
-   * return categorie;
-   * }
-   * public void setCategorie(Categories categorie) {
-   * this.categorie = categorie;
-   * }
-   */
-
 }
