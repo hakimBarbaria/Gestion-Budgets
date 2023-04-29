@@ -1,48 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="template">
+  layout:decorate="template">
 
-    <head>
-        <meta charset="utf-8">
-        <title>Transactions</title>
-    </head>
+<head>
+  <meta charset="utf-8">
+  <title>Transactions</title>
+</head>
 
-    <body>
-        <div layout:fragment="Mycontent">
-            <section class="bg-white dark:bg-gray-900">
-                <p class=" text-left text-gray-500 dark:text-gray-400"><a href="/Transactions"
-                                                                          class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                    <i class="bi bi-arrow-left-circle mr-3"></i>
-                    Transactions
-                </a>
-                </p>
-                <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
-                    <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Add Transaction</h2>
-                    <form action="saveTransaction" method="post">
-                        <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
-                            <div class="w-full">
-                                <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
-                                <input type="number" name="amount" id="amount" min="0" step="any"
-                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        placeholder="amount">
-                            </div>
-                            <div class="w-full">
-                                <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
-                                <input type="date" name="date" id="date"
-                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                       >
-                            </div>
-                            <div>
-                                <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
-                                <select id="type" name="type"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                    <option selected disabled>Select type</option>
-                                    <option>IN</option>
-                                    <option>OUT</option>
-                                </select>
-                            </div>
-                            <div>
-                               <!--  <label for="categorie"
+<body>
+  <div layout:fragment="Mycontent">
+    <section class="bg-white dark:bg-gray-900">
+      <p class=" text-left text-gray-500 dark:text-gray-400"><a href="/Transactions"
+          class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
+          <i class="bi bi-arrow-left-circle mr-3"></i>
+          Transactions
+        </a>
+      </p>
+      <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
+        <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Add Transaction</h2>
+        <form action="saveTransaction" method="post">
+          <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
+            <div class="w-full">
+              <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
+              <input type="number" name="amount" id="amount" min="0" step="any"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="amount">
+            </div>
+            <div class="w-full">
+              <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
+              <input type="date" name="date" id="date"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+            </div>
+            <div>
+              <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
+              <select id="type" name="type"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                <option selected disabled>Select type</option>
+                <option>EXPENSE</option>
+                <option>INCOME</option>
+              </select>
+            </div>
+            <div>
+              <!--  <label for="categorie"
                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">category</label>
                                 <select id="categorie" name="categorie"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
@@ -51,49 +50,52 @@
 								    <option th:value="${category.name}" th:text="${category.name}"></option>
 								  </th:block>
                                 </select>-->
-                        
-                   <label for="categorie"
-                                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">category</label>        
-<div class="flex">
-    <a href="/AddCategory"><button class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">
-    	<i class="bi bi-plus-lg"></i>
-    </button></a>
-    <label for="categories" class="sr-only">Choose a state</label>
-    <select id="categorie" name="categorie" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg border-l-gray-100 dark:border-l-gray-700 border-l-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-         <option selected disabled>Select category</option>
-								  <th:block th:each="category: ${categories}">
-								    <option th:value="${category.name}" th:text="${category.name}"></option>
-								  </th:block>
-    </select>
-</div>
-                                
-                            </div> 
-                        </div> 
-                        <div class="sm:col-span-2 mb-4">
-                            <label for="description" name="description"
-                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                            <textarea id="description" name="description" rows="5"
-                                      class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                      placeholder="Write a Transaction description here..."></textarea>
-                        </div>
-                        <div class="grid grid-cols-2 md:grid-cols-2 gap-6">
-                        	<div>
-                            <button type="submit"
-                                    class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                                Add Transaction
-                            </button>
-                            </div>
-                            <div>
-                            <button type="reset"
-                                    class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-                                Reset choices
-                            </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </section>
-        </div>
-    </body>
+
+              <label for="categorie"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">category</label>
+              <div class="flex">
+                <a href="/AddCategory"><button
+                    class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                    type="button">
+                    <i class="bi bi-plus-lg"></i>
+                  </button></a>
+                <label for="categories" class="sr-only">Choose a state</label>
+                <select id="categorie" name="categorie"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg border-l-gray-100 dark:border-l-gray-700 border-l-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option selected disabled>Select category</option>
+                  <th:block th:each="category: ${categories}">
+                    <option th:value="${category.name}" th:text="${category.name}"></option>
+                  </th:block>
+                </select>
+              </div>
+
+            </div>
+          </div>
+          <div class="sm:col-span-2 mb-4">
+            <label for="description" name="description"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+            <textarea id="description" name="description" rows="5"
+              class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="Write a Transaction description here..."></textarea>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-2 gap-6">
+            <div>
+              <button type="submit"
+                class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                Add Transaction
+              </button>
+            </div>
+            <div>
+              <button type="reset"
+                class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                Reset choices
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+</body>
 
 </html>
