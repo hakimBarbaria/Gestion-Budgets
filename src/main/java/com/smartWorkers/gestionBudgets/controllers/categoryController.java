@@ -1,5 +1,7 @@
 package com.smartWorkers.gestionBudgets.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,7 +21,10 @@ public class categoryController {
   CategoriesService categoriesService;
 
   @RequestMapping("/Categories")
-  public String RedirectToCategories() {
+  public String RedirectToCategories(ModelMap modelMap) {
+    List<Categories> categories = categoriesService.getCategories();
+    modelMap.addAttribute("categories", categories);
+
     return "categories";
   }
 
