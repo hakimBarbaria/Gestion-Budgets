@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.10</version>
+    <version>3.0.6</version>
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
   <groupId>com.iset</groupId>
@@ -15,7 +15,7 @@
   <name>Produits</name>
   <description>Demo project for Spring Boot</description>
   <properties>
-    <java.version>1.8</java.version>
+    <java.version>19</java.version>
   </properties>
 
   <dependencies>
@@ -36,10 +36,14 @@
       <scope>provided</scope>
     </dependency>
 
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>jstl</artifactId>
-    </dependency>
+   <!-- https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api -->
+<dependency>
+    <groupId>jakarta.servlet.jsp.jstl</groupId>
+    <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+    <version>3.0.0</version>
+</dependency>
+
+
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
