@@ -85,7 +85,7 @@ public class categoryController {
       new_category.setName(name);
       new_category.setDescription(description);
       categoriesService.addCategory(new_category);
-      return "redirect:/Dashboard";
+      return "redirect:/Categories";
     }
     else if(name.length()<5&&description.length()<10){
       modelMap.addAttribute("messageBoth", "verify your input !");
