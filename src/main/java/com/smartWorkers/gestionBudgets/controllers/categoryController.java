@@ -37,11 +37,11 @@ public class categoryController {
     return "AddCategories";
   }
 
-  @RequestMapping(path = "/delete_category/{id}")
+  @RequestMapping(path = "/delete_category/{category_id}")
   public String deleteCategory(ModelMap modelMap, @PathVariable Long category_id) {
     categoriesService.deleteCategory(category_id);
     modelMap.addAttribute("message", "Category deleted successfully !");
-    return "redirect:/categories";
+    return "redirect:/Categories";
   }
 
   @RequestMapping("/editCategory")
@@ -62,13 +62,12 @@ public class categoryController {
     Long category_id = newCategory.getCategorie_id();
     Categories old_category = categoriesService.getCategoryById(category_id);
 
-    if (newCategory.getName() != null && !old_category.getName().equals(newCategory.getName())) {
       old_category.setName(newCategory.getName());
-    }
+    
 
-    if (newCategory.getDescription() != null && !old_category.getDescription().equals(newCategory.getDescription())) {
+
       old_category.setDescription(newCategory.getDescription());
-    }
+   
 
     categoriesService.updateCategory(old_category);
     modelMap.addAttribute("message", "Category updated successfully !");
