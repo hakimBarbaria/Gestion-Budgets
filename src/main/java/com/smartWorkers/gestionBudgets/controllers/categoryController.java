@@ -14,7 +14,6 @@ import com.smartWorkers.gestionBudgets.services.CategoriesService;
 
 @Controller
 public class categoryController {
-  boolean ChangeViewList = true;
 
   @Autowired
   CategoriesService categoriesService;
@@ -28,22 +27,10 @@ public class categoryController {
     modelMap.addAttribute("categories", categories);
     modelMap.addAttribute("pages", new int[categories.getTotalPages()]);
     modelMap.addAttribute("currentPage", page);
-    if (this.ChangeViewList == false) {
       return "categories";
-    } else {
-      return "CategoriesInTables";
-    }
+    
   }
 
-  @RequestMapping("changingTypeView")
-  public String changingTypeView() {
-    if (this.ChangeViewList == false) {
-      this.ChangeViewList = true;
-    } else {
-      this.ChangeViewList = false;
-    }
-    return "redirect:/Categories";
-  }
 
   @RequestMapping("/AddCategory")
   public String RedirectToAddCategory() {
