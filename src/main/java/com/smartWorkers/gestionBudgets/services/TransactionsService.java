@@ -24,4 +24,8 @@ public interface TransactionsService {
 
   public Page<Transactions> filterByType(String Type, int page, int size);
 
+  public List<Float> getExpensesCountsByMonth();
+
+  public List<Float> getIncomeCountsByMonth();
+
 }
