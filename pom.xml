@@ -21,6 +21,12 @@
   <dependencies>
 
 
+<!-- https://mvnrepository.com/artifact/org.webjars.npm/chart.js -->
+<dependency>
+    <groupId>org.webjars.npm</groupId>
+    <artifactId>chart.js</artifactId>
+    <version>4.2.1</version>
+</dependency>
 
 
     <dependency>
