@@ -29,8 +29,8 @@ public class TransactionsImplementations implements TransactionsService {
   }
 
   @Override
-  public List<Transactions> findByCategorie(String categorie) {
-    return transactionRepository.findByCategorie(categorie);
+  public List<Transactions> findByCategorie(Long categorie_id) {
+    return transactionRepository.findByCategorieId(categorie_id);
   }
 
   @Override

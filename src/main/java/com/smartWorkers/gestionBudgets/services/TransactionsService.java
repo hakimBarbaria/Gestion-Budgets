@@ -12,7 +12,7 @@ public interface TransactionsService {
 
   public Page<Transactions> getTransactionsInPages(int page, int size);
 
-  public List<Transactions> findByCategorie(String categorie);
+  public List<Transactions> findByCategorie(Long categorie_id);
 
   public void deleteTransaction(Long id);
 

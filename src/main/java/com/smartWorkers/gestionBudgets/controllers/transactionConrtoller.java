@@ -113,9 +113,9 @@ public class transactionConrtoller {
   }
 
   @PostMapping("/filterWithCategorie")
-  public String filterWithCategory(@RequestParam("categorie") String categorie, ModelMap modelMap) {
+  public String filterWithCategory(@RequestParam("categorie_id") Long categorie_id, ModelMap modelMap) {
 
-    List<Transactions> filteredTransactions = transactionsService.findByCategorie(categorie);
+    List<Transactions> filteredTransactions = transactionsService.findByCategorie((Long)categorie_id);
     List<Transactions> ALLtransactions = transactionsService.getTransactions();
     List<Categories> categories = categoriesService.getCategories();
     modelMap.addAttribute("transactions", filteredTransactions);
