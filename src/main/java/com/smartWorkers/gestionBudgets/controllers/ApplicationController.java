@@ -10,4 +10,14 @@ public class ApplicationController {
   public String RedirectToDashboard() {
     return "dashboard";
   }
+  
+  @RequestMapping("/")
+  public String RedirectToAcceuille() {
+    return "landingPage";
+  }
+  
+  @RequestMapping("/Equipe")
+  public String RedirectToEquipe() {
+    return "Equipe";
+  }
 }
