@@ -87,16 +87,16 @@ public class categoryController {
       categoriesService.addCategory(new_category);
       return "redirect:/Categories";
     }
-    else if(name.length()<5&&description.length()<10){
-      modelMap.addAttribute("messageBoth", "verify your input !");
-      return "AddCategories";
-    }
     else if(name.length()<5){
       modelMap.addAttribute("messageName", "the name must be more than 5 chars long");
       return "AddCategories";
     }
     else if(description.length()<10){
       modelMap.addAttribute("messageDesc", "the description must be more than 10 chars long");
+      return "AddCategories";
+    }
+    else if(name.length()<5&&description.length()<10){
+      modelMap.addAttribute("messageBoth", "verify your input !");
       return "AddCategories";
     }
     return "";
