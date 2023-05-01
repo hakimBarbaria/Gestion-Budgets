@@ -20,4 +20,9 @@ public class ApplicationController {
   public String RedirectToEquipe() {
     return "Equipe";
   }
+  
+  @RequestMapping("/SignUp")
+  public String RedirectToSignUp() {
+    return "SignUp";
+  }
 }
