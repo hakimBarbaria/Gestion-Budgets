@@ -25,4 +25,9 @@ public class ApplicationController {
   public String RedirectToSignUp() {
     return "SignUp";
   }
+  
+  @RequestMapping("/Settings")
+  public String RedirectToSettings() {
+    return "Settings";
+  }
 }
