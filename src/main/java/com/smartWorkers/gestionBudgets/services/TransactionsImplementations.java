@@ -52,9 +52,19 @@ public class TransactionsImplementations implements TransactionsService {
   public void addTransaction(Transactions transaction) {
     transactionRepository.save(transaction);
   }
-  
+
   @Override
-  public Page<Transactions> filterByType(String Type,int page, int size) {
-	  return transactionRepository.findByType(Type,PageRequest.of(page, size));
+  public Page<Transactions> filterByType(String Type, int page, int size) {
+    return transactionRepository.findByType(Type, PageRequest.of(page, size));
+  }
+
+  @Override
+  public List<Float> getExpensesCountsByMonth() {
+    return transactionRepository.getExpensesAmountForEveryMonth();
+  }
+
+  @Override
+  public List<Float> getIncomeCountsByMonth() {
+    return transactionRepository.getIncomeAmountForEveryMonth();
   }
 }
