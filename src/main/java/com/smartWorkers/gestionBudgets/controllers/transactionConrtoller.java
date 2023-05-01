@@ -165,20 +165,13 @@ public class transactionConrtoller {
       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
       old_transaction.setUpdated_at(dateFormat.parse(dateFormat.format(currentDate)));
     }
-    if (old_transaction.getAmount() != new_transaction.getAmount() && new_transaction.getAmount() > 0) {
       old_transaction.setAmount(new_transaction.getAmount());
-    }
-    if (old_transaction.getType() != new_transaction.getType() && new_transaction.getType().length() > 0) {
+   
       old_transaction.setType(new_transaction.getType());
-    }
-    if (old_transaction.getCategorie() != new_transaction.getCategorie()
-        && new_transaction.getCategorie().length() > 0) {
+   
       old_transaction.setCategorie(new_transaction.getCategorie());
-    }
-    if (old_transaction.getDescription() != new_transaction.getDescription()
-        && new_transaction.getCategorie().length() > 0) {
+   
       old_transaction.setDescription(new_transaction.getDescription());
-    }
 
     // if (old_transaction.getDescription() != new_transaction.getDescription() &&
     // new_transaction.getDescription().length() > 0D) {

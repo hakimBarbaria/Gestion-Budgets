@@ -156,7 +156,7 @@
             </td>
             <td class="px-6 py-4" th:text="${#dates.format(transaction.updated_at, 'dd-MM-yyyy')}">
             </td>
-            <td class="px-6 py-4" th:text="${transaction.categorie}">
+            <td class="px-6 py-4" th:text="${transaction.categorie.name}">
             </td>
             <td class="px-6 py-4 text-right inline-flex">
               <a th:href="@{modifier_transaction(id=${transaction.getTransaction_id()})}"

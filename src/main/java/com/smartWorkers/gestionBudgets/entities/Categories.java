@@ -18,18 +18,38 @@ public class Categories {
 
     @OneToMany(mappedBy = "categorie")
     private List<Budgets> budgets;
+    
+    @OneToMany(mappedBy = "categorie")
+    private List<Transactions> transactions;
 
     public Categories() {
     }
 
-    public Categories(String name, String description, List<Budgets> budgets) {
-        super();
-        this.name = name;
-        this.description = description;
-        this.budgets = budgets;
-    }
+    
 
-    public Long getCategorie_id() {
+    public Categories(String name, String description, List<Budgets> budgets, List<Transactions> transactions) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.budgets = budgets;
+		this.transactions = transactions;
+	}
+
+
+
+	public List<Transactions> getTransactions() {
+		return transactions;
+	}
+
+
+
+	public void setTransactions(List<Transactions> transactions) {
+		this.transactions = transactions;
+	}
+
+
+
+	public Long getCategorie_id() {
         return categorie_id;
     }
 
