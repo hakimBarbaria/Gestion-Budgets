@@ -20,4 +20,5 @@ public interface TransactionsRepository extends JpaRepository<Transactions, Long
 
   @Query(value = "SELECT COALESCE(SUM(amount), 0) as count FROM (SELECT 1 as month_num UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m LEFT JOIN transactions ON MONTH(created_at) = m.month_num and type = 'INCOME' GROUP BY m.month_num ORDER BY m.month_num", nativeQuery = true)
   List<Float> getIncomeAmountForEveryMonth();
+
 }
