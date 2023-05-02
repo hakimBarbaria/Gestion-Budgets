@@ -12,6 +12,8 @@
   <div layout:fragment="Mycontent">
 
 
+<h2 class="text-4xl dark:text-white"><i class="bi bi-speedometer2"></i> Dashboard</h2>
+	<br>
 
 
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -19,14 +21,31 @@
 
         <a href="#"
           class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+          <div class="grid grid-cols-2 md:grid-cols-2 gap-4">
+           <div>
           <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Balance</h5>
+          </div>
+          <div>
+          <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">2500 Dinars</p>
+          </div>
+          </div>
         </a>
 
       </div>
       <div>
         <a href="#"
           class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+           <div>
           <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Totale<br>Categories</h5>
+          </div>
+          <div>
+          <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="${nombreCategories}"></p>
+          </div>
+          <div>
+             <i class="text-3xl bi bi-basket-fill"></i>
+          </div>
+          </div>
         </a>
       </div>
       <div>
