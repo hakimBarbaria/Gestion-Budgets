@@ -12,8 +12,8 @@
   <div layout:fragment="Mycontent">
 
 
-<h2 class="text-4xl dark:text-white"><i class="bi bi-speedometer2"></i> Dashboard</h2>
-	<br>
+    <h2 class="text-4xl dark:text-white"><i class="bi bi-speedometer2"></i> Dashboard</h2>
+    <br>
 
 
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -22,153 +22,155 @@
         <a href="#"
           class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
           <div class="grid grid-cols-2 md:grid-cols-2 gap-4">
-           <div>
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Balance</h5>
-          </div>
-          <div>
-          <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">2500 Dinars</p>
-          </div>
+            <div>
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Balance</h5>
+            </div>
+            <div>
+              <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">2500 Dinars</p>
+            </div>
           </div>
         </a>
 
       </div>
       <div>
-        <a href="#"
+        <a href="/showOUT"
           class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
           <div class="grid grid-cols-3 md:grid-cols-3">
-           <div>
-          <h5 class="text-red mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Expenses</h5>
-          </div>
-          <div>
-          
-          </div>
-          <div>
-             <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="${nombreCategories}"></p>
-          </div>
+            <div>
+              <h5 class="text-red mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Expenses</h5>
+            </div>
+            <div>
+
+            </div>
+            <div>
+              <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                th:text="${nombreCategories}"></p>
+            </div>
           </div>
         </a>
       </div>
       <div>
-        <a href="#"
+        <a href="/showIN"
           class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-           <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-           <div>
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Income</h5>
-          </div>
-          <div>
-          
-          </div>
-          <div>
-             <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="${nombreTransactions}"></p>
-          </div>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div>
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Income</h5>
+            </div>
+            <div>
+
+            </div>
+            <div>
+              <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                th:text="${nombreTransactions}"></p>
+            </div>
           </div>
         </a>
-      </div>
-      </div>
-      <div>
-        <div>
-          <canvas id="transactionsData"></canvas>
-        </div>
-
-        <script>
-          const labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-          var expensesCountData = JSON.parse("[[${expensesCount}]]");
-          var incomeCountData = JSON.parse("[[${incomeCount}]]");
-
-          const expensesData = {
-            labels: labels,
-            datasets: [
-              {
-                label: 'EXPENSE',
-                data: expensesCountData,
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  // 'rgba(255, 159, 64, 0.2)',
-                  // 'rgba(255, 205, 86, 0.2)',
-                  // 'rgba(75, 192, 192, 0.2)',
-                  // 'rgba(54, 162, 235, 0.2)',
-                  // 'rgba(153, 102, 255, 0.2)',
-                  // 'rgba(201, 203, 207, 0.2)',
-                  // 'rgba(255, 99, 132, 0.4)',
-                  // 'rgba(255, 159, 64, 0.4)',
-                  // 'rgba(255, 205, 86, 0.4)',
-                  // 'rgba(75, 192, 192, 0.4)',
-                  // 'rgba(54, 162, 235, 0.4)',
-                  // 'rgba(153, 102, 255, 0.4)'
-                ],
-                borderColor: [
-                  'rgb(255, 99, 132)',
-                  // 'rgb(255, 159, 64)',
-                  // 'rgb(255, 205, 86)',
-                  // 'rgb(75, 192, 192)',
-                  // 'rgb(54, 162, 235)',
-                  // 'rgb(153, 102, 255)',
-                  // 'rgb(201, 203, 207)',
-                  // 'rgb(255, 99, 132)',
-                  // 'rgb(255, 159, 64)',
-                  // 'rgb(255, 205, 86)',
-                  // 'rgb(75, 192, 192)',
-                  // 'rgb(54, 162, 235)',
-                  // 'rgb(153, 102, 255)'
-                ],
-                borderWidth: 1
-              },
-              {
-                label: 'INCOME',
-                data: incomeCountData,
-                backgroundColor: [
-                  // 'rgba(255, 99, 132, 0.2)',
-                  // 'rgba(255, 159, 64, 0.2)',
-                  // 'rgba(255, 205, 86, 0.2)',
-                  // 'rgba(75, 192, 192, 0.2)',
-                  // 'rgba(54, 162, 235, 0.2)',
-                  // 'rgba(153, 102, 255, 0.2)',
-                  // 'rgba(201, 203, 207, 0.2)',
-                  // 'rgba(255, 99, 132, 0.4)',
-                  // 'rgba(255, 159, 64, 0.4)',
-                  // 'rgba(255, 205, 86, 0.4)',
-                  // 'rgba(75, 192, 192, 0.4)',
-                  // 'rgba(54, 162, 235, 0.4)',
-                  'rgba(153, 102, 255, 0.4)'
-                ],
-                borderColor: [
-                  // 'rgb(255, 99, 132)',
-                  // 'rgb(255, 159, 64)',
-                  // 'rgb(255, 205, 86)',
-                  // 'rgb(75, 192, 192)',
-                  // 'rgb(54, 162, 235)',
-                  // 'rgb(153, 102, 255)',
-                  // 'rgb(201, 203, 207)',
-                  // 'rgb(255, 99, 132)',
-                  // 'rgb(255, 159, 64)',
-                  // 'rgb(255, 205, 86)',
-                  // 'rgb(75, 192, 192)',
-                  // 'rgb(54, 162, 235)',
-                  'rgb(153, 102, 255)'
-                ],
-                borderWidth: 1
-              }
-            ]
-          };
-
-          var ctx = document.getElementById('transactionsData').getContext('2d');
-          var myChart = new Chart(ctx, {
-        	  type: 'bar',
-            data: expensesData,
-            options: {
-              scales: {
-                yAxes: [{
-                  ticks: {
-                    beginAtZero: true
-                  }
-                }]
-              }
-            }
-          });
-        </script>
       </div>
     </div>
+    <div>
+      <div>
+        <canvas id="transactionsData"></canvas>
+      </div>
+
+      <script>
+        const labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        var expensesCountData = JSON.parse("[[${expensesCount}]]");
+        var incomeCountData = JSON.parse("[[${incomeCount}]]");
+
+        const expensesData = {
+          labels: labels,
+          datasets: [
+            {
+              label: 'EXPENSE',
+              data: expensesCountData,
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                // 'rgba(255, 159, 64, 0.2)',
+                // 'rgba(255, 205, 86, 0.2)',
+                // 'rgba(75, 192, 192, 0.2)',
+                // 'rgba(54, 162, 235, 0.2)',
+                // 'rgba(153, 102, 255, 0.2)',
+                // 'rgba(201, 203, 207, 0.2)',
+                // 'rgba(255, 99, 132, 0.4)',
+                // 'rgba(255, 159, 64, 0.4)',
+                // 'rgba(255, 205, 86, 0.4)',
+                // 'rgba(75, 192, 192, 0.4)',
+                // 'rgba(54, 162, 235, 0.4)',
+                // 'rgba(153, 102, 255, 0.4)'
+              ],
+              borderColor: [
+                'rgb(255, 99, 132)',
+                // 'rgb(255, 159, 64)',
+                // 'rgb(255, 205, 86)',
+                // 'rgb(75, 192, 192)',
+                // 'rgb(54, 162, 235)',
+                // 'rgb(153, 102, 255)',
+                // 'rgb(201, 203, 207)',
+                // 'rgb(255, 99, 132)',
+                // 'rgb(255, 159, 64)',
+                // 'rgb(255, 205, 86)',
+                // 'rgb(75, 192, 192)',
+                // 'rgb(54, 162, 235)',
+                // 'rgb(153, 102, 255)'
+              ],
+              borderWidth: 1
+            },
+            {
+              label: 'INCOME',
+              data: incomeCountData,
+              backgroundColor: [
+                // 'rgba(255, 99, 132, 0.2)',
+                // 'rgba(255, 159, 64, 0.2)',
+                // 'rgba(255, 205, 86, 0.2)',
+                // 'rgba(75, 192, 192, 0.2)',
+                // 'rgba(54, 162, 235, 0.2)',
+                // 'rgba(153, 102, 255, 0.2)',
+                // 'rgba(201, 203, 207, 0.2)',
+                // 'rgba(255, 99, 132, 0.4)',
+                // 'rgba(255, 159, 64, 0.4)',
+                // 'rgba(255, 205, 86, 0.4)',
+                // 'rgba(75, 192, 192, 0.4)',
+                // 'rgba(54, 162, 235, 0.4)',
+                'rgba(153, 102, 255, 0.4)'
+              ],
+              borderColor: [
+                // 'rgb(255, 99, 132)',
+                // 'rgb(255, 159, 64)',
+                // 'rgb(255, 205, 86)',
+                // 'rgb(75, 192, 192)',
+                // 'rgb(54, 162, 235)',
+                // 'rgb(153, 102, 255)',
+                // 'rgb(201, 203, 207)',
+                // 'rgb(255, 99, 132)',
+                // 'rgb(255, 159, 64)',
+                // 'rgb(255, 205, 86)',
+                // 'rgb(75, 192, 192)',
+                // 'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)'
+              ],
+              borderWidth: 1
+            }
+          ]
+        };
+
+        var ctx = document.getElementById('transactionsData').getContext('2d');
+        var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: expensesData,
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
+        });
+      </script>
+    </div>
+  </div>
 
 </body>
 

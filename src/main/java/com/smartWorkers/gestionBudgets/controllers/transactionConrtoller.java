@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -205,12 +206,12 @@ public class transactionConrtoller {
     return "redirect:/Transactions";
   }
 
-  @PostMapping("/showOUT")
-  public String filterWithType(ModelMap modelMap, @RequestParam("OUT") String OUT,
+  @GetMapping("/showOUT")
+  public String filterWithType(ModelMap modelMap,
       @RequestParam(name = "page", defaultValue = "0") int page,
       @RequestParam(name = "size", defaultValue = "3") int size) {
 
-    Page<Transactions> filteredTransactions = transactionsService.filterByType(OUT, page, size);
+    Page<Transactions> filteredTransactions = transactionsService.filterByType("EXPENSE", page, size);
     Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
@@ -227,12 +228,12 @@ public class transactionConrtoller {
     }
   }
 
-  @PostMapping("/showIN")
-  public String filterWithTypeIN(ModelMap modelMap, @RequestParam("IN") String IN,
+  @GetMapping("/showIN")
+  public String filterWithTypeIN(ModelMap modelMap,
       @RequestParam(name = "page", defaultValue = "0") int page,
       @RequestParam(name = "size", defaultValue = "3") int size) {
 
-    Page<Transactions> filteredTransactions = transactionsService.filterByType(IN, page, size);
+    Page<Transactions> filteredTransactions = transactionsService.filterByType("INCOME", page, size);
     Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
