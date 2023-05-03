@@ -20,15 +20,29 @@ public class Budgets {
   @ManyToOne
   private Categories categorie;
 
-  public Budgets(Double budgetLimite, Date created_at, Date updated_at, Categories categorie) {
-    super();
-    this.budgetLimite = budgetLimite;
-    this.created_at = created_at;
-    this.updated_at = updated_at;
-    this.categorie = categorie;
-  }
+  @ManyToOne
+  private Users user;
+  
+  
 
-  public Categories getCategorie() {
+  public Users getUser() {
+	return user;
+}
+
+public void setUser(Users user) {
+	this.user = user;
+}
+
+public Budgets(Double budgetLimite, Date created_at, Date updated_at, Categories categorie, Users user) {
+	super();
+	this.budgetLimite = budgetLimite;
+	this.created_at = created_at;
+	this.updated_at = updated_at;
+	this.categorie = categorie;
+	this.user = user;
+}
+
+public Categories getCategorie() {
     return categorie;
   }
 

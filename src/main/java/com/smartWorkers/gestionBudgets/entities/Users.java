@@ -1,11 +1,13 @@
 package com.smartWorkers.gestionBudgets.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Users {
@@ -19,20 +21,65 @@ public class Users {
     private Date created_at;
     private Date updated_at;
     
+    @OneToMany(mappedBy = "user")
+    private List<Transactions> transactions;
+    
+    @OneToMany(mappedBy = "user")
+    private List<Categories> categories;
+    
+    @OneToMany(mappedBy = "user")
+    private List<Budgets> budgets;
+    
     public Users() {
     }
     
-    public Users(String email, String password, Double balance, 
-            Double remember_token, Date created_at, Date updated_at) {
-        this.email = email;
-        this.password = password;
-        this.balance = balance;
-        this.remember_token = remember_token;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
-    }
+   
+    public List<Transactions> getTransactions() {
+		return transactions;
+	}
 
-    public Long getUser_id() {
+
+	public void setTransactions(List<Transactions> transactions) {
+		this.transactions = transactions;
+	}
+
+
+	public List<Categories> getCategories() {
+		return categories;
+	}
+
+
+	public void setCategories(List<Categories> categories) {
+		this.categories = categories;
+	}
+
+
+	public List<Budgets> getBudgets() {
+		return budgets;
+	}
+
+
+	public void setBudgets(List<Budgets> budgets) {
+		this.budgets = budgets;
+	}
+
+
+	public Users(String email, String password, Double balance, Double remember_token, Date created_at, Date updated_at,
+			List<Transactions> transactions, List<Categories> categories, List<Budgets> budgets) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.balance = balance;
+		this.remember_token = remember_token;
+		this.created_at = created_at;
+		this.updated_at = updated_at;
+		this.transactions = transactions;
+		this.categories = categories;
+		this.budgets = budgets;
+	}
+
+
+	public Long getUser_id() {
         return user_id;
     }
 

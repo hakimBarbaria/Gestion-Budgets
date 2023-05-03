@@ -22,6 +22,9 @@ public class Transactions {
   @ManyToOne
   private Categories categorie;
   
+  @ManyToOne
+  private Users user;
+  
   public Categories getCategorie() {
 	return categorie;
 }
@@ -39,8 +42,24 @@ public Transactions() {
 
 
 
+
+
+
+
+public Users getUser() {
+	return user;
+}
+
+
+
+public void setUser(Users user) {
+	this.user = user;
+}
+
+
+
 public Transactions(Double amount, String type, Date created_at, Date updated_at, String description,
-		Categories categorie) {
+		Categories categorie, Users user) {
 	super();
 	this.amount = amount;
 	this.type = type;
@@ -48,6 +67,7 @@ public Transactions(Double amount, String type, Date created_at, Date updated_at
 	this.updated_at = updated_at;
 	this.description = description;
 	this.categorie = categorie;
+	this.user = user;
 }
 
 
