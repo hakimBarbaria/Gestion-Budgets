@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -21,19 +22,52 @@ public class Categories {
     
     @OneToMany(mappedBy = "categorie")
     private List<Transactions> transactions;
+    
+    @ManyToOne
+    private Users user;
 
     public Categories() {
     }
 
     
 
-    public Categories(String name, String description, List<Budgets> budgets, List<Transactions> transactions) {
+   
+
+
+
+	public Users getUser() {
+		return user;
+	}
+
+
+
+
+
+
+
+	public void setUser(Users user) {
+		this.user = user;
+	}
+
+
+
+
+
+
+
+	public Categories(String name, String description, List<Budgets> budgets, List<Transactions> transactions,
+			Users user) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.budgets = budgets;
 		this.transactions = transactions;
+		this.user = user;
 	}
+
+
+
+
 
 
 

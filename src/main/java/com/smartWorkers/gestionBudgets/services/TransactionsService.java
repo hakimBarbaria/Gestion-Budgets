@@ -10,6 +10,10 @@ public interface TransactionsService {
 
   public List<Transactions> getTransactions();
 
+  public int getCountIncomes();
+  
+  public int getCountExpenses();
+  
   public Page<Transactions> getTransactionsInPages(int page, int size);
 
   public List<Transactions> findByCategorie(Long categorie_id);
