@@ -35,15 +35,15 @@
       <div>
         <a href="#"
           class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div class="grid grid-cols-3 md:grid-cols-3">
            <div>
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Totale<br>Categories</h5>
+          <h5 class="text-red mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Expenses</h5>
           </div>
           <div>
-          <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="${nombreCategories}"></p>
+          
           </div>
           <div>
-             <i class="text-3xl bi bi-basket-fill"></i>
+             <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="${nombreCategories}"></p>
           </div>
           </div>
         </a>
@@ -53,16 +53,17 @@
           class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
            <div>
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Totale<br>Transactions</h5>
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Income</h5>
           </div>
           <div>
-          <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="${nombreTransactions}"></p>
+          
           </div>
           <div>
-             <i class="text-3xl bi bi-currency-exchange"></i>
+             <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="${nombreTransactions}"></p>
           </div>
           </div>
         </a>
+      </div>
       </div>
       <div>
         <div>
@@ -168,7 +169,6 @@
         </script>
       </div>
     </div>
-  </div>
 
 </body>
 

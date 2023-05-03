@@ -67,4 +67,14 @@ public class TransactionsImplementations implements TransactionsService {
   public List<Float> getIncomeCountsByMonth() {
     return transactionRepository.getIncomeAmountForEveryMonth();
   }
+
+@Override
+public int getCountIncomes() {
+	return transactionRepository.getCountIncomes();
+}
+
+@Override
+public int getCountExpenses() {
+	return transactionRepository.getCountExpenses();
+}
 }

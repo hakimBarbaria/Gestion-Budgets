@@ -24,26 +24,15 @@ public class ApplicationController {
   public String RedirectToDashboard(ModelMap modelMap) {
     List<Float> expensesCount = transactionsService.getExpensesCountsByMonth();
     List<Float> incomeCount = transactionsService.getIncomeCountsByMonth();
-    List<Transactions> ALLtransactions = transactionsService.getTransactions();
-    List<Categories> Categories = categorieService.getCategories();
+    int countIncomes = transactionsService.getCountIncomes();
+    int countExpenses = transactionsService.getCountExpenses();
     
-    int CC=0;
-    Iterator it= Categories.iterator();
-    while(it.hasNext()) {
-    	CC++;
-    	it.next();
-    }
+
     
-    int C=0;
-    Iterator it2= ALLtransactions.iterator();
-    while(it2.hasNext()) {
-    	C++;
-    	it2.next();
-    }
     modelMap.addAttribute("expensesCount", expensesCount);
     modelMap.addAttribute("incomeCount", incomeCount);
-    modelMap.addAttribute("nombreTransactions",C);
-    modelMap.addAttribute("nombreCategories",CC);
+    modelMap.addAttribute("nombreTransactions",countIncomes);
+    modelMap.addAttribute("nombreCategories",countExpenses);
     return "dashboard";
   }
 
