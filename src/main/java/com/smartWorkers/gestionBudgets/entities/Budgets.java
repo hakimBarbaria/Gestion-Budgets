@@ -13,45 +13,12 @@ public class Budgets {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long budget_id;
-  private Double budgetLimite;
+  private Double budgetLimit;
   private Date created_at;
   private Date updated_at;
-  /* Ajouter une clé étrangére "category_id" du la table categories */
+
   @ManyToOne
   private Categories categorie;
-
-  @ManyToOne
-  private Users user;
-  
-  
-
-  public Users getUser() {
-	return user;
-}
-
-public void setUser(Users user) {
-	this.user = user;
-}
-
-public Budgets(Double budgetLimite, Date created_at, Date updated_at, Categories categorie, Users user) {
-	super();
-	this.budgetLimite = budgetLimite;
-	this.created_at = created_at;
-	this.updated_at = updated_at;
-	this.categorie = categorie;
-	this.user = user;
-}
-
-public Categories getCategorie() {
-    return categorie;
-  }
-
-  public void setCategorie(Categories categorie) {
-    this.categorie = categorie;
-  }
-
-  public Budgets() {
-  }
 
   public Long getBudget_id() {
     return budget_id;
@@ -61,12 +28,12 @@ public Categories getCategorie() {
     this.budget_id = budget_id;
   }
 
-  public Double getBudgetLimite() {
-    return budgetLimite;
+  public Double getbudgetLimit() {
+    return budgetLimit;
   }
 
-  public void setBudgetLimite(Double budgetLimite) {
-    this.budgetLimite = budgetLimite;
+  public void setbudgetLimit(Double budgetLimit) {
+    this.budgetLimit = budgetLimit;
   }
 
   public Date getCreated_at() {
@@ -85,4 +52,11 @@ public Categories getCategorie() {
     this.updated_at = updated_at;
   }
 
+  public Categories getCategorie() {
+    return categorie;
+  }
+
+  public void setCategorie(Categories categorie) {
+    this.categorie = categorie;
+  }
 }
