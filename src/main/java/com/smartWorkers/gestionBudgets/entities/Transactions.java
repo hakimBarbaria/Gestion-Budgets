@@ -21,65 +21,48 @@ public class Transactions {
 
   @ManyToOne
   private Categories categorie;
-  
+
   @ManyToOne
   private Users user;
-  
+
   public Categories getCategorie() {
-	return categorie;
-}
-
-
-
-public Transactions() {
+    return categorie;
   }
 
-  
+  public Transactions() {
+  }
 
   public void setCategorie(Categories categorie) {
-	this.categorie = categorie;
-}
+    this.categorie = categorie;
+  }
 
+  public Users getUser() {
+    return user;
+  }
 
+  public void setUser(Users user) {
+    this.user = user;
+  }
 
+  public Transactions(Double amount, String type, Date created_at, Date updated_at, String description,
+      Categories categorie, Users user) {
+    super();
+    this.amount = amount;
+    this.type = type;
+    this.created_at = created_at;
+    this.updated_at = updated_at;
+    this.description = description;
+    this.categorie = categorie;
+    this.user = user;
+  }
 
-
-
-
-public Users getUser() {
-	return user;
-}
-
-
-
-public void setUser(Users user) {
-	this.user = user;
-}
-
-
-
-public Transactions(Double amount, String type, Date created_at, Date updated_at, String description,
-		Categories categorie, Users user) {
-	super();
-	this.amount = amount;
-	this.type = type;
-	this.created_at = created_at;
-	this.updated_at = updated_at;
-	this.description = description;
-	this.categorie = categorie;
-	this.user = user;
-}
-
-
-
-public String getDescription() {
+  public String getDescription() {
     return description;
   }
 
   public void setDescription(String description) {
     this.description = description;
   }
-
 
   public Long getTransaction_id() {
     return transaction_id;

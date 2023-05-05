@@ -47,7 +47,7 @@
 
       <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
         <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Update Transaction</h2>
-        <form action="update_transaction" method="post">
+        <form action="update_transaction" method="post" th:object="${transaction}">
           <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
             <input type="text" name="transaction_id" th:value="${transaction.getTransaction_id()}" hidden>
             <div class="w-full">
@@ -70,9 +70,9 @@
                 <option th:selected="${transaction.type == 'INCOME'}">INCOME</option>
               </select>
             </div>
-            
-             <div>
-             
+
+            <div>
+
               <label for="categorie"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">category</label>
               <div class="flex">
@@ -81,17 +81,16 @@
                     type="button">
                     <i class="bi bi-plus-lg"></i>
                   </button></a>
-                <label for="categories" class="sr-only">Choose a state</label>
-               <select id="categorie" name="categorie"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                <option th:each="category: ${categories}" th:text="${category.name}" th:value="${category.categorie_id}"
-                  th:selected="${category.name == transaction.categorie}">
-                </option>
-              </select>
+                <select id="categorie" name="categorie"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                  <option th:each="category: ${categories}" th:value="${category.categorie_id}"
+                    th:text="${category.name}" th:selected="${category.name == transaction.categorie.name}">
+                  </option>
+                </select>
               </div>
 
             </div>
-            
+
           </div>
           <div class="sm:col-span-2 mb-4">
             <label for="description"
