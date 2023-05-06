@@ -21,9 +21,13 @@ import com.smartWorkers.gestionBudgets.entities.Categories;
 import com.smartWorkers.gestionBudgets.entities.Transactions;
 import com.smartWorkers.gestionBudgets.services.BudgetsService;
 import com.smartWorkers.gestionBudgets.services.CategoriesService;
+import com.smartWorkers.gestionBudgets.services.TransactionsService;
 
 @Controller
 public class budgetController {
+	@Autowired
+	  TransactionsService transactionsService;
+	
 	@Autowired
 	CategoriesService categorieService;
 	@Autowired
@@ -32,6 +36,10 @@ public class budgetController {
   @RequestMapping("/AddBudget")
   public String RedirectToAddBudget(ModelMap modelMap) {
 	  List<Categories> categories = categorieService.getCategories();
+	  Long count = transactionsService.numberTransactions();
+	    Long countC = categorieService.numberCategories();
+	    modelMap.addAttribute("nbT", count);
+	    modelMap.addAttribute("nbC", countC);
 	  modelMap.addAttribute("categories", categories);
     return "AddBudgets";
   }
@@ -53,7 +61,11 @@ public class budgetController {
 
 
   @RequestMapping("/Budgets")
-  public String RedirectToBudgets() {
+  public String RedirectToBudgets(ModelMap modelMap) {
+	  Long count = transactionsService.numberTransactions();
+	    Long countC = categorieService.numberCategories();
+	    modelMap.addAttribute("nbT", count);
+	    modelMap.addAttribute("nbC", countC);
     return "Budgets";
   }
 }
