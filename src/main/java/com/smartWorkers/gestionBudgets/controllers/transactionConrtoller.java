@@ -128,7 +128,7 @@ public class transactionConrtoller {
   @PostMapping("/filterWithCategorie")
   public String filterWithCategory(@RequestParam("categorie_id") Long categorie_id, ModelMap modelMap) {
 
-    List<Transactions> filteredTransactions = transactionsService.findByCategorie((Long)categorie_id);
+    List<Transactions> filteredTransactions = transactionsService.findByCategorie((Long) categorie_id);
     List<Transactions> ALLtransactions = transactionsService.getTransactions();
     List<Categories> categories = categoriesService.getCategories();
     Long count = transactionsService.numberTransactions();
@@ -172,10 +172,11 @@ public class transactionConrtoller {
 
   @RequestMapping("/update_transaction")
   public String updateTransaction(@ModelAttribute("transaction") Transactions new_transaction,
-      @RequestParam("date") String date, ModelMap modelMap) throws ParseException {
+      @RequestParam("date") String date, ModelMap modelMap)
+      throws ParseException {
     Long transaction_id = new_transaction.getTransaction_id();
     Transactions old_transaction = transactionsService.getTransactionById(transaction_id);
-    
+
     if (date != "" && old_transaction.getCreated_at() != new_transaction.getCreated_at()) {
       // conversion de la date
       SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
@@ -186,13 +187,11 @@ public class transactionConrtoller {
       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
       old_transaction.setUpdated_at(dateFormat.parse(dateFormat.format(currentDate)));
     }
-      old_transaction.setAmount(new_transaction.getAmount());
-   
-      old_transaction.setType(new_transaction.getType());
-   
-      old_transaction.setCategorie(new_transaction.getCategorie());
-   
-      old_transaction.setDescription(new_transaction.getDescription());
+
+    old_transaction.setAmount(new_transaction.getAmount());
+    old_transaction.setType(new_transaction.getType());
+    old_transaction.setCategorie(new_transaction.getCategorie());
+    old_transaction.setDescription(new_transaction.getDescription());
 
     // if (old_transaction.getDescription() != new_transaction.getDescription() &&
     // new_transaction.getDescription().length() > 0D) {
@@ -202,7 +201,7 @@ public class transactionConrtoller {
 
     Transactions updated_Transaction = transactionsService.getTransactionById(transaction_id);
     List<Categories> categories = categoriesService.getCategories();
-    
+
     modelMap.addAttribute("categories", categories);
     modelMap.addAttribute("message", "Transaction updated successfully !");
     modelMap.addAttribute("transaction", updated_Transaction);
