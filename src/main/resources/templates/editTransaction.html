@@ -84,7 +84,7 @@
                 <label for="categories" class="sr-only">Choose a state</label>
                <select id="categorie" name="categorie"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                <option th:each="category: ${categories}" th:text="${category.name}" th:value="${category.name}"
+                <option th:each="category: ${categories}" th:text="${category.name}" th:value="${category.categorie_id}"
                   th:selected="${category.name == transaction.categorie}">
                 </option>
               </select>
