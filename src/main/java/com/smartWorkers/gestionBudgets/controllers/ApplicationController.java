@@ -23,7 +23,10 @@ public class ApplicationController {
     List<Float> incomeCount = transactionsService.getIncomeCountsByMonth();
     int countIncomes = transactionsService.getCountIncomes();
     int countExpenses = transactionsService.getCountExpenses();
-
+    Long count = transactionsService.numberTransactions();
+    Long countC = categorieService.numberCategories();
+    modelMap.addAttribute("nbT", count);
+    modelMap.addAttribute("nbC", countC);
     modelMap.addAttribute("expensesCount", expensesCount);
     modelMap.addAttribute("incomeCount", incomeCount);
     modelMap.addAttribute("nombreTransactions", countIncomes);
@@ -47,7 +50,11 @@ public class ApplicationController {
   }
 
   @RequestMapping("/Settings")
-  public String RedirectToSettings() {
+  public String RedirectToSettings(ModelMap modelMap) {
+	  Long count = transactionsService.numberTransactions();
+	    Long countC = categorieService.numberCategories();
+	    modelMap.addAttribute("nbT", count);
+	    modelMap.addAttribute("nbC", countC);
     return "Settings";
   }
 }

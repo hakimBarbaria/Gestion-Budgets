@@ -31,5 +31,7 @@ public interface TransactionsService {
   public List<Float> getExpensesCountsByMonth();
 
   public List<Float> getIncomeCountsByMonth();
+  
+  public Long numberTransactions();
 
 }

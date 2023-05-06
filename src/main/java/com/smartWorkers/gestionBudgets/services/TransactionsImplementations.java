@@ -77,4 +77,9 @@ public int getCountIncomes() {
 public int getCountExpenses() {
 	return transactionRepository.getCountExpenses();
 }
+
+@Override
+public Long numberTransactions() {
+	return transactionRepository.count();
+}
 }
