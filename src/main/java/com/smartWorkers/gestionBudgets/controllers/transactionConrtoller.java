@@ -151,8 +151,8 @@ public class transactionConrtoller {
     }
   }
 
-  @RequestMapping(path = "/delete/{id}")
-  public String deleteTransaction(@PathVariable Long id) {
+  @PostMapping(path = "/delete")
+  public String deleteTransaction(@RequestParam("id") Long id) {
     transactionsService.deleteTransaction(id);
     return "redirect:/Transactions";
   }
