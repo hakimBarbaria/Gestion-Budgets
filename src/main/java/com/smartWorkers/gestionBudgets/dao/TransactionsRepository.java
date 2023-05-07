@@ -28,4 +28,7 @@ public interface TransactionsRepository extends JpaRepository<Transactions, Long
   @Query("SELECT COUNT(*) FROM Transactions t WHERE t.type = 'EXPENSE'\r\n" + 
 	  		"")
 	  int getCountExpenses();
+  
+  @Query("select t from Transactions t where t.type= ?1 order by t.transaction_id DESC")
+	List <Transactions> getTransactionsInType (String type);
 }

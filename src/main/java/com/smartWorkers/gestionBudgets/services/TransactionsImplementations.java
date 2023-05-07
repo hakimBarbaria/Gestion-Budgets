@@ -82,4 +82,9 @@ public int getCountExpenses() {
 public Long numberTransactions() {
 	return transactionRepository.count();
 }
+
+@Override
+public List<Transactions> getLastTransactions(String Type) {
+	return this.transactionRepository.getTransactionsInType(Type);
+}
 }
