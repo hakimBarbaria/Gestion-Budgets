@@ -90,13 +90,13 @@
         </thead>
         <tbody>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" th:each="transactionsIn:${transactionsIn}">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" th:text="{transactionsIn.amount}">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" th:text="${transactionsIn.amount}">
                     
                 </th>
                 <td class="px-6 py-4" th:text="${#dates.format(transactionsIn.created_at, 'dd-MM-yyyy')}">
                     
                 </td>
-                <td class="px-6 py-4" th:text="${transactionsOut.categorie.name}">
+                <td class="px-6 py-4" th:text="${transactionsIn.categorie.name}">
                     
                 </td>
             </tr>
