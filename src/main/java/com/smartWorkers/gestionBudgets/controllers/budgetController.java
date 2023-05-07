@@ -48,6 +48,9 @@ public class budgetController {
   public String saveTransaction(ModelMap modelMap,
 	      @ModelAttribute("budget") Budgets new_budget
 	      ) throws ParseException {
+	     if (new_budget.getCategorie().getBudgets() != null) {
+	    	 modelMap.addAttribute("msg", "suddly you can't add again a budget for this category");
+	     }else {
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	    LocalDateTime ldt = LocalDateTime.now();
 	    String today = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(ldt);
@@ -56,6 +59,13 @@ public class budgetController {
 	    new_budget.setUpdated_at(tadayForReal);
 	    this.budgetsService.addBudgets(new_budget);
 	    modelMap.addAttribute("msg", "Budget Fixed Succesfully");
+	     }
+	     List<Categories> categories = categorieService.getCategories();
+		  Long count = transactionsService.numberTransactions();
+		    Long countC = categorieService.numberCategories();
+		    modelMap.addAttribute("nbT", count);
+		    modelMap.addAttribute("nbC", countC);
+		  modelMap.addAttribute("categories", categories);
 	    return "AddBudgets";
 	  }
 
