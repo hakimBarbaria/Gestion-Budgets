@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Users {
@@ -17,6 +18,7 @@ public class Users {
   private String name;
   private String email;
   private String password;
+  @Transient
   private Double balance;
   private Double remember_token;
   private Date created_at;
