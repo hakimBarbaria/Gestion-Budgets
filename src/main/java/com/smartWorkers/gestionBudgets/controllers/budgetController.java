@@ -34,10 +34,6 @@ public class budgetController {
   @RequestMapping("/AddBudget")
   public String RedirectToAddBudget(ModelMap modelMap) {
     List<Categories> categories = categorieService.getCategories();
-    Long count = transactionsService.numberTransactions();
-    Long countC = categorieService.numberCategories();
-    modelMap.addAttribute("nbT", count);
-    modelMap.addAttribute("nbC", countC);
     modelMap.addAttribute("categories", categories);
     return "AddBudgets";
   }
@@ -58,20 +54,12 @@ public class budgetController {
       modelMap.addAttribute("msg", "Budget Fixed Succesfully");
     }
     List<Categories> categories = categorieService.getCategories();
-    Long count = transactionsService.numberTransactions();
-    Long countC = categorieService.numberCategories();
-    modelMap.addAttribute("nbT", count);
-    modelMap.addAttribute("nbC", countC);
     modelMap.addAttribute("categories", categories);
     return "AddBudgets";
   }
 
   @RequestMapping("/Budgets")
   public String RedirectToBudgets(ModelMap modelMap) {
-    Long count = transactionsService.numberTransactions();
-    Long countC = categorieService.numberCategories();
-    modelMap.addAttribute("nbT", count);
-    modelMap.addAttribute("nbC", countC);
     return "Budgets";
   }
 }
