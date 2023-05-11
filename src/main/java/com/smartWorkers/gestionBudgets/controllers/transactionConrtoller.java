@@ -17,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,10 +45,6 @@ public class transactionConrtoller {
   public String RedirectToAddTransaction(ModelMap modelMap) {
     List<Categories> categories = categoriesService.getCategories();
     modelMap.addAttribute("categories", categories);
-    Long count = transactionsService.numberTransactions();
-    Long countC = categoriesService.numberCategories();
-    modelMap.addAttribute("nbT", count);
-    modelMap.addAttribute("nbC", countC);
     return "AddTransactions";
   }
 
@@ -71,16 +66,12 @@ public class transactionConrtoller {
       @RequestParam(name = "size", defaultValue = "3") int size) {
     Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
     List<Transactions> ALLtransactions = transactionsService.getTransactions();
-    Long count = transactionsService.numberTransactions();
-    Long countC = categoriesService.numberCategories();
     List<Categories> categories = categoriesService.getCategories();
     modelMap.addAttribute("transactions", transactions);
     modelMap.addAttribute("pages", new int[transactions.getTotalPages()]);
     modelMap.addAttribute("currentPage", page);
     modelMap.addAttribute("ALLtransactions", ALLtransactions);
     modelMap.addAttribute("categories", categories);
-    modelMap.addAttribute("nbT", count);
-    modelMap.addAttribute("nbC", countC);
     if (this.ChangingTypeOfPresentation == false) {
       return "listeTransactionsUsingCards";
     } else {
@@ -93,8 +84,6 @@ public class transactionConrtoller {
     // Get the transactions from your service layer
     List<Transactions> transactions = transactionsService.getTransactions();
     List<Transactions> ALLtransactions = transactionsService.getTransactions();
-    Long count = transactionsService.numberTransactions();
-    Long countC = categoriesService.numberCategories();
     // Filter the transactions based on the selected month
     List<Transactions> filteredTransactions = transactions.stream()
         .filter(transaction -> {
@@ -111,8 +100,6 @@ public class transactionConrtoller {
     // Add the filtered transactions to the model
     modelMap.addAttribute("transactions", filteredTransactions);
     modelMap.addAttribute("ALLtransactions", ALLtransactions);
-    modelMap.addAttribute("nbT", count);
-    modelMap.addAttribute("nbC", countC);
     if (filteredTransactions.isEmpty()) {
       modelMap.addAttribute("message",
           "If you see this message that's mean you don't creat any transaction in this date yet, try to creat one\r\n" +
@@ -131,8 +118,6 @@ public class transactionConrtoller {
     List<Transactions> filteredTransactions = transactionsService.findByCategorie((Long) categorie_id);
     List<Transactions> ALLtransactions = transactionsService.getTransactions();
     List<Categories> categories = categoriesService.getCategories();
-    Long count = transactionsService.numberTransactions();
-    Long countC = categoriesService.numberCategories();
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
       modelMap.addAttribute("message",
@@ -142,8 +127,6 @@ public class transactionConrtoller {
     }
     modelMap.addAttribute("ALLtransactions", ALLtransactions);
     modelMap.addAttribute("categories", categories);
-    modelMap.addAttribute("nbT", count);
-    modelMap.addAttribute("nbC", countC);
     if (this.ChangingTypeOfPresentation == false) {
       return "listeTransactionsUsingCards";
     } else {
@@ -161,12 +144,8 @@ public class transactionConrtoller {
   public String modifierTransaction(@RequestParam("id") Long transaction_id, ModelMap modelMap) {
     Transactions transaction = transactionsService.getTransactionById(transaction_id);
     List<Categories> categories = categoriesService.getCategories();
-    Long count = transactionsService.numberTransactions();
-    Long countC = categoriesService.numberCategories();
     modelMap.addAttribute("categories", categories);
     modelMap.addAttribute("transaction", transaction);
-    modelMap.addAttribute("nbT", count);
-    modelMap.addAttribute("nbC", countC);
     return "editTransaction";
   }
 
@@ -232,8 +211,6 @@ public class transactionConrtoller {
 
     Page<Transactions> filteredTransactions = transactionsService.filterByType("EXPENSE", page, size);
     Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
-    Long count = transactionsService.numberTransactions();
-    Long countC = categoriesService.numberCategories();
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
       modelMap.addAttribute("message",
@@ -242,8 +219,6 @@ public class transactionConrtoller {
     }
     modelMap.addAttribute("pages", new int[transactions.getTotalPages()]);
     modelMap.addAttribute("currentPage", page);
-    modelMap.addAttribute("nbT", count);
-    modelMap.addAttribute("nbC", countC);
     if (this.ChangingTypeOfPresentation == false) {
       return "listeTransactionsUsingCards";
     } else {
@@ -258,8 +233,6 @@ public class transactionConrtoller {
 
     Page<Transactions> filteredTransactions = transactionsService.filterByType("INCOME", page, size);
     Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
-    Long count = transactionsService.numberTransactions();
-    Long countC = categoriesService.numberCategories();
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
       modelMap.addAttribute("message",
@@ -268,8 +241,6 @@ public class transactionConrtoller {
     }
     modelMap.addAttribute("pages", new int[transactions.getTotalPages()]);
     modelMap.addAttribute("currentPage", page);
-    modelMap.addAttribute("nbT", count);
-    modelMap.addAttribute("nbC", countC);
     if (this.ChangingTypeOfPresentation == false) {
       return "listeTransactionsUsingCards";
     } else {
