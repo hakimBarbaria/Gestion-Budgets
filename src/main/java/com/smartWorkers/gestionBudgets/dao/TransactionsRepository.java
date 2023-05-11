@@ -29,6 +29,6 @@ public interface TransactionsRepository extends JpaRepository<Transactions, Long
 	  		"")
 	  int getCountExpenses();
   
-  @Query("select t from Transactions t where t.type= ?1 order by t.transaction_id DESC")
+  @Query("select t from Transactions t where t.type= ?1 order by t.transaction_id DESC limit 3")
 	List <Transactions> getTransactionsInType (String type);
 }

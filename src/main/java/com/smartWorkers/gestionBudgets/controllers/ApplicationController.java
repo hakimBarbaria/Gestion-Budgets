@@ -54,6 +54,15 @@ public class ApplicationController {
     return "SignUp";
   }
 
+  @RequestMapping("/Profile")
+  public String RedirectToProfile(ModelMap modelMap) {
+	  Long count = transactionsService.numberTransactions();
+	    Long countC = categorieService.numberCategories();
+	    modelMap.addAttribute("nbT", count);
+	    modelMap.addAttribute("nbC", countC);
+    return "Profile";
+  }
+  
   @RequestMapping("/Settings")
   public String RedirectToSettings(ModelMap modelMap) {
 	  Long count = transactionsService.numberTransactions();
