@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.smartWorkers.gestionBudgets.entities.Budgets;
 import com.smartWorkers.gestionBudgets.entities.Transactions;
+import com.smartWorkers.gestionBudgets.services.BudgetsService;
 import com.smartWorkers.gestionBudgets.services.CategoriesService;
 import com.smartWorkers.gestionBudgets.services.TransactionsService;
 import com.smartWorkers.gestionBudgets.services.UserService;
@@ -20,16 +22,20 @@ public class ApplicationController {
   CategoriesService categorieService;
   @Autowired
   UserService userService;
+  
+  @Autowired
+  BudgetsService budgetService;
 
   @RequestMapping("/Dashboard")
   public String RedirectToDashboard(ModelMap modelMap) {
+	List <Budgets> budgets = budgetService.getBudgets();
     List<Float> expensesCount = transactionsService.getExpensesCountsByMonth();
     List<Float> incomeCount = transactionsService.getIncomeCountsByMonth();
     int countIncomes = transactionsService.getCountIncomes();
     int countExpenses = transactionsService.getCountExpenses();
     List<Transactions> transactionsOut = this.transactionsService.getLastTransactions("EXPENSE");
     List<Transactions> transactionsIn = this.transactionsService.getLastTransactions("INCOME");
-
+    modelMap.addAttribute("budgets", budgets);
     modelMap.addAttribute("expensesCount", expensesCount);
     modelMap.addAttribute("incomeCount", incomeCount);
     modelMap.addAttribute("nombreTransactions", countIncomes);
