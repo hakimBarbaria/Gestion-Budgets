@@ -17,8 +17,8 @@ public class Categories {
   private String name;
   private String description;
 
-  @OneToOne(mappedBy = "categorie")
-  private Budgets budgets;
+  @OneToMany(mappedBy = "categorie")
+  private List<Budgets> budgets;
 
   @OneToMany(mappedBy = "categorie")
   private List<Transactions> transactions;
@@ -26,16 +26,17 @@ public class Categories {
   public Categories() {
   }
 
-  public Categories(String name, String description, Budgets budgets, List<Transactions> transactions,
-      Users user) {
-    super();
-    this.name = name;
-    this.description = description;
-    this.budgets = budgets;
-    this.transactions = transactions;
-  }
+ 
+  public Categories(String name, String description, List<Budgets> budgets, List<Transactions> transactions) {
+	super();
+	this.name = name;
+	this.description = description;
+	this.budgets = budgets;
+	this.transactions = transactions;
+}
 
-  public List<Transactions> getTransactions() {
+
+public List<Transactions> getTransactions() {
     return transactions;
   }
 
@@ -67,11 +68,15 @@ public class Categories {
     this.description = description;
   }
 
-  public Budgets getBudgets() {
-    return budgets;
-  }
 
-  public void setBudgets(Budgets budgets) {
-    this.budgets = budgets;
-  }
+public List<Budgets> getBudgets() {
+	return budgets;
+}
+
+
+public void setBudgets(List<Budgets> budgets) {
+	this.budgets = budgets;
+}
+
+ 
 }

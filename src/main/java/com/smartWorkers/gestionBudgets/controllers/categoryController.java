@@ -28,6 +28,7 @@ public class categoryController {
       @RequestParam(name = "size", defaultValue = "3") int size) {
     /* declaration des page des categories */
     Page<Categories> categories = categoriesService.getCategoryInPages(page, size);
+    
     modelMap.addAttribute("categories", categories);
     modelMap.addAttribute("pages", new int[categories.getTotalPages()]);
     modelMap.addAttribute("currentPage", page);

@@ -41,7 +41,7 @@ public class budgetController {
   @PostMapping("/saveBudget")
   public String saveTransaction(ModelMap modelMap,
       @ModelAttribute("budget") Budgets new_budget) throws ParseException {
-    if (new_budget.getCategorie().getBudgets() != null) {
+    if (new_budget.getCategorie().getBudgets() != null && new_budget.getCategorie().getBudgets().size() >0) {
       modelMap.addAttribute("msg", "suddly you can't add again a budget for this category");
     } else {
       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
