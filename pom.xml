@@ -9,8 +9,8 @@
     <version>3.0.6</version>
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
-  <groupId>com.iset</groupId>
-  <artifactId>Produits</artifactId>
+  <groupId>com.smartWorkers</groupId>
+  <artifactId>BudgetManager</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>Produits</name>
   <description>Demo project for Spring Boot</description>
@@ -19,6 +19,18 @@
   </properties>
 
   <dependencies>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5 -->
+    <dependency>
+      <groupId>org.thymeleaf.extras</groupId>
+      <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+      <version>3.1.1.RELEASE</version>
+    </dependency>
 
 
     <!-- https://mvnrepository.com/artifact/org.webjars.npm/chart.js -->
