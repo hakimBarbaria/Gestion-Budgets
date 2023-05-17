@@ -2,9 +2,7 @@ package com.smartWorkers.gestionBudgets.entities;
 
 import java.util.Date;
 import java.util.List;
-
 import jakarta.persistence.*;
-
 @Entity
 public class Users {
   @Id
@@ -14,6 +12,7 @@ public class Users {
   @Column(unique=true)
   private String email;
   private String password;
+  @Transient
   private Double balance;
   private String role;
   @OneToMany(mappedBy = "user")

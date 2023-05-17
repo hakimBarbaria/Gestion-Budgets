@@ -31,12 +31,18 @@
                         <span th:text="${category.name}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span>
                     </p>
                 </div>
-                <br>
+                <div class="text-left">
+  <p class="font-semibold tracking-tight text-gray-900 dark:text-white">BudgetLimit :
+    <span th:text="${category.getBudgets() != null and category.getBudgets().size() > 0 ? category.getBudgets()[0].getbudgetLimit() : 'Not Initiliazed yet'}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span>
+  </p>
+</div>
+
                 <div class="text-left">
                     <p class="font-semibold tracking-tight text-gray-900 dark:text-white">Description :<br>
                         <span th:text="${category.description}" class="mb-3 font-normal text-gray-500 dark:text-gray-400"></span>
                     </p>
                 </div>
+                
 
                 <div class="px-6 py-4 inline-flex">
                     <a th:href="@{editCategory(idCategory=${category.getCategorie_id()})}"

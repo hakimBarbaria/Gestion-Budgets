@@ -28,13 +28,10 @@ public class categoryController {
       @RequestParam(name = "size", defaultValue = "3") int size) {
     /* declaration des page des categories */
     Page<Categories> categories = categoriesService.getCategoryInPages(page, size);
-    Long count = transactionsService.numberTransactions();
-    Long countC = categoriesService.numberCategories();
+    
     modelMap.addAttribute("categories", categories);
     modelMap.addAttribute("pages", new int[categories.getTotalPages()]);
     modelMap.addAttribute("currentPage", page);
-    modelMap.addAttribute("nbT", count);
-    modelMap.addAttribute("nbC", countC);
       return "categories";
     
   }
@@ -42,10 +39,6 @@ public class categoryController {
 
   @RequestMapping("/AddCategory")
   public String RedirectToAddCategory(ModelMap modelMap) {
-	  Long count = transactionsService.numberTransactions();
-	    Long countC = categoriesService.numberCategories();
-	    modelMap.addAttribute("nbT", count);
-	    modelMap.addAttribute("nbC", countC);
     return "AddCategories";
   }
 
@@ -59,11 +52,7 @@ public class categoryController {
   @RequestMapping("/editCategory")
   public String editCategory(ModelMap modelMap, @RequestParam("idCategory") Long Category_id) {
     Categories category = categoriesService.getCategoryById(Category_id);
-    Long count = transactionsService.numberTransactions();
-    Long countC = categoriesService.numberCategories();
     modelMap.addAttribute("category", category);
-    modelMap.addAttribute("nbT", count);
-    modelMap.addAttribute("nbC", countC);
     return "editCategory";
   }
 

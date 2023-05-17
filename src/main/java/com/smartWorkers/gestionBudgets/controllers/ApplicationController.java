@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.smartWorkers.gestionBudgets.entities.Transactions;
 import com.smartWorkers.gestionBudgets.services.CategoriesService;
 import com.smartWorkers.gestionBudgets.services.TransactionsService;
+import com.smartWorkers.gestionBudgets.services.UserService;
 
 @Controller
 public class ApplicationController {
@@ -23,18 +24,17 @@ public class ApplicationController {
   public String loginPage(){
     return "login";
   }
+  @Autowired
+  UserService userService;
   @RequestMapping("/Dashboard")
   public String RedirectToDashboard(ModelMap modelMap) {
     List<Float> expensesCount = transactionsService.getExpensesCountsByMonth();
     List<Float> incomeCount = transactionsService.getIncomeCountsByMonth();
     int countIncomes = transactionsService.getCountIncomes();
     int countExpenses = transactionsService.getCountExpenses();
-    Long count = transactionsService.numberTransactions();
-    Long countC = categorieService.numberCategories();
     List<Transactions> transactionsOut = this.transactionsService.getLastTransactions("EXPENSE");
     List<Transactions> transactionsIn = this.transactionsService.getLastTransactions("INCOME");
-    modelMap.addAttribute("nbT", count);
-    modelMap.addAttribute("nbC", countC);
+
     modelMap.addAttribute("expensesCount", expensesCount);
     modelMap.addAttribute("incomeCount", incomeCount);
     modelMap.addAttribute("nombreTransactions", countIncomes);
@@ -61,19 +61,11 @@ public class ApplicationController {
 
   @RequestMapping("/Profile")
   public String RedirectToProfile(ModelMap modelMap) {
-	  Long count = transactionsService.numberTransactions();
-	    Long countC = categorieService.numberCategories();
-	    modelMap.addAttribute("nbT", count);
-	    modelMap.addAttribute("nbC", countC);
     return "Profile";
   }
-  
+
   @RequestMapping("/Settings")
   public String RedirectToSettings(ModelMap modelMap) {
-	  Long count = transactionsService.numberTransactions();
-	    Long countC = categorieService.numberCategories();
-	    modelMap.addAttribute("nbT", count);
-	    modelMap.addAttribute("nbC", countC);
     return "Settings";
   }
 }

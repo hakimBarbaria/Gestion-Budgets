@@ -8,3 +8,4 @@ import org.springframework.data.jpa.repository.Query;
 public interface UsersRepository extends JpaRepository<Users, Long>{
     public Users getUsersByEmail(String email);
 }
+

@@ -29,19 +29,22 @@
             </svg>
           </button>
           <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-            <a href="/Dashboard"><i class="bi bi-wallet2">  Budget Manager</i>
+            <a href="/Dashboard"><i class="bi bi-wallet2"> Budget Manager</i>
             </a>
           </span>
 
         </div>
         <div class="flex items-center">
           <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-          
-          <button type="button" class="relative inline-flex items-center p-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
- <i class="bi bi-bell-fill"></i>
-  <span class="sr-only">Notifications</span>
-  <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">20</div>
-</button>
+
+            <button type="button"
+              class="relative inline-flex items-center p-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              <i class="bi bi-bell-fill"></i>
+              <span class="sr-only">Notifications</span>
+              <div th:text="${getNotificationsCount}"
+                class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
+              </div>
+            </button>
             <div>
               <button type="button"
                 class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
@@ -62,7 +65,7 @@
                 </p>
               </div>
               <ul class="py-1" role="none">
-              <li>
+                <li>
                   <a href="/Profile"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                     role="menuitem">Profile</a>
@@ -77,7 +80,7 @@
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                     role="menuitem">Settings</a>
                 </li>
-                
+
                 <li>
                   <a onclick="document.logoutForm.submit()"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -125,10 +128,10 @@
               class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white bi bi-currency-exchange"></i>
             <span class="ml-3"></span>
             <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Transactions</span>
-             <span
-              class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300"
-              ><p th:text="${nbT}"></p></span
-            >
+            <span
+              class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
+              <p th:text="${getNumberTransactions}"></p>
+            </span>
             <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd"
@@ -159,10 +162,10 @@
               class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white bi bi-basket-fill"></i>
             <span class="ml-3"></span>
             <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Categories</span>
-             <span
-              class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300"
-              ><p th:text="${nbC}"></p></span
-            >
+            <span
+              class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
+              <p th:text="${getNumberCategories}"></p>
+            </span>
             <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd"
@@ -209,7 +212,7 @@
             </li>
             <li>
               <a href="/Budgets"
-                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">List
+                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Edit
                 Budgets</a>
             </li>
           </ul>
