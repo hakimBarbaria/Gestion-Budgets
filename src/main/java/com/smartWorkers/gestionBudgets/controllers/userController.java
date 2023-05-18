@@ -1,8 +1,12 @@
 package com.smartWorkers.gestionBudgets.controllers;
 
 import com.smartWorkers.gestionBudgets.entities.Users;
+import com.smartWorkers.gestionBudgets.services.UserServiceImpl;
 import com.smartWorkers.gestionBudgets.services.UsersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,7 +32,13 @@ public class userController {
         return "redirect:/";
     }
     @RequestMapping("/Profile")
-    public String RedirectToProfile(ModelMap modelMap) {
-      return "Profile";
+    public String redirectToProfile(ModelMap modelMap) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+           Users user = usersService.getUsersByName(userDetails.getUsername());
+            modelMap.addAttribute("user", user);
+        return "Profile";
     }
+
 }

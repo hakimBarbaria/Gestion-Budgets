@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+xmlns:sec=https://www.thymeleaf.org/thymeleaf-extras-springsecurity5
   layout:decorate="template">
 
 <head>
@@ -20,7 +22,7 @@
           <img class="h-auto max-w-full rounded-lg" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
             alt="Bonnie image" />
           <br>
-          <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Bonnie Green</h5>
+          <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white" th:text="${user.name}"></h5>
           <span
             class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">Balance
             : 250 dinars</span>
@@ -31,15 +33,7 @@
           <dl class="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
             <div class="flex flex-col pb-3">
               <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Email address</dt>
-              <dd class="text-lg font-semibold"></dd>
-            </div>
-            <div class="flex flex-col py-3">
-              <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">First access :</dt>
-              <dd class="text-lg font-semibold">02 / 09 /2023</dd>
-            </div>
-            <div class="flex flex-col pt-3">
-              <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Last changes</dt>
-              <dd class="text-lg font-semibold">02 / 09 /2023</dd>
+              <dd class="text-lg font-semibold" th:text="${user.email}"></dd>
             </div>
           </dl>
 
