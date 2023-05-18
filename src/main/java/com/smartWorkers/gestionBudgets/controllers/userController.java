@@ -5,7 +5,9 @@ import com.smartWorkers.gestionBudgets.services.UsersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -24,5 +26,9 @@ public class userController {
         users.setRole("user");
         usersService.addUser(users);
         return "redirect:/";
+    }
+    @RequestMapping("/Profile")
+    public String RedirectToProfile(ModelMap modelMap) {
+      return "Profile";
     }
 }

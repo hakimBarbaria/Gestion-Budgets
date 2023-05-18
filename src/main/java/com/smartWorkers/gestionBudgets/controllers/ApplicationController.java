@@ -59,11 +59,6 @@ public class ApplicationController {
     return "signup";
   }
 
-  @RequestMapping("/Profile")
-  public String RedirectToProfile(ModelMap modelMap) {
-    return "Profile";
-  }
-
   @RequestMapping("/Settings")
   public String RedirectToSettings(ModelMap modelMap) {
     return "Settings";
