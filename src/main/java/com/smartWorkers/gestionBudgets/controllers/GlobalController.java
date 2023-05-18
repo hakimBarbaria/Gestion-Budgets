@@ -1,9 +1,12 @@
 package com.smartWorkers.gestionBudgets.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.smartWorkers.gestionBudgets.entities.Notification;
 import com.smartWorkers.gestionBudgets.services.CategoriesService;
 import com.smartWorkers.gestionBudgets.services.TransactionsService;
 import com.smartWorkers.gestionBudgets.services.UserService;
@@ -24,6 +27,12 @@ public class GlobalController {
   public int getNotificationsCount() {
     int notificationsCount = usersService.getNotificationsCount();
     return notificationsCount;
+  }
+
+  @ModelAttribute("getNotifications")
+  public List<Notification> getNotifications() {
+    List<Notification> notifications = usersService.getNotifications();
+    return notifications;
   }
 
   @ModelAttribute("getNumberTransactions")
