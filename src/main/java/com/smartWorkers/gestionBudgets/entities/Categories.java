@@ -7,7 +7,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class Categories {
@@ -26,17 +25,15 @@ public class Categories {
   public Categories() {
   }
 
- 
   public Categories(String name, String description, List<Budgets> budgets, List<Transactions> transactions) {
-	super();
-	this.name = name;
-	this.description = description;
-	this.budgets = budgets;
-	this.transactions = transactions;
-}
+    super();
+    this.name = name;
+    this.description = description;
+    this.budgets = budgets;
+    this.transactions = transactions;
+  }
 
-
-public List<Transactions> getTransactions() {
+  public List<Transactions> getTransactions() {
     return transactions;
   }
 
@@ -68,15 +65,12 @@ public List<Transactions> getTransactions() {
     this.description = description;
   }
 
+  public List<Budgets> getBudgets() {
+    return budgets;
+  }
 
-public List<Budgets> getBudgets() {
-	return budgets;
-}
+  public void setBudgets(List<Budgets> budgets) {
+    this.budgets = budgets;
+  }
 
-
-public void setBudgets(List<Budgets> budgets) {
-	this.budgets = budgets;
-}
-
- 
 }

@@ -14,38 +14,40 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-@Bean
-public UserDetailsService userDetailsService(){
+  @Bean
+  public UserDetailsService userDetailsService() {
     return new UserInfoUserDatailService();
-}
-@Bean
-public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+  }
+
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     return http.csrf().disable()
-            .authorizeHttpRequests().requestMatchers("/").permitAll()
-            .and()
-            .authorizeHttpRequests().requestMatchers("/login").permitAll()
-            .and()
-            .authorizeHttpRequests().requestMatchers("/signup").permitAll()
-            .and()
-            .authorizeHttpRequests().requestMatchers("/equipe").permitAll()
-            .and()
-            .authorizeHttpRequests().requestMatchers("/addUser").permitAll()
-            .and()
-            .authorizeHttpRequests().requestMatchers("/**").authenticated()
-            .and().formLogin().loginPage("/login").loginProcessingUrl("/login")
-            .defaultSuccessUrl("/Dashboard", true).permitAll()
-            .and().build();
-}
-@Bean
-public PasswordEncoder passwordEncoder()
-{
+        .authorizeHttpRequests().requestMatchers("/").permitAll()
+        .and()
+        .authorizeHttpRequests().requestMatchers("/login").permitAll()
+        .and()
+        .authorizeHttpRequests().requestMatchers("/signup").permitAll()
+        .and()
+        .authorizeHttpRequests().requestMatchers("/equipe").permitAll()
+        .and()
+        .authorizeHttpRequests().requestMatchers("/addUser").permitAll()
+        .and()
+        .authorizeHttpRequests().requestMatchers("/**").authenticated()
+        .and().formLogin().loginPage("/login").loginProcessingUrl("/login")
+        .defaultSuccessUrl("/Dashboard", true).permitAll()
+        .and().build();
+  }
+
+  @Bean
+  public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
-}
-@Bean
-public AuthenticationProvider authenticationProvider(){
+  }
+
+  @Bean
+  public AuthenticationProvider authenticationProvider() {
     DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
     authenticationProvider.setUserDetailsService(userDetailsService());
     authenticationProvider.setPasswordEncoder(passwordEncoder());
     return authenticationProvider;
-}
+  }
 }
