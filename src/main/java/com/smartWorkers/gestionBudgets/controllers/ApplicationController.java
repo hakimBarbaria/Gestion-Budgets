@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.smartWorkers.gestionBudgets.entities.Transactions;
@@ -20,12 +19,15 @@ public class ApplicationController {
   TransactionsService transactionsService;
   @Autowired
   CategoriesService categorieService;
+
   @GetMapping("/login")
-  public String loginPage(){
+  public String loginPage() {
     return "login";
   }
+
   @Autowired
   UserService userService;
+
   @RequestMapping("/Dashboard")
   public String RedirectToDashboard(ModelMap modelMap) {
     List<Float> expensesCount = transactionsService.getExpensesCountsByMonth();
