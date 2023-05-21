@@ -19,4 +19,8 @@ public interface UsersService {
   public int getNotificationsCount(long user_id);
 
   public List<Notification> getNotifications(long user_id);
+  
+  public void editUser(Users user);
+  
+  public void deleteUser(long id);
 }

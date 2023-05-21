@@ -102,4 +102,13 @@ public class UsersServiceImpl implements UsersService {
 
     return notifications;
   }
+
+  @Override
+  public void editUser(Users user) {
+      usersRepository.save(user);
+  }
+  public void deleteUser(long id) {
+	  usersRepository.deleteById(id);
+  }
+
 }

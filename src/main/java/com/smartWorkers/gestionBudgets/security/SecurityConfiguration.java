@@ -21,8 +21,13 @@ public class SecurityConfiguration {
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    String[] staticResources = {
+        "/image/**",
+    };
     return http.csrf().disable()
         .authorizeHttpRequests().requestMatchers("/").permitAll()
+        .and()
+        .authorizeHttpRequests().requestMatchers(staticResources).permitAll()
         .and()
         .authorizeHttpRequests().requestMatchers("/login").permitAll()
         .and()
