@@ -120,9 +120,12 @@ public class transactionConrtoller {
   }
 
   @PostMapping("/filterWithCategorie")
-  public String filterWithCategory(@RequestParam("categorie_id") Long categorie_id, ModelMap modelMap) {
+  public String filterWithCategory(@RequestParam("categorie_id") Long categorie_id, ModelMap modelMap,
+      Authentication authentication) {
+    Users currentUser = usersService.getUserById(authentication);
 
-    List<Transactions> filteredTransactions = transactionsService.findByCategorie((Long) categorie_id);
+    List<Transactions> filteredTransactions = transactionsService.findByCategorie((Long) categorie_id,
+        currentUser.getUser_id());
     List<Transactions> ALLtransactions = transactionsService.getTransactions();
     List<Categories> categories = categoriesService.getCategories();
     modelMap.addAttribute("transactions", filteredTransactions);
@@ -222,7 +225,8 @@ public class transactionConrtoller {
       @RequestParam(name = "size", defaultValue = "3") int size, Authentication authentication) {
     Users currentUser = usersService.getUserById(authentication);
 
-    Page<Transactions> filteredTransactions = transactionsService.filterByType("EXPENSE", page, size);
+    Page<Transactions> filteredTransactions = transactionsService.filterByType("EXPENSE", page, size,
+        currentUser.getUser_id());
     Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size, currentUser.getUser_id());
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
@@ -245,7 +249,8 @@ public class transactionConrtoller {
       @RequestParam(name = "size", defaultValue = "3") int size, Authentication authentication) {
     Users currentUser = usersService.getUserById(authentication);
 
-    Page<Transactions> filteredTransactions = transactionsService.filterByType("INCOME", page, size);
+    Page<Transactions> filteredTransactions = transactionsService.filterByType("INCOME", page, size,
+        currentUser.getUser_id());
     Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size, currentUser.getUser_id());
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {

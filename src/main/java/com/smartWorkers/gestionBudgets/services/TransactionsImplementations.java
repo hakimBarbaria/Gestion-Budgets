@@ -29,8 +29,8 @@ public class TransactionsImplementations implements TransactionsService {
   }
 
   @Override
-  public List<Transactions> findByCategorie(Long categorie_id) {
-    return transactionRepository.findByCategorieId(categorie_id);
+  public List<Transactions> findByCategorie(Long categorie_id, long user_id) {
+    return transactionRepository.findByCategorieId(categorie_id, user_id);
   }
 
   @Override
@@ -54,18 +54,18 @@ public class TransactionsImplementations implements TransactionsService {
   }
 
   @Override
-  public Page<Transactions> filterByType(String Type, int page, int size) {
-    return transactionRepository.findByType(Type, PageRequest.of(page, size));
+  public Page<Transactions> filterByType(String Type, int page, int size, long user_id) {
+    return transactionRepository.findByType(Type, user_id, PageRequest.of(page, size));
   }
 
   @Override
-  public List<Float> getExpensesCountsByMonth() {
-    return transactionRepository.getExpensesAmountForEveryMonth();
+  public List<Float> getExpensesCountsByMonth(long user_id) {
+    return transactionRepository.getExpensesAmountForEveryMonth(user_id);
   }
 
   @Override
-  public List<Float> getIncomeCountsByMonth() {
-    return transactionRepository.getIncomeAmountForEveryMonth();
+  public List<Float> getIncomeCountsByMonth(long user_id) {
+    return transactionRepository.getIncomeAmountForEveryMonth(user_id);
   }
 
   @Override

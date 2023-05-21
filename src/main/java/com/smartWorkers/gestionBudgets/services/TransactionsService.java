@@ -16,7 +16,7 @@ public interface TransactionsService {
   
   public Page<Transactions> getTransactionsInPages(int page, int size, long user_id);
 
-  public List<Transactions> findByCategorie(Long categorie_id);
+  public List<Transactions> findByCategorie(Long categorie_id, long user_id);
 
   public void deleteTransaction(Long id);
 
@@ -26,11 +26,11 @@ public interface TransactionsService {
 
   public void addTransaction(Transactions transaction);
 
-  public Page<Transactions> filterByType(String Type, int page, int size);
+  public Page<Transactions> filterByType(String Type, int page, int size, long user_id);
 
-  public List<Float> getExpensesCountsByMonth();
+  public List<Float> getExpensesCountsByMonth(long user_id);
 
-  public List<Float> getIncomeCountsByMonth();
+  public List<Float> getIncomeCountsByMonth(long user_id);
   
   public Long numberTransactions();
   
