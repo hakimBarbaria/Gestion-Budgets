@@ -35,6 +35,7 @@ public class userController {
 
   @RequestMapping("/Profile")
   public String redirectToProfile(ModelMap modelMap) {
+
     try {
       Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
       UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -43,7 +44,7 @@ public class userController {
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
+
     return "Profile";
   }
-
 }
