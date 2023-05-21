@@ -69,14 +69,15 @@ public class transactionConrtoller {
   public String Transitions(
       ModelMap modelMap,
       @RequestParam(name = "page", defaultValue = "0") int page,
-      @RequestParam(name = "size", defaultValue = "3") int size) {
-    Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
-    List<Transactions> ALLtransactions = transactionsService.getTransactions();
+      @RequestParam(name = "size", defaultValue = "3") int size, Authentication authentication) {
+    Users currentUser = usersService.getUserById(authentication);
+    Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size, currentUser.getUser_id());
+    // List<Transactions> ALLtransactions = transactionsService.getTransactions();
     List<Categories> categories = categoriesService.getCategories();
     modelMap.addAttribute("transactions", transactions);
     modelMap.addAttribute("pages", new int[transactions.getTotalPages()]);
     modelMap.addAttribute("currentPage", page);
-    modelMap.addAttribute("ALLtransactions", ALLtransactions);
+    // modelMap.addAttribute("ALLtransactions", ALLtransactions);
     modelMap.addAttribute("categories", categories);
     if (this.ChangingTypeOfPresentation == false) {
       return "listeTransactionsUsingCards";
@@ -218,10 +219,11 @@ public class transactionConrtoller {
   @GetMapping("/showOUT")
   public String filterWithType(ModelMap modelMap,
       @RequestParam(name = "page", defaultValue = "0") int page,
-      @RequestParam(name = "size", defaultValue = "3") int size) {
+      @RequestParam(name = "size", defaultValue = "3") int size, Authentication authentication) {
+    Users currentUser = usersService.getUserById(authentication);
 
     Page<Transactions> filteredTransactions = transactionsService.filterByType("EXPENSE", page, size);
-    Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
+    Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size, currentUser.getUser_id());
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
       modelMap.addAttribute("message",
@@ -240,10 +242,11 @@ public class transactionConrtoller {
   @GetMapping("/showIN")
   public String filterWithTypeIN(ModelMap modelMap,
       @RequestParam(name = "page", defaultValue = "0") int page,
-      @RequestParam(name = "size", defaultValue = "3") int size) {
+      @RequestParam(name = "size", defaultValue = "3") int size, Authentication authentication) {
+    Users currentUser = usersService.getUserById(authentication);
 
     Page<Transactions> filteredTransactions = transactionsService.filterByType("INCOME", page, size);
-    Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
+    Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size, currentUser.getUser_id());
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
       modelMap.addAttribute("message",

@@ -24,8 +24,8 @@ public class TransactionsImplementations implements TransactionsService {
   }
 
   @Override
-  public Page<Transactions> getTransactionsInPages(int page, int size) {
-    return transactionRepository.findAll(PageRequest.of(page, size));
+  public Page<Transactions> getTransactionsInPages(int page, int size, long user_id) {
+    return transactionRepository.findByUserId(user_id, PageRequest.of(page, size));
   }
 
   @Override
@@ -68,23 +68,23 @@ public class TransactionsImplementations implements TransactionsService {
     return transactionRepository.getIncomeAmountForEveryMonth();
   }
 
-@Override
-public int getCountIncomes() {
-	return transactionRepository.getCountIncomes();
-}
+  @Override
+  public int getCountIncomes() {
+    return transactionRepository.getCountIncomes();
+  }
 
-@Override
-public int getCountExpenses() {
-	return transactionRepository.getCountExpenses();
-}
+  @Override
+  public int getCountExpenses() {
+    return transactionRepository.getCountExpenses();
+  }
 
-@Override
-public Long numberTransactions() {
-	return transactionRepository.count();
-}
+  @Override
+  public Long numberTransactions() {
+    return transactionRepository.count();
+  }
 
-@Override
-public List<Transactions> getLastTransactions(String Type) {
-	return this.transactionRepository.getTransactionsInType(Type);
-}
+  @Override
+  public List<Transactions> getLastTransactions(String Type) {
+    return this.transactionRepository.getTransactionsInType(Type);
+  }
 }

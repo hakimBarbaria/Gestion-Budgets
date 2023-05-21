@@ -14,7 +14,7 @@ public interface TransactionsService {
   
   public int getCountExpenses();
   
-  public Page<Transactions> getTransactionsInPages(int page, int size);
+  public Page<Transactions> getTransactionsInPages(int page, int size, long user_id);
 
   public List<Transactions> findByCategorie(Long categorie_id);
 
