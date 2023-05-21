@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +24,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smartWorkers.gestionBudgets.entities.Categories;
 import com.smartWorkers.gestionBudgets.entities.Transactions;
+import com.smartWorkers.gestionBudgets.entities.Users;
+import com.smartWorkers.gestionBudgets.security.UserInfoUserDetails;
 import com.smartWorkers.gestionBudgets.services.CategoriesService;
 import com.smartWorkers.gestionBudgets.services.TransactionsService;
+import com.smartWorkers.gestionBudgets.services.UsersService;
 
 @Controller
 public class transactionConrtoller {
@@ -32,6 +36,9 @@ public class transactionConrtoller {
 
   @Autowired
   TransactionsService transactionsService;
+
+  @Autowired
+  UsersService usersService;
 
   @Autowired
   CategoriesService categoriesService;
@@ -191,7 +198,8 @@ public class transactionConrtoller {
   public String saveTransaction(ModelMap modelMap,
       @ModelAttribute("transaction") Transactions new_transaction,
       @RequestParam("date") String date,
-      @RequestParam("description") String description) throws ParseException {
+      @RequestParam("description") String description,
+      Authentication authentication) throws ParseException {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     Date dateCreation = dateFormat.parse(date);
     new_transaction.setCreated_at(dateCreation);
@@ -200,6 +208,14 @@ public class transactionConrtoller {
     Date tadayForReal = dateFormat.parse(today);
     new_transaction.setUpdated_at(tadayForReal);
     new_transaction.setDescription(description);
+
+    Object principal = authentication.getPrincipal();
+    if (principal instanceof UserInfoUserDetails) {
+      UserInfoUserDetails userDetails = (UserInfoUserDetails) principal;
+      Users currentUser = usersService.getUserById(userDetails.getUser_id());
+      new_transaction.setUser(currentUser);
+    }
+
     transactionsService.addTransaction(new_transaction);
     return "redirect:/Transactions";
   }

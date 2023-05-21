@@ -24,6 +24,11 @@ public class UsersServiceImpl implements UsersService {
   BudgetsService budgetsService;
 
   @Override
+  public Users getUserById(Long id) {
+    return usersRepository.findById(id).get();
+  }
+
+  @Override
   public void addUser(Users u) {
     usersRepository.save(u);
   }
