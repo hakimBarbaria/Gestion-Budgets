@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.smartWorkers.gestionBudgets.entities.Transactions;
 import com.smartWorkers.gestionBudgets.services.CategoriesService;
 import com.smartWorkers.gestionBudgets.services.TransactionsService;
-import com.smartWorkers.gestionBudgets.services.UserService;
+import com.smartWorkers.gestionBudgets.services.UsersService;
 
 @Controller
 public class ApplicationController {
@@ -26,7 +26,7 @@ public class ApplicationController {
   }
 
   @Autowired
-  UserService userService;
+  UsersService userService;
 
   @RequestMapping("/Dashboard")
   public String RedirectToDashboard(ModelMap modelMap) {

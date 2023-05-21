@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import com.smartWorkers.gestionBudgets.entities.Notification;
 import com.smartWorkers.gestionBudgets.services.CategoriesService;
 import com.smartWorkers.gestionBudgets.services.TransactionsService;
-import com.smartWorkers.gestionBudgets.services.UserService;
 import com.smartWorkers.gestionBudgets.services.UsersService;
 
 @ControllerAdvice
@@ -21,7 +20,7 @@ public class GlobalController {
   @Autowired
   UsersService userService;
   @Autowired
-  UserService usersService;
+  UsersService usersService;
 
   @ModelAttribute("getNotificationsCount")
   public int getNotificationsCount() {
