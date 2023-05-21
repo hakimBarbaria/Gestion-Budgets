@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.smartWorkers.gestionBudgets.entities.Categories;
 import com.smartWorkers.gestionBudgets.entities.Transactions;
 import com.smartWorkers.gestionBudgets.entities.Users;
-import com.smartWorkers.gestionBudgets.security.UserInfoUserDetails;
 import com.smartWorkers.gestionBudgets.services.CategoriesService;
 import com.smartWorkers.gestionBudgets.services.TransactionsService;
 import com.smartWorkers.gestionBudgets.services.UsersService;
@@ -38,10 +37,10 @@ public class transactionConrtoller {
   TransactionsService transactionsService;
 
   @Autowired
-  UsersService usersService;
+  CategoriesService categoriesService;
 
   @Autowired
-  CategoriesService categoriesService;
+  UsersService usersService;
 
   @RequestMapping("/redirectionToOriginalList")
   public String redirectionToOriginalList() {
@@ -209,12 +208,8 @@ public class transactionConrtoller {
     new_transaction.setUpdated_at(tadayForReal);
     new_transaction.setDescription(description);
 
-    Object principal = authentication.getPrincipal();
-    if (principal instanceof UserInfoUserDetails) {
-      UserInfoUserDetails userDetails = (UserInfoUserDetails) principal;
-      Users currentUser = usersService.getUserById(userDetails.getUser_id());
-      new_transaction.setUser(currentUser);
-    }
+    Users currentUser = usersService.getUserById(authentication);
+    new_transaction.setUser(currentUser);
 
     transactionsService.addTransaction(new_transaction);
     return "redirect:/Transactions";
