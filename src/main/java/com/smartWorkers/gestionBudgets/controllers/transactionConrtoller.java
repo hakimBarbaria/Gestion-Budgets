@@ -13,14 +13,17 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import com.smartWorkers.gestionBudgets.entities.Categories;
 import com.smartWorkers.gestionBudgets.entities.Transactions;
+import com.smartWorkers.gestionBudgets.entities.Users;
 import com.smartWorkers.gestionBudgets.services.CategoriesService;
 import com.smartWorkers.gestionBudgets.services.TransactionsService;
+import com.smartWorkers.gestionBudgets.services.UsersService;
 
 @Controller
 public class transactionConrtoller {
@@ -31,6 +34,9 @@ public class transactionConrtoller {
 
   @Autowired
   CategoriesService categoriesService;
+
+  @Autowired
+  UsersService usersService;
 
   @RequestMapping("/redirectionToOriginalList")
   public String redirectionToOriginalList() {
@@ -59,14 +65,15 @@ public class transactionConrtoller {
   public String Transitions(
       ModelMap modelMap,
       @RequestParam(name = "page", defaultValue = "0") int page,
-      @RequestParam(name = "size", defaultValue = "3") int size) {
-    Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
-    List<Transactions> ALLtransactions = transactionsService.getTransactions();
+      @RequestParam(name = "size", defaultValue = "3") int size, Authentication authentication) {
+    Users currentUser = usersService.getUserById(authentication);
+    Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size, currentUser.getUser_id());
+    // List<Transactions> ALLtransactions = transactionsService.getTransactions();
     List<Categories> categories = categoriesService.getCategories();
     modelMap.addAttribute("transactions", transactions);
     modelMap.addAttribute("pages", new int[transactions.getTotalPages()]);
     modelMap.addAttribute("currentPage", page);
-    modelMap.addAttribute("ALLtransactions", ALLtransactions);
+    // modelMap.addAttribute("ALLtransactions", ALLtransactions);
     modelMap.addAttribute("categories", categories);
     if (this.ChangingTypeOfPresentation == false) {
       return "listeTransactionsUsingCards";
@@ -76,10 +83,12 @@ public class transactionConrtoller {
   }
 
   @PostMapping("/filteringWithDate")
-  public String filterTransactionsByMonth(@RequestParam("month") int month, ModelMap modelMap) {
+  public String filterTransactionsByMonth(@RequestParam("month") int month, ModelMap modelMap,
+      Authentication authentication) {
+    Users currentUser = usersService.getUserById(authentication);
     // Get the transactions from your service layer
-    List<Transactions> transactions = transactionsService.getTransactions();
-    List<Transactions> ALLtransactions = transactionsService.getTransactions();
+    List<Transactions> transactions = transactionsService.getTransactions(currentUser.getUser_id());
+    List<Transactions> ALLtransactions = transactionsService.getTransactions(currentUser.getUser_id());
     // Filter the transactions based on the selected month
     List<Transactions> filteredTransactions = transactions.stream()
         .filter(transaction -> {
@@ -109,10 +118,13 @@ public class transactionConrtoller {
   }
 
   @PostMapping("/filterWithCategorie")
-  public String filterWithCategory(@RequestParam("categorie_id") Long categorie_id, ModelMap modelMap) {
+  public String filterWithCategory(@RequestParam("categorie_id") Long categorie_id, ModelMap modelMap,
+      Authentication authentication) {
+    Users currentUser = usersService.getUserById(authentication);
 
-    List<Transactions> filteredTransactions = transactionsService.findByCategorie((Long) categorie_id);
-    List<Transactions> ALLtransactions = transactionsService.getTransactions();
+    List<Transactions> filteredTransactions = transactionsService.findByCategorie((Long) categorie_id,
+        currentUser.getUser_id());
+    List<Transactions> ALLtransactions = transactionsService.getTransactions(currentUser.getUser_id());
     List<Categories> categories = categoriesService.getCategories();
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
@@ -187,7 +199,8 @@ public class transactionConrtoller {
   public String saveTransaction(ModelMap modelMap,
       @ModelAttribute("transaction") Transactions new_transaction,
       @RequestParam("date") String date,
-      @RequestParam("description") String description) throws ParseException {
+      @RequestParam("description") String description,
+      Authentication authentication) throws ParseException {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     Date dateCreation = dateFormat.parse(date);
     new_transaction.setCreated_at(dateCreation);
@@ -196,6 +209,10 @@ public class transactionConrtoller {
     Date tadayForReal = dateFormat.parse(today);
     new_transaction.setUpdated_at(tadayForReal);
     new_transaction.setDescription(description);
+
+    Users currentUser = usersService.getUserById(authentication);
+    new_transaction.setUser(currentUser);
+
     transactionsService.addTransaction(new_transaction);
     return "redirect:/Transactions";
   }
@@ -203,10 +220,12 @@ public class transactionConrtoller {
   @GetMapping("/showOUT")
   public String filterWithType(ModelMap modelMap,
       @RequestParam(name = "page", defaultValue = "0") int page,
-      @RequestParam(name = "size", defaultValue = "3") int size) {
+      @RequestParam(name = "size", defaultValue = "3") int size, Authentication authentication) {
+    Users currentUser = usersService.getUserById(authentication);
 
-    Page<Transactions> filteredTransactions = transactionsService.filterByType("EXPENSE", page, size);
-    Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
+    Page<Transactions> filteredTransactions = transactionsService.filterByType("EXPENSE", page, size,
+        currentUser.getUser_id());
+    Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size, currentUser.getUser_id());
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
       modelMap.addAttribute("message",
@@ -225,10 +244,12 @@ public class transactionConrtoller {
   @GetMapping("/showIN")
   public String filterWithTypeIN(ModelMap modelMap,
       @RequestParam(name = "page", defaultValue = "0") int page,
-      @RequestParam(name = "size", defaultValue = "3") int size) {
+      @RequestParam(name = "size", defaultValue = "3") int size, Authentication authentication) {
+    Users currentUser = usersService.getUserById(authentication);
 
-    Page<Transactions> filteredTransactions = transactionsService.filterByType("INCOME", page, size);
-    Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size);
+    Page<Transactions> filteredTransactions = transactionsService.filterByType("INCOME", page, size,
+        currentUser.getUser_id());
+    Page<Transactions> transactions = transactionsService.getTransactionsInPages(page, size, currentUser.getUser_id());
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {
       modelMap.addAttribute("message",
