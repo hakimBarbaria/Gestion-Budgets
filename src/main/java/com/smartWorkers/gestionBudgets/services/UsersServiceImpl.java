@@ -27,10 +27,14 @@ public class UsersServiceImpl implements UsersService {
 
   @Override
   public Users getUserById(Authentication authentication) {
-    Object principal = authentication.getPrincipal();
-    if (principal instanceof UserInfoUserDetails) {
-      UserInfoUserDetails userDetails = (UserInfoUserDetails) principal;
-      return usersRepository.findById(userDetails.getUser_id()).get();
+    try {
+      Object principal = authentication.getPrincipal();
+      if (principal instanceof UserInfoUserDetails) {
+        UserInfoUserDetails userDetails = (UserInfoUserDetails) principal;
+        return usersRepository.findById(userDetails.getUser_id()).get();
+      }
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
     }
     return null;
   }
@@ -51,9 +55,9 @@ public class UsersServiceImpl implements UsersService {
   }
 
   @Override
-  public int getNotificationsCount() {
+  public int getNotificationsCount(long user_id) {
     int notifications = 0;
-    List<Transactions> transactions = transactionsService.getTransactions();
+    List<Transactions> transactions = transactionsService.getTransactions(user_id);
     List<Budgets> budgets = budgetsService.getBudgets();
 
     for (Budgets budget : budgets) {
@@ -72,10 +76,10 @@ public class UsersServiceImpl implements UsersService {
   }
 
   @Override
-  public List<Notification> getNotifications() {
+  public List<Notification> getNotifications(long user_id) {
     Double amount;
     List<Notification> notifications = new ArrayList<>();
-    List<Transactions> transactions = transactionsService.getTransactions();
+    List<Transactions> transactions = transactionsService.getTransactions(user_id);
     List<Budgets> budgets = budgetsService.getBudgets();
 
     for (Budgets budget : budgets) {

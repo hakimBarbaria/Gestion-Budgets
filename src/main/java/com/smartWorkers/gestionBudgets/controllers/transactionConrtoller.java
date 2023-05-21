@@ -87,10 +87,12 @@ public class transactionConrtoller {
   }
 
   @PostMapping("/filteringWithDate")
-  public String filterTransactionsByMonth(@RequestParam("month") int month, ModelMap modelMap) {
+  public String filterTransactionsByMonth(@RequestParam("month") int month, ModelMap modelMap,
+      Authentication authentication) {
+    Users currentUser = usersService.getUserById(authentication);
     // Get the transactions from your service layer
-    List<Transactions> transactions = transactionsService.getTransactions();
-    List<Transactions> ALLtransactions = transactionsService.getTransactions();
+    List<Transactions> transactions = transactionsService.getTransactions(currentUser.getUser_id());
+    List<Transactions> ALLtransactions = transactionsService.getTransactions(currentUser.getUser_id());
     // Filter the transactions based on the selected month
     List<Transactions> filteredTransactions = transactions.stream()
         .filter(transaction -> {
@@ -126,7 +128,7 @@ public class transactionConrtoller {
 
     List<Transactions> filteredTransactions = transactionsService.findByCategorie((Long) categorie_id,
         currentUser.getUser_id());
-    List<Transactions> ALLtransactions = transactionsService.getTransactions();
+    List<Transactions> ALLtransactions = transactionsService.getTransactions(currentUser.getUser_id());
     List<Categories> categories = categoriesService.getCategories();
     modelMap.addAttribute("transactions", filteredTransactions);
     if (filteredTransactions.isEmpty()) {

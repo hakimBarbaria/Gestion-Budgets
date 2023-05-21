@@ -35,11 +35,14 @@ public class userController {
 
   @RequestMapping("/Profile")
   public String redirectToProfile(ModelMap modelMap) {
-
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-    Users user = usersService.getUsersByName(userDetails.getUsername());
-    modelMap.addAttribute("user", user);
+    try {
+      Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+      UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+      Users user = usersService.getUsersByName(userDetails.getUsername());
+      modelMap.addAttribute("user", user);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
     return "Profile";
   }
 

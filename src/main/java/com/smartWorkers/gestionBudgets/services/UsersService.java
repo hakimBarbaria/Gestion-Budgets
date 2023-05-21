@@ -16,7 +16,7 @@ public interface UsersService {
 
   public Users getUsersByName(String name);
 
-  public int getNotificationsCount();
+  public int getNotificationsCount(long user_id);
 
-  public List<Notification> getNotifications();
+  public List<Notification> getNotifications(long user_id);
 }

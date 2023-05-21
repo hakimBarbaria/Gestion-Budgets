@@ -19,8 +19,8 @@ public class TransactionsImplementations implements TransactionsService {
   }
 
   @Override
-  public List<Transactions> getTransactions() {
-    return transactionRepository.findAll();
+  public List<Transactions> getTransactions(long user_id) {
+    return transactionRepository.findAllByUserId(user_id);
   }
 
   @Override
@@ -79,8 +79,8 @@ public class TransactionsImplementations implements TransactionsService {
   }
 
   @Override
-  public Long numberTransactions() {
-    return transactionRepository.count();
+  public Long numberTransactions(long userId) {
+    return transactionRepository.countByUserId(userId);
   }
 
   @Override

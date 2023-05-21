@@ -12,6 +12,9 @@ import com.smartWorkers.gestionBudgets.entities.Transactions;
 public interface TransactionsRepository extends JpaRepository<Transactions, Long> {
 
   @Query("SELECT t FROM Transactions t WHERE t.user.id = :userId")
+  List<Transactions> findAllByUserId(long userId);
+
+  @Query("SELECT t FROM Transactions t WHERE t.user.id = :userId")
   Page<Transactions> findByUserId(long userId, Pageable pageable);
 
   @Query("select t from Transactions t where t.categorie.categorie_id = :categorie_id and t.user.id = :userId")
@@ -36,4 +39,8 @@ public interface TransactionsRepository extends JpaRepository<Transactions, Long
 
   @Query("select t from Transactions t where t.type= ?1 order by t.transaction_id DESC limit 3")
   List<Transactions> getTransactionsInType(String type);
+
+  @Query("SELECT COUNT(t) FROM Transactions t WHERE t.user.id = :userId")
+  Long countByUserId(long userId);
+
 }

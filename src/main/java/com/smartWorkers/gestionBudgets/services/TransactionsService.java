@@ -8,7 +8,7 @@ import com.smartWorkers.gestionBudgets.entities.Transactions;
 
 public interface TransactionsService {
 
-  public List<Transactions> getTransactions();
+  public List<Transactions> getTransactions(long user_id);
 
   public int getCountIncomes();
   
@@ -32,7 +32,7 @@ public interface TransactionsService {
 
   public List<Float> getIncomeCountsByMonth(long user_id);
   
-  public Long numberTransactions();
+  public Long numberTransactions(long user_id);
   
   public List<Transactions> getLastTransactions(String Type);
 
