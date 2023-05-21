@@ -32,6 +32,8 @@ public class SecurityConfiguration {
         .and()
         .authorizeHttpRequests().requestMatchers("/addUser").permitAll()
         .and()
+        .authorizeHttpRequests().requestMatchers("/landingPage").permitAll()
+        .and()
         .authorizeHttpRequests().requestMatchers("/**").authenticated()
         .and().formLogin().loginPage("/login").loginProcessingUrl("/login")
         .defaultSuccessUrl("/Dashboard", true).permitAll()
