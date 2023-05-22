@@ -33,7 +33,7 @@ public class SecurityConfiguration {
         .and()
         .authorizeHttpRequests().requestMatchers("/signup").permitAll()
         .and()
-        .authorizeHttpRequests().requestMatchers("/equipe").permitAll()
+        .authorizeHttpRequests().requestMatchers("/Equipe").permitAll()
         .and()
         .authorizeHttpRequests().requestMatchers("/addUser").permitAll()
         .and()
