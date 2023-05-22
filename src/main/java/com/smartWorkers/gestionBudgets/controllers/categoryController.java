@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -42,6 +43,12 @@ public class categoryController {
     return "AddCategories";
   }
 
+  @PostMapping(path = "/delete_cat")
+  public String deleteTransaction(@RequestParam("id_cat") Long id) {
+	  categoriesService.deleteCategory(id);
+    return "redirect:/Categories";
+  }
+  
   @RequestMapping(path = "/delete_category/{category_id}")
   public String deleteCategory(ModelMap modelMap, @PathVariable Long category_id) {
     categoriesService.deleteCategory(category_id);
