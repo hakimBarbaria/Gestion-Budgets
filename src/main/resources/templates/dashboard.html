@@ -250,10 +250,24 @@
             }
           }
         });
+        let labelsDonut  = "[[${catBudgets}]]";
+
+        labelsDonut = labelsDonut.substring(1,labelsDonut.length-1)
+
+        let labelsDonutArr = labelsDonut.split(',');
+        let finalFormLabels = []
+        let finalFormData = []
+        console.log( labelsDonutArr)
+        labelsDonutArr.forEach((label)=>{
+            finalFormLabels.push(label.trim().split("=")[0]);
+            finalFormData.push(parseFloat(label.trim().split("=")[1]));
+        })
+        console.log(finalFormData)
+        console.log(finalFormLabels)
         var data = {
-                labels: ['Red', 'Blue', 'Yellow'],
+                labels: finalFormLabels,
                 datasets: [{
-                    data: [10, 20, 30],
+                    data: finalFormData,
                     backgroundColor: ['#ff6384', '#36a2eb', '#ffce56','rgba(255, 99, 132, 0.2)',
                          'rgba(255, 159, 64, 0.2)',
                          'rgba(255, 205, 86, 0.2)',
@@ -266,7 +280,9 @@
                          'rgba(255, 205, 86, 0.4)',
                          'rgba(75, 192, 192, 0.4)',
                          'rgba(54, 162, 235, 0.4)',
-                        'rgba(153, 102, 255, 0.4)']
+                        'rgba(153, 102, 255, 0.4)'
+                        ,'rgba(194, 123, 21, 1)',
+                    'rgba(218, 42, 252, 1)']
                 }]
             };
 
