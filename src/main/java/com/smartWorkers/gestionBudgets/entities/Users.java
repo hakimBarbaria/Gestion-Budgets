@@ -2,6 +2,7 @@ package com.smartWorkers.gestionBudgets.entities;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,8 +23,9 @@ public class Users {
   @Transient
   private Double balance;
   private String role;
-  @OneToMany(mappedBy = "user")
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Transactions> transactions;
+
 
   public Long getUser_id() {
     return user_id;

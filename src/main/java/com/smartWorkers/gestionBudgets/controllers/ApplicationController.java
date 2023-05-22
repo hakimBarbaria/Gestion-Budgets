@@ -4,16 +4,23 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smartWorkers.gestionBudgets.entities.Transactions;
 import com.smartWorkers.gestionBudgets.entities.Users;
 import com.smartWorkers.gestionBudgets.services.CategoriesService;
 import com.smartWorkers.gestionBudgets.services.TransactionsService;
 import com.smartWorkers.gestionBudgets.services.UsersService;
+import com.smartWorkers.gestionBudgets.services.UsersServiceImpl;
+
+import jakarta.persistence.EntityManager;
 
 @Controller
 public class ApplicationController {
@@ -21,7 +28,10 @@ public class ApplicationController {
   TransactionsService transactionsService;
   @Autowired
   CategoriesService categorieService;
-
+  @Autowired
+  UsersServiceImpl usersService;
+  @Autowired
+  private PasswordEncoder passwordEncoder;
   @GetMapping("/login")
   public String loginPage() {
     return "login";
@@ -90,6 +100,31 @@ public class ApplicationController {
 
   @RequestMapping("/Settings")
   public String RedirectToSettings(ModelMap modelMap) {
+	  Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+      UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+      Users user = usersService.getUsersByName(userDetails.getUsername());
+      modelMap.addAttribute("user", user);
     return "Settings";
+  }
+  @RequestMapping("/EditUser")
+  public String editUser (ModelMap modelMap,@RequestParam("Email") String email, @RequestParam("password") String password
+		  ) {
+	  Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+      UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+      Users user = usersService.getUsersByName(userDetails.getUsername());
+      user.setEmail(email);
+      user.setPassword(passwordEncoder.encode(password));
+      usersService.editUser(user);
+      modelMap.addAttribute("user", user);
+      modelMap.addAttribute("msg", "User Info changed Successfully !");
+      return "Settings";
+  }
+  @RequestMapping("/DeleteUser")
+  public String deleteUser() {
+	  Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+      UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+      Users user = usersService.getUsersByName(userDetails.getUsername());
+	  usersService.deleteUser(user.getUser_id());
+	  return "redirect:/";
   }
 }
