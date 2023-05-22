@@ -2,6 +2,7 @@ package com.smartWorkers.gestionBudgets.entities;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,10 +17,10 @@ public class Categories {
   private String name;
   private String description;
 
-  @OneToMany(mappedBy = "categorie")
+  @OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL)
   private List<Budgets> budgets;
 
-  @OneToMany(mappedBy = "categorie")
+  @OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL)
   private List<Transactions> transactions;
 
   public Categories() {

@@ -44,22 +44,21 @@
                 </div>
                 
 
-                <div class="px-6 py-4 inline-flex">
-                    <a th:href="@{editCategory(idCategory=${category.getCategorie_id()})}"
-                       class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                        <i class="bi bi-pencil"></i>
-                    </a>
-                <form action="/delete_cat" method="post">
-                <input type="hidden" name="id_cat" th:value="${category.getCategorie_id()}">
-                <button
-                        th:data-confirm-delete="|Are you sure you want to delete this Category ${category.getCategorie_id()}?|"
-                        onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"
-                        type="submit" class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                  <i class="bi bi-trash"></i>
-                </button>
-              </form>
-                   
-                </div>
+               <div class="px-6 py-4 inline-flex">
+    <a th:href="@{editCategory(idCategory=${category.getCategorie_id()})}"
+       class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+        <i class="bi bi-pencil"></i>
+    </a>
+    <form th:action="@{/delete_category/{category_id}(category_id=${category.getCategorie_id()})}" method="post">
+        <input type="hidden" name="id_cat" th:value="${category.getCategorie_id()}">
+        <button th:data-confirm-delete="|Are you sure you want to delete this Category ${category.getCategorie_id()}?|"
+                onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"
+                type="submit" class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+            <i class="bi bi-trash"></i>
+        </button>
+    </form>
+</div>
+
 
 
 
