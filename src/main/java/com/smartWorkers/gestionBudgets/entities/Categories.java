@@ -1,5 +1,6 @@
 package com.smartWorkers.gestionBudgets.entities;
 
+import java.util.Iterator;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -25,7 +26,15 @@ public class Categories {
 
   public Categories() {
   }
-
+  public double getAllAmounts(){
+    Double amount = (double) 0;
+    Iterator iterator = budgets.iterator();
+    while (iterator.hasNext()){
+      Budgets budgets1 = (Budgets) iterator.next();
+      amount += budgets1.getbudgetLimit();
+    }
+    return amount;
+  }
   public Categories(String name, String description, List<Budgets> budgets, List<Transactions> transactions) {
     super();
     this.name = name;

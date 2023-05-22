@@ -1,7 +1,9 @@
 package com.smartWorkers.gestionBudgets.controllers;
 
+import java.util.HashMap;
 import java.util.List;
 
+import com.smartWorkers.gestionBudgets.entities.Categories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -69,11 +71,14 @@ public class ApplicationController {
     if (income < 0) {
     	income = 0.0;
     }
+    List<Categories> catList = categorieService.getCategories();
+    HashMap<String,Double> catHash = new HashMap<>();
+    catList.forEach((categories -> catHash.put(categories.getName(),categories.getAllAmounts())));
     Double balance = 0.0;
     balance = income - expenses;
     currentUser.setBalance(balance);
     modelMap.addAttribute("balance", balance);
-    
+    modelMap.addAttribute("catBudgets",catHash);
     modelMap.addAttribute("expensesCount", expensesCount);
     modelMap.addAttribute("incomeCount", incomeCount);
     modelMap.addAttribute("nombreTransactions", countIncomes);
