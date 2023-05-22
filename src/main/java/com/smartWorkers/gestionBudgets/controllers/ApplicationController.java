@@ -36,11 +36,34 @@ public class ApplicationController {
 
     List<Float> expensesCount = transactionsService.getExpensesCountsByMonth(currentUser.getUser_id());
     List<Float> incomeCount = transactionsService.getIncomeCountsByMonth(currentUser.getUser_id());
-    int countIncomes = transactionsService.getCountIncomes();
-    int countExpenses = transactionsService.getCountExpenses();
-    List<Transactions> transactionsOut = this.transactionsService.getLastTransactions("EXPENSE");
-    List<Transactions> transactionsIn = this.transactionsService.getLastTransactions("INCOME");
+    int countIncomes = transactionsService.getCountIncomes(currentUser.getUser_id());
+    int countExpenses = transactionsService.getCountExpenses(currentUser.getUser_id());
+    List<Transactions> transactionsOut = this.transactionsService.getLastTransactions("EXPENSE",currentUser.getUser_id());
+    List<Transactions> transactionsIn = this.transactionsService.getLastTransactions("INCOME",currentUser.getUser_id());
 
+    List<Transactions> transactions = this.transactionsService.getTransactions(currentUser.getUser_id());
+    Double income = 0.0;
+    Double expenses = 0.0;
+    for (Transactions transaction : transactions) {
+    	System.out.println(transaction.getType());
+    	if (transaction.getType().equals("INCOME")) {
+    		income = income + transaction.getAmount();
+    		System.out.println(income);
+    	}else if (transaction.getType().equals("EXPENSE")){
+    		expenses = expenses + transaction.getAmount();
+    	}
+    }
+    if (expenses < 0) {
+    	expenses = 0.0;
+    }
+    if (income < 0) {
+    	income = 0.0;
+    }
+    Double balance = 0.0;
+    balance = income - expenses;
+    currentUser.setBalance(balance);
+    modelMap.addAttribute("balance", balance);
+    
     modelMap.addAttribute("expensesCount", expensesCount);
     modelMap.addAttribute("incomeCount", incomeCount);
     modelMap.addAttribute("nombreTransactions", countIncomes);

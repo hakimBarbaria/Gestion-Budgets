@@ -69,13 +69,13 @@ public class TransactionsImplementations implements TransactionsService {
   }
 
   @Override
-  public int getCountIncomes() {
-    return transactionRepository.getCountIncomes();
+  public int getCountIncomes(long user_id) {
+    return transactionRepository.getCountIncomes(user_id);
   }
 
   @Override
-  public int getCountExpenses() {
-    return transactionRepository.getCountExpenses();
+  public int getCountExpenses(long user_id) {
+    return transactionRepository.getCountExpenses(user_id);
   }
 
   @Override
@@ -84,7 +84,7 @@ public class TransactionsImplementations implements TransactionsService {
   }
 
   @Override
-  public List<Transactions> getLastTransactions(String Type) {
-    return this.transactionRepository.getTransactionsInType(Type);
+  public List<Transactions> getLastTransactions(String Type, long idUser) {
+    return this.transactionRepository.getTransactionsInType(Type, idUser);
   }
 }

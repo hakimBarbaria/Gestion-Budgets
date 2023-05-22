@@ -10,9 +10,9 @@ public interface TransactionsService {
 
   public List<Transactions> getTransactions(long user_id);
 
-  public int getCountIncomes();
+  public int getCountIncomes(long user_id);
   
-  public int getCountExpenses();
+  public int getCountExpenses(long user_id);
   
   public Page<Transactions> getTransactionsInPages(int page, int size, long user_id);
 
@@ -34,6 +34,6 @@ public interface TransactionsService {
   
   public Long numberTransactions(long user_id);
   
-  public List<Transactions> getLastTransactions(String Type);
+  public List<Transactions> getLastTransactions(String Type, long idUser);
 
 }
