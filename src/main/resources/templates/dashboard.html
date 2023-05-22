@@ -145,6 +145,10 @@
         <canvas id="transactionsData"></canvas>
         </div>
         
+         <div>
+        <canvas id="myChart"></canvas>
+        </div>
+        
       </div>
 
       <script>
@@ -243,7 +247,27 @@
             }
           }
         });
-        
+        var data = {
+                labels: ['Red', 'Blue', 'Yellow'],
+                datasets: [{
+                    data: [10, 20, 30],
+                    backgroundColor: ['#ff6384', '#36a2eb', '#ffce56']
+                }]
+            };
+
+            // Configuration options
+            var options = {
+                responsive: true,
+                maintainAspectRatio: false
+            };
+
+            // Create the chart
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: data,
+                options: options
+            }); 
         
         
       </script>
