@@ -24,4 +24,15 @@ public class BudgetsServiceImpl implements BudgetsService {
     return budgetsRepository.findAll();
   }
 
+@Override
+public void editBudgets(Budgets budget) {
+	budgetsRepository.save(budget);
+	
+}
+
+@Override
+public Budgets getBudgetByIdCat(long id) {
+	return budgetsRepository.findByCategorieId(id);
+}
+
 }
