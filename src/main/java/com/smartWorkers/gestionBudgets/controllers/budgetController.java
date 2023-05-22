@@ -42,7 +42,12 @@ public class budgetController {
   @PostMapping("/saveBudget")
   public String saveTransaction(ModelMap modelMap,
       @ModelAttribute("budget") Budgets new_budget) throws ParseException {
-    if (new_budget.getCategorie().getBudgets() == null && new_budget.getCategorie().getBudgets().size() <0) {
+	  long id= new_budget.getCategorie().getCategorie_id();
+  	System.out.println(id);
+  	Budgets budget = this.budgetsService.getBudgetByIdCat(id);
+  	System.out.println(budget);
+    if (budget == null || new_budget.getCategorie().getBudgets().size() <0) {
+    	System.out.println("hello :) from hakim !");
     	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         LocalDateTime ldt = LocalDateTime.now();
         String today = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(ldt);
@@ -52,10 +57,6 @@ public class budgetController {
         modelMap.addAttribute("msg", "Budget Fixed Succesfully");
         this.budgetsService.addBudgets(new_budget);
     } else {
-    	long id= new_budget.getCategorie().getCategorie_id();
-    	System.out.println(id);
-    	Budgets budget = this.budgetsService.getBudgetByIdCat(id);
-    	System.out.println(budget);
     	new_budget.setBudget_id(budget.getBudget_id());
       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
       LocalDateTime ldt = LocalDateTime.now();
@@ -71,6 +72,7 @@ public class budgetController {
     return "AddBudgets";
   }
 
+  
   @RequestMapping("/Budgets")
   public String RedirectToBudgets(ModelMap modelMap) {
     return "Budgets";
