@@ -16,6 +16,7 @@
   <description>Demo project for Spring Boot</description>
   <properties>
     <java.version>19</java.version>
+    <start-class>com.smartWorkers.gestionBudgets.GestionBudgetsApplication</start-class>
   </properties>
 
   <dependencies>
