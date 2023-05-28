@@ -1,5 +1,9 @@
 package com.smartWorkers.gestionBudgets.controllers;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,11 +22,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.smartWorkers.gestionBudgets.entities.Transactions;
 import com.smartWorkers.gestionBudgets.entities.Users;
 import com.smartWorkers.gestionBudgets.services.CategoriesService;
+import com.smartWorkers.gestionBudgets.services.PdfGeneratorService;
 import com.smartWorkers.gestionBudgets.services.TransactionsService;
 import com.smartWorkers.gestionBudgets.services.UsersService;
 import com.smartWorkers.gestionBudgets.services.UsersServiceImpl;
 
 import jakarta.persistence.EntityManager;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class ApplicationController {
@@ -34,6 +40,8 @@ public class ApplicationController {
   UsersServiceImpl usersService;
   @Autowired
   private PasswordEncoder passwordEncoder;
+  @Autowired
+  PdfGeneratorService pdfGeneratorService;
   @GetMapping("/login")
   public String loginPage() {
     return "login";
@@ -42,6 +50,18 @@ public class ApplicationController {
   @Autowired
   UsersService userService;
 
+  @RequestMapping("/GenerateRapport")
+  public void GenerateRapport(HttpServletResponse response, Authentication authentication) throws IOException{
+	  response.setContentType("application/pdf");
+	  DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD:hh:mm:ss");
+	  String time = dateFormat.format(new Date());
+	  String headerKey = "Content-Disposition";
+	  String headerValue = "attachment; filname=pdf" + time + ".pdf";
+	  response.setHeader(headerKey, headerValue);
+	  
+	  pdfGeneratorService.export(response, authentication);
+	  
+  }
   @RequestMapping("/Dashboard")
   public String RedirectToDashboard(ModelMap modelMap, Authentication authentication) {
     Users currentUser = userService.getUserById(authentication);
