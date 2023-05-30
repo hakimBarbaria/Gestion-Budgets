@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
+import com.smartWorkers.gestionBudgets.entities.Categories;
 import com.smartWorkers.gestionBudgets.entities.Transactions;
 import com.smartWorkers.gestionBudgets.entities.Users;
 
@@ -58,7 +60,30 @@ public class PdfGeneratorService {
         userNameCell.setPadding(5f);
         userTable.addCell(userNameCell);
         
-        PdfPCell userBalanceCell = new PdfPCell(new Phrase("User Balance: " + currentUser.getBalance(), cellFont));
+        
+        List<Transactions> transactions = transactionService.getTransactions(currentUser.getUser_id());
+        
+        Double income = 0.0;
+        Double expenses = 0.0;
+        for (Transactions transaction : transactions) {
+        	System.out.println(transaction.getType());
+        	if (transaction.getType().equals("INCOME")) {
+        		income = income + transaction.getAmount();
+        		System.out.println(income);
+        	}else if (transaction.getType().equals("EXPENSE")){
+        		expenses = expenses + transaction.getAmount();
+        	}
+        }
+        if (expenses < 0) {
+        	expenses = 0.0;
+        }
+        if (income < 0) {
+        	income = 0.0;
+        }
+        Double balance = 0.0;
+        balance = income - expenses;
+       
+        PdfPCell userBalanceCell = new PdfPCell(new Phrase("User Balance: " +  balance, cellFont));
         userBalanceCell.setBorder(Rectangle.NO_BORDER);
         userBalanceCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
         userBalanceCell.setPadding(5f);
@@ -66,8 +91,6 @@ public class PdfGeneratorService {
         
         doc.add(userTable);
 
-        List<Transactions> transactions = transactionService.getTransactions(currentUser.getUser_id());
-        
         // Create table
         PdfPTable table = new PdfPTable(4);
         table.setWidthPercentage(100);
