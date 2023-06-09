@@ -1,5 +1,6 @@
 package com.smartWorkers.gestionBudgets.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -35,5 +36,8 @@ public interface TransactionsService {
   public Long numberTransactions(long user_id);
   
   public List<Transactions> getLastTransactions(String Type, long idUser);
+  
+  public List<Transactions> advancedSearch(Double amountMin, Double amountMax, String type, Date DateCreation,
+			Date dateUpdate, Long categorie, long User_id);
 
 }

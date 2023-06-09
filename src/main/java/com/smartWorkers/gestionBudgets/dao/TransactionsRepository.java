@@ -1,5 +1,6 @@
 package com.smartWorkers.gestionBudgets.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -41,5 +42,11 @@ public interface TransactionsRepository extends JpaRepository<Transactions, Long
 
   @Query("SELECT COUNT(t) FROM Transactions t WHERE t.user.id = :userId")
   Long countByUserId(long userId);
+  
+  @Query("SELECT t FROM Transactions t WHERE t.amount BETWEEN ?1 AND ?2 AND t.type = ?3 AND t.created_at = ?4 "
+  		+ "AND t.updated_at = ?5 AND t.categorie.id = ?6 AND t.user.id = ?7")
+  List<Transactions> advancedSearch(double amountMin, double amountMax, String type, Date DateCreation, Date dateUpdate, 
+		  Long categorie, long userId);
+
 
 }

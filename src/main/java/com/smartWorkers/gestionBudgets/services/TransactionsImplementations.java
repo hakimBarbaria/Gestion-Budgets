@@ -1,5 +1,6 @@
 package com.smartWorkers.gestionBudgets.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -87,4 +88,11 @@ public class TransactionsImplementations implements TransactionsService {
   public List<Transactions> getLastTransactions(String Type, long idUser) {
     return this.transactionRepository.getTransactionsInType(Type, idUser);
   }
+
+@Override
+public List<Transactions> advancedSearch(Double amountMin, Double amountMax, String type, Date DateCreation,
+		Date dateUpdate, Long categorie, long User_id) {
+	// TODO Auto-generated method stub
+	return this.transactionRepository.advancedSearch(amountMin, amountMax, type, DateCreation, dateUpdate, categorie, User_id);
+}
 }

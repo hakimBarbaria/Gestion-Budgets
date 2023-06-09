@@ -38,6 +38,30 @@ public class transactionConrtoller {
   @Autowired
   UsersService usersService;
 
+  @RequestMapping("/searchAdvanced")
+	  public String searchAdvanced(ModelMap modelMap, Authentication authentication, 
+			  @RequestParam("amountMin") Double amountMin,
+			  @RequestParam("amountMax") Double amountMax,
+			  @RequestParam("type") String type,
+			  @RequestParam("dateCreation") Date dateCreation,
+			  @RequestParam("dateUpdate") Date dateUpdate,
+			  @RequestParam("categorie") Long categorie) {
+	  Users currentUser = usersService.getUserById(authentication);
+	  List<Transactions> transactions = transactionsService.advancedSearch(amountMin,
+			  amountMax, type, dateCreation, dateUpdate, categorie, currentUser.getUser_id());
+	  
+	    modelMap.addAttribute("transactions", transactions);
+	    if (transactions.isEmpty()) {
+	      modelMap.addAttribute("message",
+	          "If you see this message that's mean you don't creat any transaction in this date yet, try to creat one\r\n" +
+	              "  	Click on \"add\" to add one or click \"Exist\" to go back to the original list");
+	    }
+	    if (this.ChangingTypeOfPresentation == false) {
+	      return "listeTransactionsUsingCards";
+	    } else {
+	      return "listeTransactions";
+	    }
+	  }
   @RequestMapping("/redirectionToOriginalList")
   public String redirectionToOriginalList() {
     return "redirect:/Transactions";
